@@ -57,6 +57,6 @@ void	command_split(t_minishell *shell)
 		i++;
 	}
 	split_block(shell, old_i, i);
-	if (shell->command)
-		print_cmd(shell->command);
+	//if (shell->command)
+	//	print_cmd(shell->command);
 }

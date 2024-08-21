@@ -22,15 +22,15 @@ INCLUDE		=	-I./include
 
 LIB			=	-L${LIBPATH} -lft
 
-SRCS		=	src/minishell.c						\
-				src/env/recover_env.c				\
-				src/lst_management/lst_env_utils.c	\
-				src/utils/signal.c					\
-				src/utils/ft_free_tab.c				\
-				src/utils/ft_iswhitespace.c			\
-				src/parsing/parsing.c				\
-				src/parsing/command_split.c			\
-				src/parsing/lst_pars_management.c	\
+SRCS		=	src/minishell.c										\
+				src/env/recover_env.c								\
+				src/lst_management/lst_env_utils.c					\
+				src/utils/signal.c									\
+				src/utils/ft_free_tab.c								\
+				src/utils/ft_iswhitespace.c							\
+				src/parsing/parsing.c								\
+				src/parsing/command_split.c							\
+				src/parsing/lst_parse_management/lst_pars_utils.c	\
 				src/parsing/quote/quote_split.c
 
 SRCS_BONUS	=	

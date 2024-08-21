@@ -9,7 +9,7 @@
 /*   Updated: 2024/08/21 18:45:15 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	print_cmd(t_command_lst *cmd)
 {
