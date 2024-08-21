@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
+/*   By: judetre <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 12:05:43 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/21 11:54:05 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/21 12:05:37 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef ENV_H
-# define ENV_H
+#ifndef UTILS_H
+# define UTILS_H
 
-t_env   *recover_env(char **envp);
+# include <sys/wait.h>
+# include <signal.h>
+
+void    ft_sig(void);
 
 #endif
-

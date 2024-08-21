@@ -6,7 +6,7 @@
 #    By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/21 07:48:39 by judetre          ###   ########.fr        #
+#    Updated: 2024/08/21 12:21:18 by judetre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -g -lreadline -Wno-unused-command-line-argument
 
 INCLUDE		=	-I./include
 
@@ -24,7 +24,8 @@ LIB			=	-L${LIBPATH} -lft
 
 SRCS		=	src/minishell.c						\
 				src/env/recover_env.c				\
-				src/lst_management/lst_env_utils.c	
+				src/lst_management/lst_env_utils.c	\
+				src/utils/signal.c
 
 SRCS_BONUS	=	
 

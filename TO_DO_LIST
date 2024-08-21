@@ -1,4 +1,7 @@
-faire un sort list
-faire la fonction env
-faire la fonction export sans argument
+faire un sort list <<<< normer
+faire la fonction env, ne pas afficher les variable sans egale.
+faire la fonction export sans argument, ne pas oublier les guillemet.
+faire un get element pour la liste chainer.
+faire un remove element
+commencer la fonction exit. et ne pas oublier de print exit.
 
