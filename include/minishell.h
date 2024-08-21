@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
+/*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:24:11 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 12:14:35 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:44:47 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@
 # include "lst_management.h"
 # include "env.h"
 # include "utils.h"
-
+# include "parsing.h"
+# include "quote.h"
 
 extern int	g_signal;
 
 typedef struct s_minishell
 {
-	t_env *env;
-	char	*read;
-	int 	exit_code;
+	t_env			*env;
+	t_command_lst	*command;
+	char			*read;
+	int 			exit_code;
 }				t_minishell;
 
+void	parse_command(t_minishell *shell);
+void	command_split(t_minishell *shell);
 
 #endif

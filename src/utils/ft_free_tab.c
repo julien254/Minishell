@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 11:54:05 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 18:10:14 by gcannaud         ###   ########.fr       */
+/*   Created: 2024/08/21 18:02:20 by gcannaud          #+#    #+#             */
+/*   Updated: 2024/08/21 18:29:37 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../include/minishell.h"
 
-#ifndef UTILS_H
-# define UTILS_H
+void    ft_free_tab(char **tab)
+{
+    size_t	i;
 
-# include <sys/wait.h>
-# include <signal.h>
-
-void    ft_free_tab(char **tab);
-void    ft_sig(void);
-int     ft_iswhitespace(char c);
-
-#endif
+    i = 0;
+    while (tab[i] != 0)
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
+}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+         #
+#    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/21 12:21:18 by judetre          ###   ########.fr        #
+#    Updated: 2024/08/21 18:04:17 by gcannaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,13 @@ LIB			=	-L${LIBPATH} -lft
 SRCS		=	src/minishell.c						\
 				src/env/recover_env.c				\
 				src/lst_management/lst_env_utils.c	\
-				src/utils/signal.c
+				src/utils/signal.c					\
+				src/utils/ft_free_tab.c				\
+				src/utils/ft_iswhitespace.c			\
+				src/parsing/parsing.c				\
+				src/parsing/command_split.c			\
+				src/parsing/lst_pars_management.c	\
+				src/parsing/quote/quote_split.c
 
 SRCS_BONUS	=	
 

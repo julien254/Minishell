@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 11:54:05 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 18:10:14 by gcannaud         ###   ########.fr       */
+/*   Created: 2024/08/21 14:57:27 by gcannaud          #+#    #+#             */
+/*   Updated: 2024/08/21 15:56:05 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../include/minishell.h"
 
-#ifndef UTILS_H
-# define UTILS_H
+static int	can_be_recorded(t_minishell *shell)
+{
+	int	i;
 
-# include <sys/wait.h>
-# include <signal.h>
+	i = 0;
+	while(ft_iswhitespace(shell->read[i]))
+		i++;
+	if (shell->read[i] == '\0')
+		return (1);
+	add_history(shell->read);
+	return (0);
+}
 
-void    ft_free_tab(char **tab);
-void    ft_sig(void);
-int     ft_iswhitespace(char c);
-
-#endif
+void	parse_command(t_minishell *shell)
+{
+	if (can_be_recorded(shell))
+		return ;
+	command_split(shell);
+}

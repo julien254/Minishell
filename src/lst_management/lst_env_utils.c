@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
+/*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:37:43 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 12:06:35 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/21 19:27:44 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
