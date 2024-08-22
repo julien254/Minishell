@@ -11,57 +11,37 @@
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
 
-void	print_cmd(t_command_lst *cmd)
+static void	cmddelone(t_command_lst *cmd)
 {
 	int	i;
 
-	i = 0;
-	while (cmd)
+	i = 1;
+	if (cmd)
 	{
-		printf("cmd=%s\n", cmd->cmd);
-		while (cmd->args[i])
+		free(cmd->cmd);
+		if (cmd->args[0])
 		{
-			printf("arg%i=%s\n", i, cmd->args[i]);
-			i++;
+			while (cmd->args[i])
+			{
+				free(cmd->args[i]);
+				i++;
+			}
 		}
-		i = 0;
-		cmd = cmd->next;
+		free(cmd);
 	}
 }
 
-t_command_lst	*cmdlast(t_command_lst *cmd)
+void	cmdclear(t_command_lst **cmd)
 {
-	while (cmd)
+	t_command_lst	*temp;
+
+	if (cmd && *cmd)
 	{
-		if (cmd->next == NULL)
-			return (cmd);
-		cmd = cmd->next;
+		while (*cmd)
+		{
+			temp = (*cmd)->next;
+			cmddelone(*cmd);
+			*cmd = temp;
+		}
 	}
-	return (0);
-}
-
-void	cmdadd_back(t_command_lst **cmd, t_command_lst *cmd_new)
-{
-	t_command_lst	*last;
-
-	if (!(*cmd))
-		*cmd = cmd_new;
-	else
-	{
-		last = cmdlast(*cmd);
-		last->next = cmd_new;
-	}
-}
-
-t_command_lst	*cmdnew(char *cmd_name, char **args)
-{
-	t_command_lst	*cmd;
-
-	cmd = (t_command_lst *)malloc(sizeof(t_command_lst));
-	//if (!lst)
-		//fonction pour quitter proprement
-	cmd->cmd = cmd_name;
-	cmd->args = args;
-	cmd->next = NULL;
-	return (cmd);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_split.c                                      :+:      :+:    :+:   */
+/*   quote_utile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,44 +12,59 @@
 
 #include "../../../include/minishell.h"
 
-static size_t	ft_count_words(char *s)
+static int	skip_quotes_error(char *str, int i)
 {
-	size_t	words;
-	size_t	i;
+	char	quote;
 
-	i = 0;
-	words = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '"'
-			|| s[i] == '\'')
-			i = skip_quotes(s, i);
-		if ((ft_iswhitespace(s[i + 1]) || s[i + 1] == '\0')
-			&& !ft_iswhitespace(s[i]))
-			words++;
+	quote = str[i];
+	i++;
+	if (str[i] == 0)
+		return (0);
+	while (str[i] && str[i] != quote && str[i] != 0)
 		i++;
-	}
-	return (words);
+	if (str[i] == 0)
+		return (0);
+	return (i);
 }
 
-char	**quote_split(char *s)
+int	quote_error(char *s)
 {
-	char	**tab;
-	size_t	j;
+	int	i;
 
-	if (s == NULL)
-		return (NULL);
-	tab = ft_calloc((ft_count_words(s) + 1), sizeof(char *));
-	if (tab == NULL)
-		return (NULL);
-	j = 0;
-	while (*s != '\0')
+	i = 0;
+	while (s[i])
 	{
-		if (ft_iswhitespace(*s))
-			s++;
-		else
-			s += split_word(&s, tab, j++);
+		if (s[i] == '"' || s[i] == '\'')
+		{
+			i = skip_quotes_error(s, i);
+			if (i == 0)
+				return (1);
+		}
+		i++;
 	}
-	tab[j] = 0;
-	return (tab);
+	return (0);
+}
+
+int	skip_quotes(char *str, int i)
+{
+	char	quote;
+	int		save_i;
+
+	quote = str[i];
+	i++;
+	if (str[i] == 0)
+		return (i);
+	save_i = i;
+	while (str[i] && str[i] != quote && str[i] != 0)
+		i++;
+	if (str[i] == 0)
+		return (save_i);
+	return (i);
+}
+
+int	skip_quotes_while(char *str, int i)
+{
+	while (str[i] && (str[i] == '"' || str[i] == '\''))
+		i = skip_quotes(str, i);
+	return (i);
 }

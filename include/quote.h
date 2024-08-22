@@ -13,6 +13,18 @@
 #ifndef QUOTE_H
 # define QUOTE_H
 
-char			**quote_split(char *s, char c);
+/**************************** QUOTE_UTILS *********************************/
+
+int				quote_error(char *s);
+int				skip_quotes_while(char *str, int i);
+int				skip_quotes(char *str, int i);
+
+/**************************** QUOTE_SPLIT *********************************/
+
+char			**quote_split(char *s);
+
+/**************************** SPLIT_WORD *********************************/
+
+size_t			split_word(char **s, char **tab, size_t j);
 
 #endif

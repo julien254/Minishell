@@ -16,7 +16,7 @@ static int	can_be_recorded(t_minishell *shell)
 	int	i;
 
 	i = 0;
-	while(ft_iswhitespace(shell->read[i]))
+	while (ft_iswhitespace(shell->read[i]))
 		i++;
 	if (shell->read[i] == '\0')
 		return (1);
@@ -24,9 +24,22 @@ static int	can_be_recorded(t_minishell *shell)
 	return (0);
 }
 
+static int	check_error(t_minishell *shell)
+{
+	if (quote_error(shell->read))
+	{
+		ft_putstr_fd("minishell: syntax error\n", 2);
+		shell->exit_code = 2;
+		return (1);
+	}
+	return (0);
+}
+
 void	parse_command(t_minishell *shell)
 {
 	if (can_be_recorded(shell))
+		return ;
+	if (check_error(shell))
 		return ;
 	command_split(shell);
 }
