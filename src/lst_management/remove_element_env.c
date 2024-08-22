@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   remove_element_env.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 05:54:16 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 11:27:09 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/22 09:20:02 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/22 09:41:29 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-/* if_export is an option to know if the function should print with */
-/* env or export : 0 = print_env, 1 = print_export*/
-void	print_env(t_env *env, int if_export)
+void	remove_element_env(t_env **env, char *name)
 {
-	if (!if_export)
+	t_env	*current;
+
+	if (!env || !*env)
+		return ;
+	current = *env;
+	if (ft_strcmp(name, current->name) == 0)
 	{
-		while (env)
-		{
-			if (env->value)
-				printf("%s=%s\n", env->name, env->value);
-			env = env->next;
-		}
+		*env = current->next;
+		free(current);
+		remove_element_env(env, name);
 	}
 	else
 	{
-		while (env)
-		{
-			printf("declare -x ");
-			printf("%s=\"%s\"\n", env->name, env->value);
-			env = env->next;
-		}
-
+		current = *env;
+		remove_element_env(&current->next, name);
 	}
 }

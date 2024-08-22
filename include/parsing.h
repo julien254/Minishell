@@ -15,10 +15,11 @@
 
 typedef struct s_command_lst
 {
-	char					*file;
+	char					*file; //renam cmd
 	char					**args;
 	int						fd_in;
 	int						fd_out;
+	int						fd_pipe[2];
 	struct s_command_lst	*next;
 }				t_command_lst;
 

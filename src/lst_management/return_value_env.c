@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   return_value_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 05:54:16 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 11:27:09 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/22 08:43:41 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/22 09:43:15 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-/* if_export is an option to know if the function should print with */
-/* env or export : 0 = print_env, 1 = print_export*/
-void	print_env(t_env *env, int if_export)
+char	*return_value_env(t_env *env, char *name)
 {
-	if (!if_export)
-	{
-		while (env)
-		{
-			if (env->value)
-				printf("%s=%s\n", env->name, env->value);
-			env = env->next;
-		}
-	}
-	else
-	{
-		while (env)
-		{
-			printf("declare -x ");
-			printf("%s=\"%s\"\n", env->name, env->value);
-			env = env->next;
-		}
+	t_env	*elem;
 
-	}
+	elem = return_element_env(env, name);
+	return (elem->value);
 }

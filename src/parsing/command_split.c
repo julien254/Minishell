@@ -21,6 +21,7 @@ static void	split_block(t_minishell *shell, int old_i, int i)
 		return ; //a securiser
 	//cmd_tab = hendle
 	cmd_tab = quote_split(block, ' '); //REPRIS DE MON MINISHELL /!\ ENTIERMENT A REFAIRE
+	//cmd_tab redirection
 	if (!shell->command)
 		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1]);
 	else
@@ -33,7 +34,7 @@ int skip_quotes(char *str, int i)
 
 	quote = str[i];
 	i++;
-	while (str[i] && str[i] != quote)
+	while ((str[i] && str[i] != quote))
 		i++;
 	return (i);
 }
@@ -45,6 +46,7 @@ void	command_split(t_minishell *shell)
 
 	i = 0;
 	old_i = 0;
+	shell->command = NULL;
 	while (shell->read[i])
 	{
 		if (shell->read[i] == '"' || shell->read[i] == '\'')
@@ -57,6 +59,6 @@ void	command_split(t_minishell *shell)
 		i++;
 	}
 	split_block(shell, old_i, i);
-	//if (shell->command)
-	//	print_cmd(shell->command);
+	if (shell->command)
+		print_cmd(shell->command);
 }

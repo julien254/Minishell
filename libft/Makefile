@@ -6,7 +6,7 @@
 #    By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/25 23:42:02 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/21 08:34:08 by judetre          ###   ########.fr        #
+#    Updated: 2024/08/22 08:14:35 by judetre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS		=	ft_atoi.c							\
 				ft_strlen.c     					\
 				ft_strmapi.c    					\
 				ft_strncmp.c    					\
+				ft_strcmp.c 	   					\
 				ft_strnstr.c    					\
 				ft_strrchr.c    					\
 				ft_strtrim.c    					\

@@ -1,8 +1,23 @@
+								A FAIRE POUR JUDETRE
+
 faire un sort list <<<< normer OKOKOKOKOKOKOK
+
 faire la fonction env, ne pas afficher les variable sans egale. OKOKOKOKOKOKOK
-faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value)
-faire un get element pour la liste chainer.
-faire un remove element
+
+faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value), faire une sous fonction pour add un element dans la liste. voir pourquoi la variable sans egale ne saffiche pas.
+
+faire un get value d'un element pour la liste chainer.OKOKOKOKOKOKOK
+
+faire un fonction qui retourne un element de la liste env.OKOKOKOKOKOKOK
+
+faire un remove element.OKOKOKOKOKOKOK
+
 faire une fonction qui copy la list env. OKOKOKOKOKOKOK
+
 commencer la fonction exit. et ne pas oublier de print exit.
 
+dans le sort list join le name=value pour avoir le bonne ordre.
+
+faire une fonction qui serat apeller quand je rencontre un $, le prend en parametre le nom d'une variable d'environement et doit retourner la valeur qui correspond , en char * mallocer
+
+faire une fonction qui prend en parametre une char *str , un index de debut , une taille et un char * de remplacement et qui renvoie la chaine modifier en consequence. avec un nouveau malloc.

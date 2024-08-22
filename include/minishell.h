@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:24:11 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 07:25:13 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 10:25:23 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "utils.h"
 # include "parsing.h"
 # include "quote.h"
+# include "export.h"
 
 extern int	g_signal;
 
