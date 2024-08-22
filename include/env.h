@@ -6,14 +6,19 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 12:05:43 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 06:54:42 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-t_env   *recover_env(char **envp);
+/**************************** RECOVER_ENV *********************************/                                               
+
+t_env	*recover_env(char **envp);
+
+/**************************** FT_ENV *********************************/ 
+
+void	print_env(t_env *env);
 
 #endif
-

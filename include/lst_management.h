@@ -6,12 +6,11 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:31:59 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 12:04:17 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 06:57:51 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef LST_MAGEMENT_H
-# define LST_MAGEMENT_H
+#ifndef LST_MANAGEMENT_H
+# define LST_MANAGEMENT_H
 
 typedef struct s_env
 {
@@ -20,9 +19,14 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-t_env	*sort_list(t_env* env);
-void    print_env(t_env *env);
+/**************************** LST_ENV_UTILS *********************************/
+t_env	*sort_list(t_env *env);
 t_env	*lstlast(t_env *env);
 void	lstadd_back(t_env **env, t_env *new);
 t_env	*lstnew(char *name, char *value);
+
+/**************************** LST_ENV_CPY *********************************/
+
+t_env   *lst_env_cpy(t_env *env);
+
 #endif

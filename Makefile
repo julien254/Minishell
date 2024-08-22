@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/21 18:04:17 by gcannaud         ###   ########.fr        #
+#    Updated: 2024/08/22 06:50:34 by judetre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ LIB			=	-L${LIBPATH} -lft
 
 SRCS		=	src/minishell.c										\
 				src/env/recover_env.c								\
+				src/env/ft_env.c									\
 				src/lst_management/lst_env_utils.c					\
+				src/lst_management/lst_env_cpy.c					\
 				src/utils/signal.c									\
 				src/utils/ft_free_tab.c								\
 				src/utils/ft_iswhitespace.c							\

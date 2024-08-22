@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 11:54:05 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 05:48:32 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/22 05:54:16 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/22 06:47:12 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../include/minishell.h"
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include <sys/wait.h>
-# include <signal.h>
-
-void	ft_free_tab(char **tab);
-void	ft_sig(void);
-int		ft_iswhitespace(char c);
-
-#endif
+void	print_env(t_env *env)
+{
+	while (env)
+	{
+		if (env->value)
+			printf("%s=%s\n", env->name, env->value);
+		env = env->next;
+	}
+}

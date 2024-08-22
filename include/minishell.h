@@ -6,11 +6,11 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:24:11 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 17:44:47 by gcannaud         ###   ########.fr       */
+/*   Updated: 2024/08/22 05:49:39 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef  MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stddef.h>
@@ -32,7 +32,7 @@ typedef struct s_minishell
 	t_env			*env;
 	t_command_lst	*command;
 	char			*read;
-	int 			exit_code;
+	int				exit_code;
 }				t_minishell;
 
 void	parse_command(t_minishell *shell);

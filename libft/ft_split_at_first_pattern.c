@@ -6,17 +6,17 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 08:06:27 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 08:59:49 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 06:27:04 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char **ft_split_at_first_pattern(char *str, char c)
+char	**ft_split_at_first_pattern(char *str, char c)
 {
-	char **split;
-	int	size_first_str;
-	int	size_last_str;
-	int	i;
+	char	**split;
+	int		size_first_str;
+	int		size_last_str;
+	int		i;
 
 	size_last_str = 1;
 	i = 0;

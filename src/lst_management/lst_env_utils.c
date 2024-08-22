@@ -6,16 +6,39 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:37:43 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/21 19:27:44 by gcannaud         ###   ########.fr       */
+/*   Updated: 2024/08/22 06:05:15 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
-//void	swap_list()
-t_env *sort_list(t_env* env) 
+
+static void	swap_list(t_env **env, t_env **start, int *i, int *swap)
 {
-	int		swap;
 	char	*name_swap;
 	char	*value_swap;
+
+	while ((*env)->name[*i] && (*env)->next->name[*i])
+	{
+		if ((*env)->name[*i] > (*env)->next->name[*i])
+		{
+			name_swap = (*env)->name;
+			value_swap = (*env)->value;
+			(*env)->name = (*env)->next->name;
+			(*env)->value = (*env)->next->value;
+			(*env)->next->name = name_swap;
+			(*env)->next->value = value_swap;
+			*env = *start;
+			*swap = 1;
+			break ;
+		}
+		else if ((*env)->name[*i] < (*env)->next->name[*i])
+			break ;
+		*i = *i + 1;
+	}
+}
+
+t_env	*sort_list(t_env *env)
+{
+	int		swap;
 	t_env	*start;
 	int		i;
 
@@ -24,39 +47,13 @@ t_env *sort_list(t_env* env)
 	while (env != NULL && env->next != NULL)
 	{
 		i = 0;
-		while (env->name[i] && env->next->name[i])
-		{
-	    	if (env->name[i] > env->next->name[i])
-			{
-				name_swap = env->name;
-				value_swap = env->value;
-				env->name = env->next->name;
-				env->value = env->next->value;
-				env->next->name = name_swap;
-				env->next->value = value_swap;
-				env = start;
-				swap = 1;
-				break;
-			}
-			else if (env->name[i] < env->next->name[i])
-				break;
-			i++;
-		}
+		swap_list(&env, &start, &i, &swap);
 		if (!swap)
 			env = env->next;
 		else
 			swap = 0;
 	}
 	return (start);
-}
-
-void	print_env(t_env *env)
-{
-	while (env)
-	{
-		printf("%s=%s\n", env->name, env->value);
-		env = env->next;
-	}
 }
 
 t_env	*lstlast(t_env *env)
@@ -89,7 +86,7 @@ t_env	*lstnew(char *name, char *value)
 
 	lst = (t_env *)malloc(sizeof(t_env));
 	//if (!lst)
-		//fonction pour quitter proprement
+	//fonction pour quitter proprement
 	lst->name = name;
 	lst->value = value;
 	lst->next = NULL;
