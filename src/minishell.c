@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:25:49 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 06:30:17 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 07:34:27 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"
@@ -19,7 +19,13 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argv;
 	shell.env = recover_env(envp);
 	print_env(shell.env);
-
+	shell.env_export = lst_env_cpy(shell.env);
+	sort_list(shell.env_export);
+	printf("\n\n\n\n\n\n\n");
+	print_env(shell.env_export);
+	printf("\n\n\n\n\n\n\n");
+	print_env(shell.env);
+	
 	/* while (1) */
 	/* { */
 	/* 	ft_sig(); */

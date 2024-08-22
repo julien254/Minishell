@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:24:11 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 05:49:39 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/22 07:25:13 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ extern int	g_signal;
 typedef struct s_minishell
 {
 	t_env			*env;
+	t_env			*env_export;
 	t_command_lst	*command;
 	char			*read;
 	int				exit_code;
