@@ -1,7 +1,8 @@
-faire un sort list <<<< normer OK
-faire la fonction env, ne pas afficher les variable sans egale. OK
+faire un sort list <<<< normer OKOKOKOKOKOKOK
+faire la fonction env, ne pas afficher les variable sans egale. OKOKOKOKOKOKOK
 faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value)
 faire un get element pour la liste chainer.
 faire un remove element
+faire une fonction qui copy la list env. OKOKOKOKOKOKOK
 commencer la fonction exit. et ne pas oublier de print exit.
 
