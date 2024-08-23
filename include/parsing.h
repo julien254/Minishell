@@ -37,5 +37,6 @@ void			cmdclear(t_command_lst **cmd);
 /**************************** SET_REDIRECT *********************************/
 
 char			*set_redirect(char *block, int *fd_out, int *fd_in, int *error);
+char			*set_file_name(char *block, int *i);
 
 #endif
