@@ -50,7 +50,7 @@ static void	remove_char(char **s, size_t i)
 	free(tmp3);
 }
 
-static void	remove_quotes(char **s, size_t *i)
+void	remove_quotes(char **s, size_t *i)
 {
 	size_t	j;
 	int		k;

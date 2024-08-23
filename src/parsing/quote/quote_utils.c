@@ -68,3 +68,18 @@ int	skip_quotes_while(char *str, int i)
 		i = skip_quotes(str, i);
 	return (i);
 }
+
+char	*str_remove_quotes(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '"' || str[i] == '\'')
+			remove_quotes(&str, &i);
+		else
+			i++;
+	}
+	return (str);
+}

@@ -9,7 +9,6 @@
 /*   Updated: 2024/08/21 18:03:44 by gcannaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../../include/minishell.h"
 
 static size_t	ft_count_words(char *s)

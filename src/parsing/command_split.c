@@ -11,23 +11,32 @@
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-static void	split_block(t_minishell *shell, int old_i, int i)
+static int	split_block(t_minishell *shell, int old_i, int i)
 {
 	char	*block;
 	char	**cmd_tab;
+	int		fd_out;
+	int		fd_in;
+	int		error;// le contenu de block peux estre a null dans le cas d'un malloc error MAI ausi pour une erreure de redirection, au quelle cas, les autre pipe s'executron toujour
 
+	fd_out = 1;
+	fd_in = 0;
 	block = ft_substr(shell->read, old_i, i - old_i);
 	if (!block)
-		return ; //a securiser
-	//cmd_tab = hendle
+		return (1); //a securiser
+	//block = hendle
+	block = set_redirect(block, &fd_out, &fd_in, &error);
+	if (!block && error)
+		return (1); //a securiser
 	cmd_tab = quote_split(block);
 	if (!cmd_tab)
-		return ; //a securiser
-	//cmd_tab redirection
+		return (1); //a securiser(malloc error)
 	if (!shell->command)
-		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1]);
+		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1], fd_out, fd_in);
 	else
-		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1]));
+		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1], fd_out, fd_in));
+	//proteger cmdnew
+	return (0);
 }
 
 void	command_split(t_minishell *shell)
@@ -44,12 +53,14 @@ void	command_split(t_minishell *shell)
 			i = skip_quotes(shell->read, i);
 		else if (shell->read[i] == '|' && shell->read[i + 1] != '|')
 		{
-			split_block(shell, old_i, i);
+			if (split_block(shell, old_i, i))
+				return ;
 			old_i = i + 1;
 		}
 		i++;
 	}
-	split_block(shell, old_i, i);
+	if (split_block(shell, old_i, i))
+		return ;
 	if (shell->command)
 		print_cmd(shell->command);
 }

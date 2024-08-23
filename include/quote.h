@@ -18,10 +18,12 @@
 int				quote_error(char *s);
 int				skip_quotes_while(char *str, int i);
 int				skip_quotes(char *str, int i);
+char			*str_remove_quotes(char *str);
 
 /**************************** QUOTE_SPLIT *********************************/
 
 char			**quote_split(char *s);
+void			remove_quotes(char **s, size_t *i);
 
 /**************************** SPLIT_WORD *********************************/
 

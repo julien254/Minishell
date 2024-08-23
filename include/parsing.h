@@ -28,10 +28,14 @@ typedef struct s_command_lst
 void			print_cmd(t_command_lst *cmd);
 t_command_lst	*cmdlast(t_command_lst *cmd);
 void			cmdadd_back(t_command_lst **cmd, t_command_lst *cmd_new);
-t_command_lst	*cmdnew(char *cmd, char **args);
+t_command_lst	*cmdnew(char *cmd_name, char **args, int fd_out, int fd_in);
 
 /**************************** LST_CMD_CLEAR *********************************/
 
 void			cmdclear(t_command_lst **cmd);
+
+/**************************** SET_REDIRECT *********************************/
+
+char			*set_redirect(char *block, int *fd_out, int *fd_in, int *error);
 
 #endif
