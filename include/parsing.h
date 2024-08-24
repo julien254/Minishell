@@ -37,6 +37,6 @@ void			cmdclear(t_command_lst **cmd);
 char			*set_redirect(t_minishell *shell, char *block,
 					t_set_fd *set_fd);
 char			*set_file_name(char *block, int *i);
-char			*rm_redirect(char *block, int j, int i);
+char			*rm_redirect(char *block, int j, int i, int *error);
 
 #endif

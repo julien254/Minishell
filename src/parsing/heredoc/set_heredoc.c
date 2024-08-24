@@ -33,6 +33,11 @@ static void	write_in_term_sav(t_minishell *shell, char *and_word,
 	if (content == NULL)
 		exit(0);
 	tmp_name = ft_strjoin("test", ft_itoa(heredoc_index));
+	if (tmp_name == NULL)
+	{
+		free(content);
+		exit(1);
+	}
 	ft_fillsave(content, tmp_name);
 	free(tmp_name);
 	free(content);
@@ -66,6 +71,8 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
 		exit_code = WEXITSTATUS(status);
 	if (exit_code == 0)
 		return (NULL);
-	block = rm_redirect(block, j, *i);
+	if (exit_code == 1)
+		set_fd->error = 1;
+	block = rm_redirect(block, j, *i, &set_fd->error);
 	return (block);
 }

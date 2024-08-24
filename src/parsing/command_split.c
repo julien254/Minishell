@@ -16,17 +16,20 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	char		*block;
 	char		**cmd_tab;
 	t_set_fd	set_fd;
-//	int		error;// le contenu de block peux estre a null dans le cas d'un malloc error MAI ausi pour une erreure de redirection, au quelle cas, les autre pipe s'executron toujour
 
 	set_fd.fd_out = 1;
 	set_fd.fd_in = 0;
+	set_fd.error = 0;
 	block = ft_substr(shell->read, old_i, i - old_i);
 	if (!block)
-		return (1); //a securiser
+		set_fd.error = 1;
 	//block = hendle
 	block = set_redirect(shell, block, &set_fd);
+	if (set_fd.error == 1)
+		return (1);
 	if (!block)
 		return (1); //a securiser
+	//set_fd.error = 1 = error de malloc
 	cmd_tab = quote_split(block);
 	if (!cmd_tab)
 		return (1); //a securiser(malloc error)

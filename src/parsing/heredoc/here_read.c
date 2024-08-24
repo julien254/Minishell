@@ -20,8 +20,7 @@ static char	*process_line(char *content, char *line, char *stop)
 	{
 		tmp = ft_strjoin(content, "\n");
 		free(content);
-		content = ft_strdup(tmp);
-		free(tmp);
+		content = tmp;
 	}
 	else
 		content = ft_calloc(1, 1);

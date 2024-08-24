@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-char	*rm_redirect(char *block, int j, int i)
+char	*rm_redirect(char *block, int j, int i, int *error)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -20,6 +20,15 @@ char	*rm_redirect(char *block, int j, int i)
 	tmp = ft_substr(block, 0, j);
 	tmp2 = ft_substr(block, i, ft_strlen(block) - i);
 	tmp3 = ft_strjoin(tmp, tmp2);
+	if (!tmp3)
+	{
+		if (tmp)
+			free(tmp);
+		if (tmp2)
+			free(tmp2);
+		*error = 1;
+		return (NULL);
+	}
 	free(tmp);
 	free(tmp2);
 	free(block);
@@ -38,7 +47,7 @@ static int	file_name_error(char *file_name)
 	return (0);
 }
 
-static char	*set_redirect_in(char *block, int *i, int *fd_in)
+static char	*set_redirect_in(char *block, int *i, int *fd_in, int *error)
 {
 	char	*file_name;
 	int		j;
@@ -55,7 +64,7 @@ static char	*set_redirect_in(char *block, int *i, int *fd_in)
 		return (NULL);
 	}
 	free(file_name);
-	block = rm_redirect(block, j, *i);
+	block = rm_redirect(block, j, *i, error);
 	*i = j - 1;
 	return (block);
 }
@@ -82,7 +91,7 @@ static char	*set_redirect_out(char *block, int *i, int *fd_out, int *error)
 		return (NULL);
 	}
 	free(file_name);
-	block = rm_redirect(block, j, *i - 1);
+	block = rm_redirect(block, j, *i - 1, error);
 	*i = j - 1;
 	return (block);
 }
@@ -92,6 +101,8 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 	int	i;
 
 	i = 0;
+	if (!block)
+		return (NULL);
 	while (block[i])
 	{
 		i = skip_quotes_while(block, i);
@@ -99,7 +110,7 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 			block = set_redirect_out(block, &i, &set_fd->fd_out,
 					&set_fd->error);
 		else if (block[i] == '<' && block[i + 1] != '<')
-			block = set_redirect_in(block, &i, &set_fd->fd_in);
+			block = set_redirect_in(block, &i, &set_fd->fd_in, &set_fd->error);
 		else if (!ft_strncmp(&block[i], "<<", 1))
 			block = set_heredoc(shell, set_fd, block, &i);
 		if (!block)
