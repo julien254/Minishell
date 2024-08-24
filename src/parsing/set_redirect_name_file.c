@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-
 static int	set_file_name_error(char *block, char **file_name, int *i,
 			int error_id)
 {

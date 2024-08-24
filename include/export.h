@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXPORT_H
-#define EXPORT_H
+# define EXPORT_H
 
 void	ft_export(t_env *env, char **argv);
 
 #endif
-

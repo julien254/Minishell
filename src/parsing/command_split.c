@@ -13,28 +13,29 @@
 
 static int	split_block(t_minishell *shell, int old_i, int i)
 {
-	char	*block;
-	char	**cmd_tab;
-	int		fd_out;
-	int		fd_in;
-	int		error;// le contenu de block peux estre a null dans le cas d'un malloc error MAI ausi pour une erreure de redirection, au quelle cas, les autre pipe s'executron toujour
+	char		*block;
+	char		**cmd_tab;
+	t_set_fd	set_fd;
+//	int		error;// le contenu de block peux estre a null dans le cas d'un malloc error MAI ausi pour une erreure de redirection, au quelle cas, les autre pipe s'executron toujour
 
-	fd_out = 1;
-	fd_in = 0;
+	set_fd.fd_out = 1;
+	set_fd.fd_in = 0;
 	block = ft_substr(shell->read, old_i, i - old_i);
 	if (!block)
 		return (1); //a securiser
 	//block = hendle
-	block = set_redirect(block, &fd_out, &fd_in, &error);
-	if (!block && error)
+	block = set_redirect(shell, block, &set_fd);
+	if (!block)
 		return (1); //a securiser
 	cmd_tab = quote_split(block);
 	if (!cmd_tab)
 		return (1); //a securiser(malloc error)
 	if (!shell->command)
-		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1], fd_out, fd_in);
+		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1], set_fd.fd_out,
+				set_fd.fd_in);
 	else
-		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1], fd_out, fd_in));
+		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1],
+				set_fd.fd_out, set_fd.fd_in));
 	//proteger cmdnew
 	return (0);
 }

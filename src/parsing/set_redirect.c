@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-static char	*rm_redirect(char *block, int j, int i)
+char	*rm_redirect(char *block, int j, int i)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -87,19 +87,21 @@ static char	*set_redirect_out(char *block, int *i, int *fd_out, int *error)
 	return (block);
 }
 
-char	*set_redirect(char *block, int *fd_out, int *fd_in, int *error)
+char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 {
 	int	i;
 
 	i = 0;
-	*fd_in = 5;
 	while (block[i])
 	{
 		i = skip_quotes_while(block, i);
 		if (block[i] == '>')
-			block = set_redirect_out(block, &i, fd_out, error);
-		else if (block[i] == '<')
-			block = set_redirect_in(block, &i, fd_in);
+			block = set_redirect_out(block, &i, &set_fd->fd_out,
+					&set_fd->error);
+		else if (block[i] == '<' && block[i + 1] != '<')
+			block = set_redirect_in(block, &i, &set_fd->fd_in);
+		else if (!ft_strncmp(&block[i], "<<", 1))
+			block = set_heredoc(shell, set_fd, block, &i);
 		if (!block)
 			return (NULL);
 		i++;

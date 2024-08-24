@@ -13,15 +13,13 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-typedef struct s_command_lst
+typedef struct s_set_fd
 {
-	char					*cmd;
-	char					**args;
-	int						fd_in;
-	int						fd_out;
-	int						fd_pipe[2];
-	struct s_command_lst	*next;
-}				t_command_lst;
+	int		fd_out;
+	int		fd_in;
+	int		heredoc_index;
+	int		error;
+}				t_set_fd;
 
 /**************************** LST_UTILS_CMD *********************************/
 
@@ -36,7 +34,9 @@ void			cmdclear(t_command_lst **cmd);
 
 /**************************** SET_REDIRECT *********************************/
 
-char			*set_redirect(char *block, int *fd_out, int *fd_in, int *error);
+char			*set_redirect(t_minishell *shell, char *block,
+					t_set_fd *set_fd);
 char			*set_file_name(char *block, int *i);
+char			*rm_redirect(char *block, int j, int i);
 
 #endif

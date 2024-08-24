@@ -41,6 +41,8 @@ SRCS		=	src/minishell.c										\
 				src/parsing/quote/split_word.c						\
 				src/parsing/set_redirect.c							\
 				src/parsing/set_redirect_name_file.c				\
+				src/parsing/heredoc/set_heredoc.c					\
+				src/parsing/heredoc/here_read.c						\
 				src/export/ft_export.c
 
 SRCS_BONUS	=	
