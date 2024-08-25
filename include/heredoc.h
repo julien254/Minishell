@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 18:02:20 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/21 18:29:37 by gcannaud         ###   ########.fr       */
+/*   Created: 2024/08/21 14:57:27 by gcannaud          #+#    #+#             */
+/*   Updated: 2024/08/22 05:50:40 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../include/minishell.h"
 
-void    ft_free_tab(char **tab)
-{
-    size_t	i;
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-    i = 0;
-    while (tab[i] != 0)
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
-}
+char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i);
+char	*here_read(char *content, char *stop);
+
+#endif

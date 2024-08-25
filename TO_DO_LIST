@@ -27,3 +27,6 @@ faire le parsing de export (gestion des caractere interdit). EN COURS
 Commencer la fonction d'execution avec les fork et les pipe. A DEBRIEFER AVEC GAEL
 
 Implementer unset. PRESQUE FINI
+
+ft_wait_pid :
+pren en paramaitre un t_minishell et un pid_t, attent que le programe ce termine, sovgarde l'exit code dans shell->exit_code et renvoie un int en fonction du de l'exit code.

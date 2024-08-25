@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-int ft_iswhitespace(char c)
+int	ft_iswhitespace(char c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
 }

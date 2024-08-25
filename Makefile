@@ -16,7 +16,7 @@ NAME_BONUS	=
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror -g -lreadline -Wno-unused-command-line-argument
+CFLAGS		=	-Wall -Wextra -Werror -g -gdwarf-5 -lreadline -Wno-unused-command-line-argument
 
 INCLUDE		=	-I./include
 
@@ -32,13 +32,19 @@ SRCS		=	src/minishell.c										\
 				src/lst_management/remove_element_env.c				\
 				src/lst_management/sort_list.c						\
 				src/utils/signal.c									\
-				src/utils/ft_free_tab.c								\
 				src/utils/ft_iswhitespace.c							\
 				src/utils/ft_strjoin_env.c							\
 				src/parsing/parsing.c								\
 				src/parsing/command_split.c							\
 				src/parsing/lst_parse_management/lst_pars_utils.c	\
+				src/parsing/lst_parse_management/lst_pars_clean.c	\
 				src/parsing/quote/quote_split.c						\
+				src/parsing/quote/quote_utils.c						\
+				src/parsing/quote/split_word.c						\
+				src/parsing/set_redirect.c							\
+				src/parsing/set_redirect_name_file.c				\
+				src/parsing/heredoc/set_heredoc.c					\
+				src/parsing/heredoc/here_read.c						\
 				src/export/ft_export.c
 
 SRCS_BONUS	=	

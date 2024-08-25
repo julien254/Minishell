@@ -30,8 +30,10 @@ int	main(int argc, char *argv[], char **envp)
 		if (!shell.read)
 			exit(EXIT_SUCCESS);
 		if (shell.read[0] != 0)
-		parse_command(&shell);
-		cmdclear(&shell.command);
+		{
+			parse_command(&shell);
+			cmdclear(&shell.command);
+		}
 		//free(shell.read);
 	}
 	return (0);
