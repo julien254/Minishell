@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:31:59 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 09:37:24 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/25 06:00:52 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LST_MANAGEMENT_H
@@ -21,10 +21,13 @@ typedef struct s_env
 
 /**************************** LST_ENV_UTILS *********************************/
 
-t_env	*sort_list(t_env *env);
 t_env	*lstlast(t_env *env);
 void	lstadd_back(t_env **env, t_env *new);
 t_env	*lstnew(char *name, char *value);
+
+/**************************** LST_ENV_UTILS *********************************/
+
+t_env	*sort_list(t_env *env);
 
 /**************************** LST_ENV_CPY *********************************/
 

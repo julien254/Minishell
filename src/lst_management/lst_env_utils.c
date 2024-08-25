@@ -6,55 +6,10 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:37:43 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 06:05:15 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/25 06:37:10 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
-
-static void	swap_list(t_env **env, t_env **start, int *i, int *swap)
-{
-	char	*name_swap;
-	char	*value_swap;
-
-	while ((*env)->name[*i] && (*env)->next->name[*i])
-	{
-		if ((*env)->name[*i] > (*env)->next->name[*i])
-		{
-			name_swap = (*env)->name;
-			value_swap = (*env)->value;
-			(*env)->name = (*env)->next->name;
-			(*env)->value = (*env)->next->value;
-			(*env)->next->name = name_swap;
-			(*env)->next->value = value_swap;
-			*env = *start;
-			*swap = 1;
-			break ;
-		}
-		else if ((*env)->name[*i] < (*env)->next->name[*i])
-			break ;
-		*i = *i + 1;
-	}
-}
-
-t_env	*sort_list(t_env *env)
-{
-	int		swap;
-	t_env	*start;
-	int		i;
-
-	start = env;
-	swap = 0;
-	while (env != NULL && env->next != NULL)
-	{
-		i = 0;
-		swap_list(&env, &start, &i, &swap);
-		if (!swap)
-			env = env->next;
-		else
-			swap = 0;
-	}
-	return (start);
-}
 
 t_env	*lstlast(t_env *env)
 {

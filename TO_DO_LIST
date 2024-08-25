@@ -4,7 +4,7 @@ faire un sort list <<<< normer OKOKOKOKOKOKOK
 
 faire la fonction env, ne pas afficher les variable sans egale. OKOKOKOKOKOKOK
 
-faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value), faire une sous fonction pour add un element dans la liste. voir pourquoi la variable sans egale ne saffiche pas.
+faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value), faire une sous fonction pour add un element dans la liste. voir pourquoi la variable sans egale ne saffiche pas. OKOKOKOKOKOKOK
 
 faire un get value d'un element pour la liste chainer.OKOKOKOKOKOKOK
 
@@ -14,10 +14,16 @@ faire un remove element.OKOKOKOKOKOKOK
 
 faire une fonction qui copy la list env. OKOKOKOKOKOKOK
 
-commencer la fonction exit. et ne pas oublier de print exit.
+commencer la fonction exit. et ne pas oublier de print exit. EN COURS
 
-dans le sort list join le name=value pour avoir le bonne ordre.
+dans le sort list join le name=value pour avoir le bonne ordre.OKOKOKOKOKOKOK
 
-faire une fonction qui serat apeller quand je rencontre un $, le prend en parametre le nom d'une variable d'environement et doit retourner la valeur qui correspond , en char * mallocer
+faire une fonction qui serat apeller quand je rencontre un $, qui prend en parametre le nom d'une variable d'environement et doit retourner la valeur qui correspond , en char * mallocer -- A REVOIR AVEC GAEL PARCEQUE JE SUIS PAS SUR DE COMMENT L'IMPLEMENTER.
 
-faire une fonction qui prend en parametre une char *str , un index de debut , une taille et un char * de remplacement et qui renvoie la chaine modifier en consequence. avec un nouveau malloc.
+faire une fonction qui prend en parametre une char *str , un index de debut , une taille et un char * de remplacement et qui renvoie la chaine modifier en consequence. avec un nouveau malloc. EN COURS
+
+faire le parsing de export (gestion des caractere interdit). EN COURS
+
+Commencer la fonction d'execution avec les fork et les pipe. A DEBRIEFER AVEC GAEL
+
+Implementer unset. PRESQUE FINI

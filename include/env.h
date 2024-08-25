@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 10:38:52 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/25 09:20:50 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_env	*recover_env(char **envp);
 /**************************** FT_ENV *********************************/
 
 void	print_env(t_env *env, int if_export);
+void    ft_env(t_env *env);
 
 #endif

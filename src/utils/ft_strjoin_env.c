@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_env_cpy.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 06:49:34 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/25 09:03:06 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/25 05:44:47 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/25 05:50:34 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-t_env	*lst_env_cpy(t_env *env)
+char	*ft_strjoin_env(char *s1, char *s2)
 {
-	t_env	*cpy;
-	t_env	*new;
-	char	*name;
-	char	*value;
+	char	*str;
 
-	cpy = NULL;
-	while (env)
-	{
-		name = ft_strdup(env->name);
-		if (env->value)
-			value = ft_strdup(env->value);
-		else
-			value = NULL;
-		new = lstnew(name, value);
-		lstadd_back(&cpy, new);
-		env = env->next;
-	}
-	return (cpy);
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 2, 1);
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
+	ft_strlcat(str, "=", (ft_strlen(s1) + 2));
+	ft_strlcat(str, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));
+	return (str);
 }
