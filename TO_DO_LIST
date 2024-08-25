@@ -14,7 +14,9 @@ faire un remove element.OKOKOKOKOKOKOK
 
 faire une fonction qui copy la list env. OKOKOKOKOKOKOK
 
-commencer la fonction exit. et ne pas oublier de print exit. EN COURS
+Commencer la fonction exit. et ne pas oublier de print exit. EN COURS
+
+Fonction free liste chainee.
 
 dans le sort list join le name=value pour avoir le bonne ordre.OKOKOKOKOKOKOK
 
@@ -29,4 +31,4 @@ Commencer la fonction d'execution avec les fork et les pipe. A DEBRIEFER AVEC GA
 Implementer unset. PRESQUE FINI
 
 ft_wait_pid :
-pren en paramaitre un t_minishell et un pid_t, attent que le programe ce termine, sovgarde l'exit code dans shell->exit_code et renvoie un int en fonction du de l'exit code.
+pren en paramaitre un t_minishell et un pid_t, attent que le programe ce termine, sovgarde l'exit code dans shell->exit_code et renvoie un int en fonction du de l'exit code. A DEBRIEFER AVEC GAEL
