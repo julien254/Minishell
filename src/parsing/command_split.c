@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:53:59 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/26 08:07:50 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 08:59:03 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -34,7 +34,7 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	if (!cmd_tab)
 		return (1); //a securiser(malloc error)
 	if (!shell->command)
-		shell->command = cmdnew(cmd_tab[0], &cmd_tab[1], set_fd.fd_out,
+		shell->command = cmdnew(cmd_tab[0], &cmd_tab[0], set_fd.fd_out,
 				set_fd.fd_in);
 	else
 		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1],

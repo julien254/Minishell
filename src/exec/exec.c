@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 08:43:06 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 09:09:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -49,7 +49,6 @@ static void	ft_execve(t_minishell *shell)
 		ft_putstr_fd("\n", 2);
 	}
 	execve(cmd, shell->command->args, NULL);
-	perror("Minishell : Execve: ");
 }
 
 static pid_t	ft_fork(void)
