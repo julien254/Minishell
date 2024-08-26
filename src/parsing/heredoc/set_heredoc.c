@@ -58,7 +58,10 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
 	j = *i;
 	file_name = set_file_name(block, i);
 	if (!file_name)
+	{
+		set_fd->error = 1;
 		return (NULL);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (block);

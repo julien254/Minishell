@@ -35,11 +35,13 @@ static int	check_error(t_minishell *shell)
 	return (0);
 }
 
-void	parse_command(t_minishell *shell)
+int	parse_command(t_minishell *shell)
 {
 	if (can_be_recorded(shell))
-		return ;
+		return (0);
 	if (check_error(shell))
-		return ;
-	command_split(shell);
+		return (0);
+	if (command_split(shell))
+		return (1);
+	return (0);
 }

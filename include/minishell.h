@@ -33,7 +33,7 @@
 
 extern int	g_signal;
 
-void	parse_command(t_minishell *shell);
-void	command_split(t_minishell *shell);
+int		parse_command(t_minishell *shell);
+int		command_split(t_minishell *shell);
 
 #endif

@@ -32,9 +32,11 @@ int	main(int argc, char *argv[], char **envp)
 			ft_exit(&shell);
 		if (shell.read[0] != 0)
 		{
-			parse_command(&shell);
-			exec_cmd(&shell);
-			cmdclear(&shell.command);
+			if (!parse_command(&shell))
+			{
+				exec_cmd(&shell);
+				cmdclear(&shell.command);
+			}
 		}
 		//free(shell.read);
 	}

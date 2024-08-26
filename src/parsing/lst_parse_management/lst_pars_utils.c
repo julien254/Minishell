@@ -18,16 +18,18 @@ void	print_cmd(t_command_lst *cmd)
 	i = 0;
 	while (cmd)
 	{
-		printf("cmd=%s\n", cmd->cmd);
+		printf("|--------------------\n");
+		printf("|cmd=%s\n", cmd->cmd);
 		while (cmd->args[i])
 		{
-			printf("arg%i=%s\n", i, cmd->args[i]);
+			printf("|arg%i=%s\n", i, cmd->args[i]);
 			i++;
 		}
-		printf("fd_in :%d\n", cmd->fd_in);
-		printf("fd_out :%d\n", cmd->fd_out);
-		printf("heredoc_index :%d\n", cmd->heredoc_index);
-		printf("pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0], cmd->fd_pipe[1]);
+		printf("|fd_in :%d\n", cmd->fd_in);
+		printf("|fd_out :%d\n", cmd->fd_out);
+		printf("|heredoc_index :%d\n", cmd->heredoc_index);
+		printf("|pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0], cmd->fd_pipe[1]);
+		printf("|--------------------\n");
 		i = 0;
 		cmd = cmd->next;
 	}
@@ -62,8 +64,8 @@ t_command_lst	*cmdnew(char *cmd_name, char **args, int fd_out, int fd_in)
 	t_command_lst	*cmd;
 
 	cmd = (t_command_lst *)malloc(sizeof(t_command_lst));
-	//if (!lst)
-		//fonction pour quitter proprement
+	if (!cmd)
+		return (NULL);
 	cmd->cmd = cmd_name;
 	cmd->args = args;
 	cmd->fd_out = fd_out;

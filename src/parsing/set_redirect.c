@@ -35,10 +35,13 @@ char	*rm_redirect(char *block, int j, int i, int *error)
 	return (tmp3);
 }
 
-static int	file_name_error(char *file_name)
+static int	file_name_error(char *file_name, int *error)
 {
 	if (!file_name)
+	{
+		*error = 1;
 		return (1);
+	}
 	if (file_name[0] == '\0')
 	{
 		free(file_name);
@@ -54,7 +57,7 @@ static char	*set_redirect_in(char *block, int *i, int *fd_in, int *error)
 
 	j = *i;
 	file_name = set_file_name(block, i);
-	if (file_name_error(file_name))
+	if (file_name_error(file_name, error))
 		return (NULL);
 	*fd_in = open(file_name, O_RDONLY);
 	if (*fd_in == -1)
@@ -76,7 +79,7 @@ static char	*set_redirect_out(char *block, int *i, int *fd_out, int *error)
 
 	j = *i;
 	file_name = set_file_name(block, i);
-	if (file_name_error(file_name))
+	if (file_name_error(file_name, error))
 		return (NULL);
 	(*i)++;
 	if (block[*i] == '>')

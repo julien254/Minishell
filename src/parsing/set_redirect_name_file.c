@@ -14,6 +14,8 @@
 static int	set_file_name_error(char *block, char **file_name, int *i,
 			int error_id)
 {
+	if (error_id != 1 && !*file_name)
+		return (1);
 	if (error_id == 1 && (block[*i] == '\0' || block[*i] == '>'
 			|| block[*i] == '<'))
 	{
@@ -39,19 +41,24 @@ static int	set_file_name_error(char *block, char **file_name, int *i,
 	return (0);
 }
 
-char	*set_file_name(char *block, int *i)
+static void	skipe_to_name(char *block, int *i, int *j)
 {
-	char	*file_name;
-	int		save_i;
-	int		j;
-
 	(*i)++;
 	if ((block[*i] == '>' && block[*i - 1] == '>')
 		|| (block[*i] == '<' && block[*i - 1] == '<'))
 		(*i)++;
 	while (block[*i] && ft_iswhitespace(block[*i]))
 		(*i)++;
-	j = *i;
+	*j = *i;
+}
+
+char	*set_file_name(char *block, int *i)
+{
+	char	*file_name;
+	int		save_i;
+	int		j;
+
+	skipe_to_name(block, i, &j);
 	if (set_file_name_error(block, &file_name, i, 1))
 		return (file_name);
 	while (block[*i] && !ft_iswhitespace(block[*i]) && block[*i] != '>'
