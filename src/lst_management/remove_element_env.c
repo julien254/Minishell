@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 09:20:02 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/22 09:41:29 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 05:47:53 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"

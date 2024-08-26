@@ -6,10 +6,21 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:53:50 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/25 06:46:10 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 07:27:29 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
+void	*set_tab_path(t_minishell *shell)
+{
+	char	*path;
+
+	path = return_value_env(shell->env, "PATH");
+	shell->tab_path = ft_split(path, ':');
+	if (!shell->tab_path)
+		return (NULL);
+	return ((void *)1);
+}
 
 t_env	*recover_env(char **envp)
 {

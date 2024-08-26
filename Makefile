@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/25 06:15:08 by judetre          ###   ########.fr        #
+#    Updated: 2024/08/26 07:28:16 by judetre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		=	src/minishell.c										\
 				src/lst_management/return_value_env.c				\
 				src/lst_management/remove_element_env.c				\
 				src/lst_management/sort_list.c						\
+				src/lst_management/free_lst_env.c					\
 				src/utils/signal.c									\
 				src/utils/ft_iswhitespace.c							\
 				src/utils/ft_strjoin_env.c							\
@@ -45,7 +46,10 @@ SRCS		=	src/minishell.c										\
 				src/parsing/set_redirect_name_file.c				\
 				src/parsing/heredoc/set_heredoc.c					\
 				src/parsing/heredoc/here_read.c						\
-				src/export/ft_export.c
+				src/export/ft_export.c								\
+				src/exit/ft_exit.c									\
+				src/unset/ft_unset.c								\
+				src/exec/exec.c
 
 SRCS_BONUS	=	
 

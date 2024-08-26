@@ -16,7 +16,7 @@ faire une fonction qui copy la list env. OKOKOKOKOKOKOK
 
 Commencer la fonction exit. et ne pas oublier de print exit. EN COURS
 
-Fonction free liste chainee.
+Fonction free liste chainee env.OKOKOKOKOKOKOK
 
 dans le sort list join le name=value pour avoir le bonne ordre.OKOKOKOKOKOKOK
 
@@ -24,11 +24,13 @@ faire une fonction qui serat apeller quand je rencontre un $, qui prend en param
 
 faire une fonction qui prend en parametre une char *str , un index de debut , une taille et un char * de remplacement et qui renvoie la chaine modifier en consequence. avec un nouveau malloc. EN COURS
 
-faire le parsing de export (gestion des caractere interdit). EN COURS
+faire le parsing de export (gestion des caractere interdit). OKOKOKOKOKOKOK
 
 Commencer la fonction d'execution avec les fork et les pipe. A DEBRIEFER AVEC GAEL
 
-Implementer unset. PRESQUE FINI
+Implementer unset. EN COURS
 
 ft_wait_pid :
 pren en paramaitre un t_minishell et un pid_t, attent que le programe ce termine, sovgarde l'exit code dans shell->exit_code et renvoie un int en fonction du de l'exit code. A DEBRIEFER AVEC GAEL
+
+faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument

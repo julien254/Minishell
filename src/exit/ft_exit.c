@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 07:43:07 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/26 04:32:36 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/26 05:21:31 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../include/minishell.h"
 
-#ifndef ENV_H
-# define ENV_H
-
-/**************************** RECOVER_ENV *********************************/
-
-t_env	*recover_env(char **envp);
-void    *set_tab_path(t_minishell *shell);
-
-/**************************** FT_ENV *********************************/
-
-void	print_env(t_env *env, int if_export);
-void    ft_env(t_env *env);
-
-#endif
+int ft_exit(t_minishell *shell)
+{
+	free_lst_env(shell->env);
+	ft_putstr_fd("EXIT\n", 2);
+	exit(shell->exit_code);
+}

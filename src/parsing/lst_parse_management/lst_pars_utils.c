@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:51:56 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/22 12:13:49 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 06:03:22 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
@@ -24,6 +24,10 @@ void	print_cmd(t_command_lst *cmd)
 			printf("arg%i=%s\n", i, cmd->args[i]);
 			i++;
 		}
+		printf("fd_in :%d\n", cmd->fd_in);
+		printf("fd_out :%d\n", cmd->fd_out);
+		printf("heredoc_index :%d\n", cmd->heredoc_index);
+		printf("pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0], cmd->fd_pipe[1]);
 		i = 0;
 		cmd = cmd->next;
 	}

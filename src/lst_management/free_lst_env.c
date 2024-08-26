@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   free_lst_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 07:43:07 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/26 04:09:54 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/26 04:25:04 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../include/minishell.h"
+void	free_lst_env(t_env *env)
+{
+	t_env *tmp;
 
-#ifndef ENV_H
-# define ENV_H
-
-/**************************** RECOVER_ENV *********************************/
-
-t_env	*recover_env(char **envp);
-void    *set_tab_path(t_minishell *shell);
-
-/**************************** FT_ENV *********************************/
-
-void	print_env(t_env *env, int if_export);
-void    ft_env(t_env *env);
-
-#endif
+	while (env)
+	{
+		free(env->name);
+		free(env->value);
+		tmp = env->next;
+		free(env);
+		env = tmp;
+	}
+}

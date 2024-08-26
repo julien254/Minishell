@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/21 17:50:21 by gcannaud         ###   ########.fr       */
+/*   Updated: 2024/08/26 07:26:02 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_command_lst
 {
 	char					*cmd;
 	char					**args;
+	int						pid;
 	int						fd_in;
 	int						fd_out;
 	int						heredoc_index;
@@ -27,8 +28,8 @@ typedef struct s_command_lst
 typedef struct s_minishell
 {
 	t_env			*env;
-	t_env			*env_export;
 	t_command_lst	*command;
+	char			**tab_path;
 	int				here_doc_nbr;
 	char			*read;
 	int				exit_code;
