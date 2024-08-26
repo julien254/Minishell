@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 06:25:49 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 07:49:34 by judetre          ###   ########.fr       */
+/*   Created: 2024/08/26 11:04:47 by judetre           #+#    #+#             */
+/*   Updated: 2024/08/26 11:05:23 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"

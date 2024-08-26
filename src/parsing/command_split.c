@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:53:59 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/26 08:59:03 by judetre          ###   ########.fr       */
+/*   Updated: 2024/08/26 10:00:31 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -37,7 +37,7 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 		shell->command = cmdnew(cmd_tab[0], &cmd_tab[0], set_fd.fd_out,
 				set_fd.fd_in);
 	else
-		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[1],
+		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[0],
 				set_fd.fd_out, set_fd.fd_in));
 	//proteger cmdnew
 	return (0);
@@ -65,6 +65,6 @@ void	command_split(t_minishell *shell)
 	}
 	if (split_block(shell, old_i, i))
 		return ;
-	//if (shell->command)
-	//	print_cmd(shell->command);
+	if (shell->command)
+		print_cmd(shell->command);
 }
