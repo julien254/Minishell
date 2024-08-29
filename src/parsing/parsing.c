@@ -37,6 +37,7 @@ static int	check_error(t_minishell *shell)
 
 int	parse_command(t_minishell *shell)
 {
+	shell->here_doc_nbr = 1;
 	if (can_be_recorded(shell))
 		return (0);
 	if (check_error(shell))

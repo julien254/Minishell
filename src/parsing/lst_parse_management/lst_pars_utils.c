@@ -59,7 +59,7 @@ void	cmdadd_back(t_command_lst **cmd, t_command_lst *cmd_new)
 	}
 }
 
-t_command_lst	*cmdnew(char *cmd_name, char **args, int fd_out, int fd_in)
+t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd)
 {
 	t_command_lst	*cmd;
 
@@ -68,8 +68,9 @@ t_command_lst	*cmdnew(char *cmd_name, char **args, int fd_out, int fd_in)
 		return (NULL);
 	cmd->cmd = cmd_name;
 	cmd->args = args;
-	cmd->fd_out = fd_out;
-	cmd->fd_in = fd_in;
+	cmd->fd_out = set_fd->fd_out;
+	cmd->fd_in = set_fd->fd_in;
+	cmd->heredoc_index = set_fd->heredoc_index;
 	cmd->next = NULL;
 	return (cmd);
 }

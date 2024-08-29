@@ -26,7 +26,7 @@ typedef struct s_set_fd
 void			print_cmd(t_command_lst *cmd);
 t_command_lst	*cmdlast(t_command_lst *cmd);
 void			cmdadd_back(t_command_lst **cmd, t_command_lst *cmd_new);
-t_command_lst	*cmdnew(char *cmd_name, char **args, int fd_out, int fd_in);
+t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd);
 
 /**************************** LST_CMD_CLEAR *********************************/
 

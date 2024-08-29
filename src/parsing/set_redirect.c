@@ -104,6 +104,7 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 	int	i;
 
 	i = 0;
+	set_fd->heredoc_index = 0;
 	if (!block)
 		return (NULL);
 	while (block[i])
