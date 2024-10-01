@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/26 07:28:16 by judetre          ###   ########.fr        #
+#    Updated: 2024/10/01 10:24:59 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRCS		=	src/minishell.c										\
 				src/export/ft_export.c								\
 				src/exit/ft_exit.c									\
 				src/unset/ft_unset.c								\
-				src/exec/exec.c
+				src/exec/exec.c										\
+				src/handel/replace_handle.c
 
 SRCS_BONUS	=	
 

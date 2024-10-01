@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:24:11 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 07:46:44 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/01 10:27:29 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "exit.h"
 # include "unset.h"
 # include "exec.h"
+# include "handle.h"
 
 extern int	g_signal;
 
