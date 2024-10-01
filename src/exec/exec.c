@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 09:09:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:08:49 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -18,7 +18,8 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 	char	*tmp;
 
 	i = 0;
-	while (shell->tab_path[i])
+	shell->tab_path = set_tab_path(shell);
+	while (shell->tab_path && shell->tab_path[i])
 	{
 		tmp = ft_strjoin(shell->tab_path[i++], "/");
 		if (!tmp)
@@ -42,6 +43,11 @@ static void	ft_execve(t_minishell *shell)
 	char			*cmd;
 
 	cmd = ft_recovery_cmd(shell);
+	if (shell->tab_path)
+	{
+		ft_free_malloc2d((void *)shell->tab_path);
+		shell->tab_path = NULL;
+	}
 	if (!cmd)
 	{
 		ft_putstr_fd("Minishell: Command not found: ", 2);
