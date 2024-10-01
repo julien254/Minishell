@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:04:47 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/01 11:44:30 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:23:16 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"
@@ -14,7 +14,6 @@
 int	main(int argc, char *argv[], char **envp)
 {
 	t_minishell	shell;
-
 	(void)argc;
 	(void)argv;
 	shell.env = recover_env(envp);

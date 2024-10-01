@@ -6,10 +6,36 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 09:54:57 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/01 11:05:10 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:21:29 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
+char	*join_without_handle(char *str, int index, int size)
+{
+	char	*result_str;
+
+	result_str = (char *)malloc(sizeof(char *) * \
+			(ft_strlen(str) - size + 1));
+	ft_strlcpy(result_str, str, index + 1);
+	str = str + index + size;
+	ft_strlcat(result_str, str, index + ft_strlen(str) + 1);
+	return (result_str);
+}
+
+char	*join_with_handle(char *str, int index, int size , char *value)
+{
+	char	*result_str;
+
+	result_str = (char *)malloc(sizeof(char *) * \
+			(ft_strlen(str) - size + ft_strlen(value) + 1));
+	ft_strlcpy(result_str, str, index + 1);
+	ft_strlcat(result_str, value, ft_strlen(value) + index + 1);
+	str = str + index + size;
+	ft_strlcat(result_str, str, ft_strlen(value) + \
+			index + ft_strlen(str) + 1);
+	return (result_str);
+}
 
 char	*replace_handle(char *str, int index, int size, t_env *env)
 {
@@ -17,19 +43,15 @@ char	*replace_handle(char *str, int index, int size, t_env *env)
 	char	*value;
 	char	*name;
 	char	*result_str;
-	char	*str_residu;
 	
 	str_tmp = ft_strdup(str);
 	name = str_tmp + (index + 1);
 	name[size - 1] = 0;
 	value = return_value_env(env, name);
-	result_str = (char *)malloc(sizeof(char *) * \
-			(ft_strlen(str) - size + ft_strlen(value) + 1));
-	ft_strlcpy(result_str, str_tmp, index + 1);
-	ft_strlcat(result_str, value, ft_strlen(value) + index + 1);
-	str_residu = str + index + size;
-	ft_strlcat(result_str, str_residu, ft_strlen(value) + \
-			index + ft_strlen(str_residu) + 1);
+	if (value)
+		result_str = join_with_handle(str, index, size, value);
+	else
+		result_str = join_without_handle(str, index, size);
 	ft_printf("%s", result_str); // a supprimer, cest pour l'exemple. 
 	free(str_tmp);
 	free(str);
