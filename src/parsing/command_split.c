@@ -26,6 +26,45 @@ static int	add_cmd(t_minishell *shell, char **cmd_tab, t_set_fd set_fd)
 	return (0);
 }
 
+int set_hendle_size(char *block, int i)
+{
+	int	y;
+
+	y = 0;
+	i++;
+	while (block[i] && block[i] != ' ' && block[i] != '$' && block[i] != '\'' && block[i] != '/' && block[i] != '"')//fonction de verification
+	{
+		i++;
+		y++;
+	}
+	return (y);
+}
+
+char *hendle_set(t_minishell *shell, char *block)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	if (!block)
+		return (NULL);
+	while (block[i])
+	{
+		y = 0;
+		while (block[i] == '\'')
+			i = skip_quotes(block, i);
+		if (block[i] == '$')
+		{
+			y = 1 + set_hendle_size(block, i);
+			block = replace_handle(ft_strdup(block), i, y, shell->env);
+		}
+		if (!block)
+			return (NULL);
+		i++;
+	}
+	return (block);
+}
+
 static int	split_block(t_minishell *shell, int old_i, int i)
 {
 	char		*block;
@@ -38,7 +77,7 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	block = ft_substr(shell->read, old_i, i - old_i);
 	if (!block)
 		set_fd.error = 1;
-	//block = hendle
+	block = hendle_set(shell, block);
 	block = set_redirect(shell, block, &set_fd);
 	if (set_fd.error == 1)
 	{
