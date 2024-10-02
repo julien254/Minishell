@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/01 14:41:03 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/02 15:02:12 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -54,6 +54,7 @@ static void	ft_execve(t_minishell *shell)
 		ft_putstr_fd("Minishell: Command not found: ", 2);
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd("\n", 2);
+		return ;
 	}
 	env = make_tab_env(shell->env);
 	execve(cmd, shell->command->args, env);
@@ -71,13 +72,61 @@ static pid_t	ft_fork(void)
 	return (pid);
 }
 
-void	exec_cmd(t_minishell *shell)
+void	ft_pipe(t_minishell *shell)
+{
+	if (pipe(shell->command->fd_pipe) == -1)
+		perror("Pipe");
+}
+
+void	ft_dup2(int fd_in, int fd_out)
+{
+	if (dup2(fd_in, 0) == -1)
+		perror("dup2");
+	if (dup2(fd_out, 1) == -1)
+		perror("dup2");
+}
+
+void	ft_choose_dup2(t_minishell *shell, char *order)
+{
+	if (ft_strncmp(order, "last", 4) == 0)
+	{
+		if (shell->command->fd_out != -1)
+            ft_dup2(shell->command->fd_in, shell->command->fd_out);
+	}
+	else
+		ft_dup2(shell->command->fd_in, shell->command->fd_pipe[1]);
+}
+
+void	ft_pipex(t_minishell *shell, char *order)
 {
 	shell->command->pid = ft_fork();
 	if (shell->command->pid == 0)
 	{
+		close(shell->command->fd_pipe[0]);
+		if (strncmp(order, "last", 4) == 0 && shell->command->fd_out != -1)
+			close(shell->command->fd_pipe[1]);
+        ft_choose_dup2(shell, order);
 		ft_execve(shell);
-		exit(EXIT_FAILURE);
+        ft_free_malloc2d((void *)shell->tab_path);
+        return;
 	}
-	waitpid(shell->command->pid, NULL, 0);
+}
+
+void	exec_cmd(t_minishell *shell)
+{
+	int status;
+
+	while (shell->command)
+	{
+		ft_pipe(shell);		
+		if (!shell->command->next)
+			ft_pipex(shell, "last");
+		else
+			ft_pipex(shell, "first");
+		shell->command->fd_in = shell->command->fd_pipe[0];
+        close(shell->command->fd_pipe[1]);
+        waitpid(shell->command->pid, &status, 0);
+        close(shell->command->fd_pipe[0]);
+		shell->command = shell->command->next;
+	}
 }
