@@ -120,7 +120,7 @@ int	command_split(t_minishell *shell)
 	}
 	if (split_block(shell, old_i, i))
 		return (1);
-	if (shell->command)
-		print_cmd(shell->command);
+	//if (shell->command)
+		//print_cmd(shell->command);
 	return (0);
 }

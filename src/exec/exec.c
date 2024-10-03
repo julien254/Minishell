@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/02 15:02:12 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/03 10:32:01 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -90,8 +90,9 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 {
 	if (ft_strncmp(order, "last", 4) == 0)
 	{
-		if (shell->command->fd_out != -1)
-            ft_dup2(shell->command->fd_in, shell->command->fd_out);
+		if (shell->command->fd_out == -1)
+        	shell->command->fd_out = shell->command->fd_pipe[1];  
+		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	}
 	else
 		ft_dup2(shell->command->fd_in, shell->command->fd_pipe[1]);
@@ -102,9 +103,9 @@ void	ft_pipex(t_minishell *shell, char *order)
 	shell->command->pid = ft_fork();
 	if (shell->command->pid == 0)
 	{
-		close(shell->command->fd_pipe[0]);
 		if (strncmp(order, "last", 4) == 0 && shell->command->fd_out != -1)
 			close(shell->command->fd_pipe[1]);
+		close(shell->command->fd_pipe[0]);
         ft_choose_dup2(shell, order);
 		ft_execve(shell);
         ft_free_malloc2d((void *)shell->tab_path);
@@ -123,10 +124,14 @@ void	exec_cmd(t_minishell *shell)
 			ft_pipex(shell, "last");
 		else
 			ft_pipex(shell, "first");
-		shell->command->fd_in = shell->command->fd_pipe[0];
+		waitpid(shell->command->pid, &status, 0);
+		if (shell->command->fd_in > 0)
+			close(shell->command->fd_in);
+		if (shell->command->next)
+			shell->command->next->fd_in = shell->command->fd_pipe[0];
         close(shell->command->fd_pipe[1]);
-        waitpid(shell->command->pid, &status, 0);
-        close(shell->command->fd_pipe[0]);
+		if (shell->command->fd_out && shell->command->fd_out != 1)
+			close(shell->command->fd_out);
 		shell->command = shell->command->next;
 	}
 }
