@@ -71,6 +71,7 @@ t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd)
 	cmd->fd_out = set_fd->fd_out;
 	cmd->fd_in = set_fd->fd_in;
 	cmd->heredoc_index = set_fd->heredoc_index;
+	cmd->wrong_cmd = 0;
 	cmd->next = NULL;
 	return (cmd);
 }

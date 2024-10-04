@@ -105,7 +105,6 @@ int	command_split(t_minishell *shell)
 
 	i = 0;
 	old_i = 0;
-	shell->command->wrong_cmd = 0;
 	shell->command = NULL;
 	while (shell->read[i])
 	{
