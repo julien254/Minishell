@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/03 10:32:01 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 10:00:59 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -100,6 +100,7 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 
 void	ft_pipex(t_minishell *shell, char *order)
 {
+
 	shell->command->pid = ft_fork();
 	if (shell->command->pid == 0)
 	{
@@ -109,14 +110,15 @@ void	ft_pipex(t_minishell *shell, char *order)
         ft_choose_dup2(shell, order);
 		ft_execve(shell);
         ft_free_malloc2d((void *)shell->tab_path);
-        return;
+        exit(0);
 	}
 }
 
 void	exec_cmd(t_minishell *shell)
 {
-	int status;
-
+	t_command_lst	*command_lst;
+	
+	command_lst = shell->command;
 	while (shell->command)
 	{
 		ft_pipe(shell);		
@@ -124,14 +126,20 @@ void	exec_cmd(t_minishell *shell)
 			ft_pipex(shell, "last");
 		else
 			ft_pipex(shell, "first");
-		waitpid(shell->command->pid, &status, 0);
 		if (shell->command->fd_in > 0)
 			close(shell->command->fd_in);
 		if (shell->command->next)
 			shell->command->next->fd_in = shell->command->fd_pipe[0];
+		else
+        	close(shell->command->fd_pipe[0]);
         close(shell->command->fd_pipe[1]);
-		if (shell->command->fd_out && shell->command->fd_out != 1)
-			close(shell->command->fd_out);
 		shell->command = shell->command->next;
+	}
+	while (command_lst)
+	{
+		waitpid(command_lst->pid, NULL, 0);
+		if (command_lst->fd_out && command_lst->fd_out > 1)
+			close(command_lst->fd_out);
+		command_lst = command_lst->next;
 	}
 }
