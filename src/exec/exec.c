@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 12:59:37 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 13:11:40 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -150,6 +150,7 @@ void	ft_pipex(t_minishell *shell, char *order)
 
 void	exec_cmd(t_minishell *shell)
 {
+	int				status;
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
@@ -171,7 +172,8 @@ void	exec_cmd(t_minishell *shell)
 	}
 	while (command_lst)
 	{
-		waitpid(command_lst->pid, NULL, 0);
+		waitpid(command_lst->pid, &status, 0);
+		shell->exit_code = status;
 		if (command_lst->fd_out && command_lst->fd_out > 1)
 			close(command_lst->fd_out);
 		command_lst = command_lst->next;
