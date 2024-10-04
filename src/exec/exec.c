@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 11:08:31 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:23:36 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -39,23 +39,23 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 	}
 	return (NULL);
 }
-char	*cut_cmd(t_command_lst *command)
-{
-	char	**tab_cmd;
-	int		size;
-	char	*cmd;
 
-	tab_cmd = ft_split(command->cmd, '/');
-	if (!tab_cmd)
-		return (NULL);
-	size = ft_tab2dlen(tab_cmd);
-	cmd = ft_strdup(tab_cmd[size - 1]);
-	free(command->cmd);
-	ft_free_malloc2d((void *)tab_cmd);
-	if (!cmd)
-		return (NULL);
-	return (cmd);
-}
+/* char	*cut_cmd(t_command_lst *command) */
+/* { */
+/* 	char	**tab_cmd; */
+/* 	int		size; */
+/* 	char	*cmd; */
+/* 	tab_cmd = ft_split(command->cmd, '/'); */
+/* 	if (!tab_cmd) */
+/* 		return (NULL); */
+/* 	size = ft_tab2dlen(tab_cmd); */
+/* 	cmd = ft_strdup(tab_cmd[size - 1]); */
+/* 	free(command->cmd); */
+/* 	ft_free_malloc2d((void *)tab_cmd); */
+/* 	if (!cmd) */
+/* 		return (NULL); */
+/* 	return (cmd); */
+/* } */
 
 static void	ft_execve(t_minishell *shell)
 {
@@ -70,10 +70,10 @@ static void	ft_execve(t_minishell *shell)
 	}
 	if (!cmd)
 	{
-		ft_putstr_fd("Minishell: Command not found: ", 2);
-		shell->command->cmd = cut_cmd(shell->command);
+		ft_putstr_fd("Minishell: ", 2);
+		//shell->command->cmd = cut_cmd(shell->command);
 		ft_putstr_fd(shell->command->cmd, 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return ;
 	}
 	env = make_tab_env(shell->env);
