@@ -6,14 +6,14 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 12:13:01 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 12:48:50 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
 static int	if_backslash(char *str)
 {
-	while (str)
+	while (*str)
 	{
 		if (*str == '/')
 			return (1);
@@ -30,29 +30,30 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 
 	i = 0;
 	shell->tab_path = set_tab_path(shell);
-	if (if_backslash(shell))
+	if (if_backslash(shell->command->cmd))
 	{
-	if (access(shell->command->cmd, F_OK | X_OK) == 0)
+		if (access(shell->command->cmd, F_OK | X_OK) == 0)
 			return (shell->command->cmd);
 	}
 	else
 	{
-	while (shell->tab_path && shell->tab_path[i])
-	{
-		tmp = ft_strjoin(shell->tab_path[i++], "/");
-		if (!tmp)
-			return (NULL);
-		cmd = ft_strjoin(tmp, shell->command->cmd);
-		if (!cmd)
+		while (shell->tab_path && shell->tab_path[i])
 		{
+			tmp = ft_strjoin(shell->tab_path[i++], "/");
+			if (!tmp)
+				return (NULL);
+			cmd = ft_strjoin(tmp, shell->command->cmd);
+			if (!cmd)
+			{
+				free(tmp);
+				return (NULL);
+			}
 			free(tmp);
-			return (NULL);
+			if (access(cmd, F_OK | X_OK) == 0)
+				return (cmd);
+			free(cmd);
 		}
-		free(tmp);
-		if (access(cmd, F_OK | X_OK) == 0)
-			return (cmd);
-		free(cmd);
-	}
+		shell->command->wrong_cmd = 1;
 	}
 	return (NULL);
 }
@@ -60,7 +61,7 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 
 static void	putstr_err_command(t_minishell *shell)
 {
-	if (if_backslash(shell->command->cmd))
+	if (!shell->command->wrong_cmd)
 	{
 		ft_putstr_fd("Minishell: ", 2);
 		ft_putstr_fd(shell->command->cmd, 2);
@@ -124,7 +125,7 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 	if (ft_strncmp(order, "last", 4) == 0)
 	{
 		if (shell->command->fd_out == -1)
-        	shell->command->fd_out = shell->command->fd_pipe[1];  
+			shell->command->fd_out = shell->command->fd_pipe[1];  
 		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	}
 	else
@@ -140,17 +141,17 @@ void	ft_pipex(t_minishell *shell, char *order)
 		if (strncmp(order, "last", 4) == 0 && shell->command->fd_out != -1)
 			close(shell->command->fd_pipe[1]);
 		close(shell->command->fd_pipe[0]);
-        ft_choose_dup2(shell, order);
+		ft_choose_dup2(shell, order);
 		ft_execve(shell);
-        ft_free_malloc2d((void *)shell->tab_path);
-        exit(0);
+		ft_free_malloc2d((void *)shell->tab_path);
+		exit(0);
 	}
 }
 
 void	exec_cmd(t_minishell *shell)
 {
 	t_command_lst	*command_lst;
-	
+
 	command_lst = shell->command;
 	while (shell->command)
 	{
@@ -164,8 +165,8 @@ void	exec_cmd(t_minishell *shell)
 		if (shell->command->next)
 			shell->command->next->fd_in = shell->command->fd_pipe[0];
 		else
-        	close(shell->command->fd_pipe[0]);
-        close(shell->command->fd_pipe[1]);
+			close(shell->command->fd_pipe[0]);
+		close(shell->command->fd_pipe[1]);
 		shell->command = shell->command->next;
 	}
 	while (command_lst)
