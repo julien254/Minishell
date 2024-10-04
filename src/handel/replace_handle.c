@@ -43,8 +43,10 @@ char	*replace_handle(char *str, int index, int size, t_env *env)
 	char	*value;
 	char	*name;
 	char	*result_str;
-	
+
 	str_tmp = ft_strdup(str);
+	if (!str_tmp)
+		return (NULL);
 	name = str_tmp + (index + 1);
 	name[size - 1] = 0;
 	value = return_value_env(env, name);
@@ -52,7 +54,6 @@ char	*replace_handle(char *str, int index, int size, t_env *env)
 		result_str = join_with_handle(str, index, size, value);
 	else
 		result_str = join_without_handle(str, index, size);
-	//ft_printf("%s", result_str); // a supprimer, cest pour l'exemple. 
 	free(str_tmp);
 	free(str);
 	return (result_str);
@@ -66,14 +67,18 @@ char	*hendles_error(char *str, int index, int exit_code)
 	char	*result_str;
 
 	str_tmp = ft_strdup(str);
+	if (!str_tmp)
+		return (NULL);
 	name = str_tmp + (index + 1);
 	name[1] = 0;
 	value = ft_itoa(exit_code);
-	if (value)
-		result_str = join_with_handle(str, index, 2, value);
-	else
-		result_str = join_without_handle(str, index, 2);
-	//ft_printf("%s", result_str); // a supprimer, cest pour l'exemple. 
+	if (!value)
+	{
+		free(str_tmp);
+		free(str);
+		return (NULL);
+	}
+	result_str = join_with_handle(str, index, 2, value);
 	free(str_tmp);
 	free(str);
 	return (result_str);
