@@ -40,7 +40,7 @@ int set_hendle_size(char *block, int i)
 	return (y);
 }
 
-char *hendle_set(t_minishell *shell, char *block)
+char	*hendle_set(t_minishell *shell, char *block)
 {
 	int	i;
 	int	y;
@@ -55,8 +55,13 @@ char *hendle_set(t_minishell *shell, char *block)
 			i = skip_quotes(block, i);
 		if (block[i] == '$')
 		{
-			y = 1 + set_hendle_size(block, i);
-			block = replace_handle(ft_strdup(block), i, y, shell->env);
+			if (block[i + 1] == '?')
+				block = hendles_error(ft_strdup(block), i, shell->exit_code);
+			else
+			{
+				y = 1 + set_hendle_size(block, i);
+				block = replace_handle(ft_strdup(block), i, y, shell->env);
+			}
 		}
 		if (!block)
 			return (NULL);
