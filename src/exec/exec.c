@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 10:00:59 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 10:46:36 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -19,6 +19,8 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 
 	i = 0;
 	shell->tab_path = set_tab_path(shell);
+	if (access(shell->command->cmd, F_OK | X_OK) == 0)
+			return (shell->command->cmd);
 	while (shell->tab_path && shell->tab_path[i])
 	{
 		tmp = ft_strjoin(shell->tab_path[i++], "/");
