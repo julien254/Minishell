@@ -52,7 +52,7 @@ char	*replace_handle(char *str, int index, int size, t_env *env)
 		result_str = join_with_handle(str, index, size, value);
 	else
 		result_str = join_without_handle(str, index, size);
-	ft_printf("%s", result_str); // a supprimer, cest pour l'exemple. 
+	//ft_printf("%s", result_str); // a supprimer, cest pour l'exemple. 
 	free(str_tmp);
 	free(str);
 	return (result_str);
