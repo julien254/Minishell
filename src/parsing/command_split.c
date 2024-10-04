@@ -53,7 +53,7 @@ char	*hendle_set(t_minishell *shell, char *block)
 		y = 0;
 		while (block[i] == '\'')
 			i = skip_quotes(block, i);
-		if (block[i] == '$')
+		if (block[i] == '$' && (block[i + 1] && block[i + 1] != ' ' && block[i + 1] != '$' && block[i + 1] != '\'' && block[i + 1] != '/' && block[i + 1] != '"'))//fonction de verification
 		{
 			if (block[i + 1] == '?')
 				block = hendles_error(ft_strdup(block), i, shell->exit_code);
