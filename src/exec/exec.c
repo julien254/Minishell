@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 12:48:50 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/04 12:59:37 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -63,7 +63,7 @@ static void	putstr_err_command(t_minishell *shell)
 {
 	if (!shell->command->wrong_cmd)
 	{
-		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
