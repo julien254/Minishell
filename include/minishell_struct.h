@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/04 12:12:58 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/05 10:05:34 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_command_lst
 	int						fd_pipe[2];
 	struct s_command_lst	*next;
 }				t_command_lst;
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}				t_env;
 
 typedef struct s_minishell
 {

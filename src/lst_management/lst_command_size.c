@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   lst_command_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
+/*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 05:43:54 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 08:40:45 by judetre          ###   ########.fr       */
+/*   Created: 2024/10/01 14:05:21 by jdetre            #+#    #+#             */
+/*   Updated: 2024/10/05 09:56:34 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
-void ft_unset(t_env *env, char *name)
+int	lst_command_size(t_command_lst *cmd)
 {
-	remove_element_env(&env, name);
+	int	i;
+
+	i = 0;
+	if (!cmd)
+		return (0);
+	while (cmd)
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	return (i);
 }

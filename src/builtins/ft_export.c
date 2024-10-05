@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 05:11:00 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/05 08:20:11 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -58,7 +58,7 @@ void    ft_export(t_env *env, char **argv)
 	t_env	*env_export;
    	int		i;
 	
-	if (!argv)
+	if (ft_tab2dlen(argv) == 1)
 	{
 		env_export = lst_env_cpy(env);
 		sort_list(env_export);
@@ -67,7 +67,7 @@ void    ft_export(t_env *env, char **argv)
 	}
 	else
 	{
-		i = 0;
+		i = 1;
 		while (argv[i])
 			add_element_env(env, argv[i++]);
 	}

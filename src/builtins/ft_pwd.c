@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.h                                            :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
+/*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 05:16:12 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/26 05:44:19 by judetre          ###   ########.fr       */
+/*   Created: 2024/10/05 10:58:46 by jdetre            #+#    #+#             */
+/*   Updated: 2024/10/05 11:06:17 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef unset
-# define unset
+#include "../../include/minishell.h"
 
-void ft_unset(t_env *env, char *name);
+void	ft_pwd(void)
+{
+	char pwd[PATH_MAX];
 
-#endif
-
+    if (getcwd(pwd, sizeof(pwd)) != NULL) {
+        printf("%s\n", pwd);
+    } else {
+        perror("Erreur getcwd");
+    }
+}

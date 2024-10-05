@@ -6,10 +6,56 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/04 13:11:40 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/05 11:29:22 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
+int	if_is_builtins(t_minishell *shell)
+{
+	if (ft_strcmp(shell->command->cmd, "export") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "env") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "unset") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "exit") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "pwd") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "echo") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "cd") == 0)
+		return (1);
+	return (0);
+}
+
+static int	exec_builtins(t_minishell *shell, int exit_option)
+{
+	if (ft_strcmp(shell->command->cmd, "export") == 0)
+		ft_export(shell->env, shell->command->args);
+	if (ft_strcmp(shell->command->cmd, "env") == 0)
+		ft_env(shell->env);
+	if (ft_strcmp(shell->command->cmd, "unset") == 0)
+		ft_unset(shell->env, shell->command->args);
+	if (ft_strcmp(shell->command->cmd, "exit") == 0)
+		ft_exit(shell, exit_option);
+	if (ft_strcmp(shell->command->cmd, "pwd") == 0)
+		ft_pwd();
+	if (ft_strcmp(shell->command->cmd, "echo") == 0)
+	{}
+	if (ft_strcmp(shell->command->cmd, "cd") == 0)
+	{}
+	if (exit_option)
+		exit(shell->exit_code);
+	return (shell->exit_code);
+}
+
+void	set_exit_code(t_minishell *shell,int status)
+{
+		if (WIFEXITED(status))
+            shell->exit_code = WEXITSTATUS(status);
+}
 
 static int	if_backslash(char *str)
 {
@@ -72,6 +118,7 @@ static void	putstr_err_command(t_minishell *shell)
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
+	shell->exit_code = 127;
 }
 
 static void	ft_execve(t_minishell *shell)
@@ -88,7 +135,7 @@ static void	ft_execve(t_minishell *shell)
 	if (!cmd)
 	{
 		putstr_err_command(shell);
-		return ;
+		exit(shell->exit_code);
 	}
 	env = make_tab_env(shell->env);
 	execve(cmd, shell->command->args, env);
@@ -142,9 +189,11 @@ void	ft_pipex(t_minishell *shell, char *order)
 			close(shell->command->fd_pipe[1]);
 		close(shell->command->fd_pipe[0]);
 		ft_choose_dup2(shell, order);
+		if (if_is_builtins(shell))
+			exec_builtins(shell, 1);
 		ft_execve(shell);
 		ft_free_malloc2d((void *)shell->tab_path);
-		exit(0);
+		exit(shell->exit_code);
 	}
 }
 
@@ -154,6 +203,11 @@ void	exec_cmd(t_minishell *shell)
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
+	if (!shell->command->next && if_is_builtins(shell))
+	{
+		exec_builtins(shell, 0);
+		return;
+	}
 	while (shell->command)
 	{
 		ft_pipe(shell);		
@@ -173,7 +227,7 @@ void	exec_cmd(t_minishell *shell)
 	while (command_lst)
 	{
 		waitpid(command_lst->pid, &status, 0);
-		shell->exit_code = status;
+		set_exit_code(shell, status);
 		if (command_lst->fd_out && command_lst->fd_out > 1)
 			close(command_lst->fd_out);
 		command_lst = command_lst->next;

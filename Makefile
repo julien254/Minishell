@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/01 14:21:28 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/05 11:13:56 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ LIB			=	-L${LIBPATH} -lft
 
 SRCS		=	src/minishell.c										\
 				src/env/recover_env.c								\
-				src/env/ft_env.c									\
-				src/env/make_tab_env.c									\
+				src/env/make_tab_env.c								\
 				src/lst_management/lst_env_utils.c					\
 				src/lst_management/lst_env_cpy.c					\
 				src/lst_management/return_element_env.c				\
@@ -34,6 +33,7 @@ SRCS		=	src/minishell.c										\
 				src/lst_management/sort_list.c						\
 				src/lst_management/free_lst_env.c					\
 				src/lst_management/lst_env_size.c					\
+				src/lst_management/lst_command_size.c				\
 				src/utils/signal.c									\
 				src/utils/ft_iswhitespace.c							\
 				src/utils/ft_strjoin_env.c							\
@@ -48,9 +48,11 @@ SRCS		=	src/minishell.c										\
 				src/parsing/set_redirect_name_file.c				\
 				src/parsing/heredoc/set_heredoc.c					\
 				src/parsing/heredoc/here_read.c						\
-				src/export/ft_export.c								\
-				src/exit/ft_exit.c									\
-				src/unset/ft_unset.c								\
+				src/builtins/ft_env.c								\
+				src/builtins/ft_export.c							\
+				src/builtins/ft_exit.c								\
+				src/builtins/ft_unset.c								\
+				src/builtins/ft_pwd.c								\
 				src/exec/exec.c										\
 				src/handel/replace_handle.c
 
