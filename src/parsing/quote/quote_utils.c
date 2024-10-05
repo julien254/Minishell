@@ -40,6 +40,8 @@ int	quote_error(char *s)
 			if (i == 0)
 				return (1);
 		}
+		if (s[i] == '|' && s[i + 1] == '|')
+			return (1);
 		i++;
 	}
 	return (0);

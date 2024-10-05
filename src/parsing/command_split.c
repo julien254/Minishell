@@ -111,7 +111,7 @@ int	command_split(t_minishell *shell)
 	i = 0;
 	old_i = 0;
 	shell->command = NULL;
-	while (shell->read[i])
+	while (shell->read[i] && shell->read[i] != 0)
 	{
 		if (shell->read[i] == '"' || shell->read[i] == '\'')
 			i = skip_quotes(shell->read, i);
