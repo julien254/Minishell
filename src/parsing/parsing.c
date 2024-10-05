@@ -42,7 +42,7 @@ int	parse_command(t_minishell *shell)
 		return (0);
 	if (check_error(shell))
 		return (0);
-	if (command_split(shell))
+	if (!command_split(shell))
 		return (1);
 	return (0);
 }

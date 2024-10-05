@@ -30,7 +30,7 @@ int	main(int argc, char *argv[], char **envp)
 			ft_exit(&shell, 0);
 		if (shell.read[0] != 0)
 		{
-			if (!parse_command(&shell))
+			if (parse_command(&shell) != 0)
 			{
 				exec_cmd(&shell);
 				cmdclear(&shell.command);
