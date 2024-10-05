@@ -74,5 +74,7 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
 	if (exit_code == 1)
 		set_fd->error = 1;
 	block = rm_redirect(block, j, *i, &set_fd->error);
+	if (ft_strlen(block) == 0)
+		*i = 0;
 	return (block);
 }

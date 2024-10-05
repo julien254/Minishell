@@ -121,10 +121,5 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 			return (NULL);
 		i++;
 	}
-	if (ft_strlen(block) == 0)
-	{
-		free(block);
-		return (NULL);
-	}
 	return (block);
 }

@@ -13,6 +13,8 @@
 
 int	if_is_builtins(t_minishell *shell)
 {
+	if (shell->command->cmd == NULL)
+		return (0);
 	if (ft_strcmp(shell->command->cmd, "export") == 0)
 		return (1);
 	if (ft_strcmp(shell->command->cmd, "env") == 0)
