@@ -35,7 +35,7 @@ char	*rm_redirect(char *block, int j, int i, int *error)
 	return (tmp3);
 }
 
-static int	file_name_error(char *file_name, int *error)
+int	file_name_error(char *file_name, int *error)
 {
 	if (!file_name)
 	{
@@ -116,10 +116,15 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 		else if (block[i] == '<' && block[i + 1] != '<')
 			block = set_redirect_in(block, &i, &set_fd->fd_in, &set_fd->error);
 		else if (!ft_strncmp(&block[i], "<<", 1))
-			block = set_heredoc(shell, set_fd, block, &i);
+			block = set_heredoc(shell, set_fd, block, &i, &set_fd->error);
 		if (!block)
 			return (NULL);
 		i++;
+	}
+	if (ft_strlen(block) == 0)
+	{
+		free(block);
+		return (NULL);
 	}
 	return (block);
 }

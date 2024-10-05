@@ -45,7 +45,7 @@ static void	write_in_term_sav(t_minishell *shell, char *and_word,
 }
 
 char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
-		int *i)
+		int *i, int *error)
 {
 	char	*file_name;
 	pid_t	pid;
@@ -57,11 +57,8 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
 	pid = 0;
 	j = *i;
 	file_name = set_file_name(block, i);
-	if (!file_name)
-	{
-		set_fd->error = 1;
+	if (file_name_error(file_name, error))
 		return (NULL);
-	}
 	pid = fork();
 	if (pid == -1)
 		return (block);
