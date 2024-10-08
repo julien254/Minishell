@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 05:44:47 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/01 15:07:44 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/08 10:29:23 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -15,8 +15,13 @@ char	*ft_strjoin_env(char *s1, char *s2)
 {
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!s1)
 		return (NULL);
+	if (!s2)
+	{
+		str = ft_strdup(s1);
+		return (str);
+	}
 	str = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 2, 1);
 	if (!str)
 		return (NULL);
