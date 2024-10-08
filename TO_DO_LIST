@@ -1,14 +1,7 @@
 								A FAIRE POUR JUDETRE
 
 
-faire cd . A FAIRE
-
 faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY
-
-unset = gerer les argument multiple OKOKOKOKOK
-
-export = gerer les doublon et le += OKOKOKOKOKOK
-	Enlever le _=./minishell de export. OKOKOKOKOKOKOK
 
 erreur detecter = - message derreur quand seulement un .
 		  - message derreur quand seulement une ~
@@ -16,6 +9,9 @@ erreur detecter = - message derreur quand seulement un .
 
 verfier les exit code de chaque builtins
 
+normer
+
+valgrind
 
 		  
 		  
