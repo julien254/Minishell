@@ -6,12 +6,17 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 05:43:54 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/05 08:07:51 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/08 08:08:34 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-void ft_unset(t_env *env, char **name)
+void ft_unset(t_minishell *shell, char **name)
 {
-	remove_element_env(&env, name[1]);
+	int	i;
+
+	i = 1;
+	while (name[i])
+		remove_element_env(&shell->env, name[i++]);
+	shell->exit_code = 0;
 }

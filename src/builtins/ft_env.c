@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 05:54:16 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/25 09:21:56 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/08 09:22:24 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -28,11 +28,14 @@ void	print_env(t_env *env, int if_export)
 	{
 		while (env)
 		{
-			printf("declare -x ");
-			if (env->value)
-				printf("%s=\"%s\"\n", env->name, env->value);
-			else
-				printf("%s\n", env->name);
+			if (ft_strcmp(env->name, "_") != 0)
+			{
+				printf("declare -x ");
+				if (env->value)
+					printf("%s=\"%s\"\n", env->name, env->value);
+				else
+					printf("%s\n", env->name);
+			}
 			env = env->next;
 		}
 	}

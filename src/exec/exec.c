@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/05 11:29:22 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/08 09:27:17 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -39,13 +39,13 @@ static int	exec_builtins(t_minishell *shell, int exit_option)
 	if (ft_strcmp(shell->command->cmd, "env") == 0)
 		ft_env(shell->env);
 	if (ft_strcmp(shell->command->cmd, "unset") == 0)
-		ft_unset(shell->env, shell->command->args);
+		ft_unset(shell, shell->command->args);
 	if (ft_strcmp(shell->command->cmd, "exit") == 0)
 		ft_exit(shell, exit_option);
 	if (ft_strcmp(shell->command->cmd, "pwd") == 0)
 		ft_pwd();
 	if (ft_strcmp(shell->command->cmd, "echo") == 0)
-	{}
+		ft_echo(shell, shell->command->args);
 	if (ft_strcmp(shell->command->cmd, "cd") == 0)
 	{}
 	if (exit_option)
@@ -178,7 +178,12 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	}
 	else
-		ft_dup2(shell->command->fd_in, shell->command->fd_pipe[1]);
+	{
+		if (shell->command->fd_out > 1)
+			ft_dup2(shell->command->fd_in, shell->command->fd_out);
+		else
+			ft_dup2(shell->command->fd_in, shell->command->fd_pipe[1]);
+	}
 }
 
 void	ft_pipex(t_minishell *shell, char *order)

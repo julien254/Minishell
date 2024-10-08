@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/05 11:13:56 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/08 07:54:40 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS		=	src/minishell.c										\
 				src/builtins/ft_exit.c								\
 				src/builtins/ft_unset.c								\
 				src/builtins/ft_pwd.c								\
+				src/builtins/ft_echo.c								\
 				src/exec/exec.c										\
 				src/handel/replace_handle.c
 

@@ -1,37 +1,19 @@
 								A FAIRE POUR JUDETRE
 
-faire un sort list <<<< normer OKOKOKOKOKOKOK
 
-faire la fonction env, ne pas afficher les variable sans egale. OKOKOKOKOKOKOK
-
-faire la fonction export sans argument, ne pas oublier les guillemet. (si il y a un = on lenvoie dans split sinon on le rajoute dans la liste chainee avec NULL en value), faire une sous fonction pour add un element dans la liste. voir pourquoi la variable sans egale ne saffiche pas. OKOKOKOKOKOKOK
-
-faire un get value d'un element pour la liste chainer.OKOKOKOKOKOKOK
-
-faire un fonction qui retourne un element de la liste env.OKOKOKOKOKOKOK
-
-faire un remove element.OKOKOKOKOKOKOK
-
-faire une fonction qui copy la list env. OKOKOKOKOKOKOK
-
-Commencer la fonction exit. et ne pas oublier de print exit. EN COURS
-
-Fonction free liste chainee env.OKOKOKOKOKOKOK
-
-dans le sort list join le name=value pour avoir le bonne ordre.OKOKOKOKOKOKOK
-
-
-faire une fonction qui prend en parametre une char *str , un index de debut , une taille et un char * de remplacement et qui renvoie la chaine modifier en consequence. avec un nouveau malloc. OKOKOKOKOKOK
-
-faire le parsing de export (gestion des caractere interdit). OKOKOKOKOKOKOK
-
-Commencer la fonction d'execution avec les fork et les pipe. EN COURS
-
-Implementer unset, env, exit, export. A AJOUTER DANS LEXEC MAIS DEJA FONCTIONNEL.
-
-faire echo, cd , et pwd. A FAIRE
-
-ft_wait_pid :
-pren en paramaitre un t_minishell et un pid_t, attent que le programe ce termine, sovgarde l'exit code dans shell->exit_code et renvoie un int en fonction du de l'exit code. A DEBRIEFER AVEC GAEL
+faire echo, cd . A FAIRE
 
 faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY
+
+unset = gerer les argument multiple OKOKOKOKOK
+
+export = gerer les doublon et le += OKOKOKOKOKOK
+	Enlever le _=./minishell de export.
+
+erreur detecter = - message derreur quand seulement un .
+		  - message derreur quand seulement une ~
+
+verfier les exit code de chaque builtins
+		  
+		  
+		 
