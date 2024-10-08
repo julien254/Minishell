@@ -7,6 +7,8 @@ erreur detecter = - message derreur quand seulement un .
 		  - message derreur quand seulement une ~
 		  - cat | cat | fdfsdfsdf<dsada ne se comporte pas comme il devrais
 
+mise a jour du HOLDPATH dans l'env pour CD
+
 verfier les exit code de chaque builtins
 
 normer
