@@ -12,8 +12,11 @@ export = gerer les doublon et le += OKOKOKOKOKOK
 
 erreur detecter = - message derreur quand seulement un .
 		  - message derreur quand seulement une ~
+		  - cat | cat | fdfsdfsdf<dsada ne se comporte pas comme il devrais
 
 verfier les exit code de chaque builtins
+
+
 		  
 		  
 		 

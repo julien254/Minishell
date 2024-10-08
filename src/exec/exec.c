@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/08 09:27:17 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:24:56 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -47,7 +47,7 @@ static int	exec_builtins(t_minishell *shell, int exit_option)
 	if (ft_strcmp(shell->command->cmd, "echo") == 0)
 		ft_echo(shell, shell->command->args);
 	if (ft_strcmp(shell->command->cmd, "cd") == 0)
-	{}
+		ft_cd(shell->command->args);
 	if (exit_option)
 		exit(shell->exit_code);
 	return (shell->exit_code);
