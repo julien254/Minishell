@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/08 09:12:35 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/08 09:50:48 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -41,7 +41,7 @@ void	update_element(t_env *env, int *option_add, char **split)
 {
 	char *value_tmp;
 
-	if (option_add)
+	if (*option_add)
 	{
 		value_tmp = ft_strjoin(env->value, split[1]);
 		free(env->value);
