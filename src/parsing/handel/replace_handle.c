@@ -9,7 +9,7 @@
 /*   Updated: 2024/10/01 13:21:29 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 char	*join_without_handle(char *str, int index, int size)
 {
@@ -23,7 +23,7 @@ char	*join_without_handle(char *str, int index, int size)
 	return (result_str);
 }
 
-char	*join_with_handle(char *str, int index, int size , char *value)
+char	*join_with_handle(char *str, int index, int size, char *value)
 {
 	char	*result_str;
 

@@ -28,7 +28,8 @@ void	print_cmd(t_command_lst *cmd)
 		printf("|fd_in :%d\n", cmd->fd_in);
 		printf("|fd_out :%d\n", cmd->fd_out);
 		printf("|heredoc_index :%d\n", cmd->heredoc_index);
-		printf("|pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0], cmd->fd_pipe[1]);
+		printf("|pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0],
+			cmd->fd_pipe[1]);
 		printf("|--------------------\n");
 		i = 0;
 		cmd = cmd->next;

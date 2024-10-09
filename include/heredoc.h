@@ -13,8 +13,7 @@
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
-char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block,
-		int *i, int *error);
+char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i);
 char	*here_read(char *content, char *stop);
 
 #endif

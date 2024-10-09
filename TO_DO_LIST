@@ -21,8 +21,6 @@ valgrind
 
 GAEL:
 
-voir pour corriger la commande ls | | ls.
-stocker le here_doc FICHIER /TMP
 normer
 valgrind
 
