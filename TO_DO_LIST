@@ -13,6 +13,8 @@ erreur detecter = - message derreur quand seulement un .(minishell: .: filename 
 
 verfier les exit code de chaque builtins
 
+passer le plus de test possible au tester
+
 normer
 
 valgrind
