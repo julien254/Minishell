@@ -17,6 +17,7 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	shell.env = recover_env(envp);
+	shell.exit_code = 0;
 	while (1)
 	{
 		ft_sig();

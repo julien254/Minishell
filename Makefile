@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/08 11:02:41 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/09 11:29:25 by gcannaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=
 
 CC			=	clang
 
-CFLAGS		=	-Wall -Wextra -Werror -g -gdwarf-5 -lreadline -Wno-unused-command-line-argument
+CFLAGS		=	-Wall -Wextra -Werror -g -gdwarf-4 -lreadline -Wno-unused-command-line-argument
 
 INCLUDE		=	-I./include
 
