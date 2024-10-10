@@ -26,54 +26,25 @@ static int	add_cmd(t_minishell *shell, char **cmd_tab, t_set_fd set_fd)
 	return (0);
 }
 
-int set_hendle_size(char *block, int i)
+static int	set_cmd_struct(char *block, t_minishell *shell, t_set_fd set_fd)
 {
-	int	y;
+	char		**cmd_tab;
 
-	y = 0;
-	i++;
-	while (block[i] && block[i] != ' ' && block[i] != '$' && block[i] != '\'' && block[i] != '/' && block[i] != '"')//fonction de verification
+	cmd_tab = quote_split(block);
+	free(block);
+	if (!cmd_tab)
 	{
-		i++;
-		y++;
+		ft_putstr_fd("minishell: memerror\n", 2);
+		return (1);
 	}
-	return (y);
-}
-
-char	*hendle_set(t_minishell *shell, char *block)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	if (!block)
-		return (NULL);
-	while (block[i])
-	{
-		y = 0;
-		while (block[i] == '\'')
-			i = skip_quotes(block, i);
-		if (block[i] == '$' && (block[i + 1] && block[i + 1] != ' ' && block[i + 1] != '$' && block[i + 1] != '\'' && block[i + 1] != '/' && block[i + 1] != '"'))//fonction de verification
-		{
-			if (block[i + 1] == '?')
-				block = hendles_error(ft_strdup(block), i, shell->exit_code);
-			else
-			{
-				y = 1 + set_hendle_size(block, i);
-				block = replace_handle(ft_strdup(block), i, y, shell->env);
-			}
-		}
-		if (!block)
-			return (NULL);
-		i++;
-	}
-	return (block);
+	if (add_cmd(shell, cmd_tab, set_fd))
+		return (1);
+	return (0);
 }
 
 static int	split_block(t_minishell *shell, int old_i, int i)
 {
 	char		*block;
-	char		**cmd_tab;
 	t_set_fd	set_fd;
 
 	set_fd.fd_out = 1;
@@ -86,19 +57,12 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	block = set_redirect(shell, block, &set_fd);
 	if (set_fd.error == 1)
 	{
-		printf("minishell: memerror\n");
+		ft_putstr_fd("minishell: memerror\n", 2);
 		return (1);
 	}
 	if (!block)
 		return (1);
-	cmd_tab = quote_split(block);
-	free(block);
-	if (!cmd_tab)
-	{
-		printf("minishell: memerror\n");
-		return (1);
-	}
-	if (add_cmd(shell, cmd_tab, set_fd))
+	if (set_cmd_struct(block, shell, set_fd))
 		return (1);
 	return (0);
 }

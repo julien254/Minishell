@@ -60,12 +60,12 @@ static char	*set_redirect_in(char *block, int *i, int *fd_in, int *error)
 	if (file_name_error(file_name, error))
 		return (NULL);
 	*fd_in = open(file_name, O_RDONLY);
-	if (*fd_in == -1)
+	/*if (*fd_in == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", file_name);
 		//free(file_name);
 		//return (NULL);
-	}
+	}*/
 	free(file_name);
 	block = rm_redirect(block, j, *i, error);
 	*i = j - 1;
@@ -86,13 +86,13 @@ static char	*set_redirect_out(char *block, int *i, int *fd_out, int *error)
 		*fd_out = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else
 		*fd_out = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (*fd_out == -1)
+	/*if (*fd_out == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", file_name);
 		//free(file_name);
 		*error = 0;
 		//return (NULL);
-	}
+	}*/
 	free(file_name);
 	block = rm_redirect(block, j, *i - 1, error);
 	*i = j - 1;
@@ -116,7 +116,7 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 		else if (block[i] == '<' && block[i + 1] != '<')
 			block = set_redirect_in(block, &i, &set_fd->fd_in, &set_fd->error);
 		else if (!ft_strncmp(&block[i], "<<", 1))
-			block = set_heredoc(shell, set_fd, block, &i, &set_fd->error);
+			block = set_heredoc(shell, set_fd, block, &i);
 		if (!block)
 			return (NULL);
 		i++;

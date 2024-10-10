@@ -1,20 +1,34 @@
 								A FAIRE POUR JUDETRE
 
+JULIEN:
 
-faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY
+faire une seul execution si un seul element dans shell->command. A FAIRE EN PREMIER
 
-erreur detecter = - message derreur quand seulement un .
-		  - message derreur quand seulement une ~
-		  - cat | cat | fdfsdfsdf<dsada ne se comporte pas comme il devrais
+faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY (gerer largument avec un atoi (doit prendre un + ou un moin -))
+
+erreur detecter = - message derreur quand seulement un .(minishell: .: filename argument required)
+		  - ls < dsadsadas , message derreur qui ne doivent pas s'afficher
+		  - gerer la chaine de commande vide. (command not found)
+		  - ls < dsada ne pas afficher erreur dup2 et ne pas tester la commande
 
 mise a jour du HOLDPATH dans l'env pour CD
 
 verfier les exit code de chaque builtins
 
+passer le plus de test possible au tester
+
 normer
 
 valgrind
 
-		  
-		  
-		 
+GAEL:
+
+normer
+valgrind
+
+nous deux:
+
+faire le here_doc
+
+FAQ:
+

@@ -14,6 +14,7 @@
 
 char    *replace_handle(char *str, int index, int size, t_env *env);
 char    *hendles_error(char *str, int index, int exit_code);
+char	*hendle_set(t_minishell *shell, char *block);
 
 #endif /* ifndef HANDlE_H */
 

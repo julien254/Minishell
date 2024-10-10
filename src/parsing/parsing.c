@@ -24,12 +24,12 @@ static int	can_be_recorded(t_minishell *shell)
 	return (0);
 }
 
-int is_last_pipe(char *s, int i)
+static int	pipe_content_error(char *s, int i)
 {
 	i++;
 	while (ft_iswhitespace(s[i]))
 		i++;
-	if (s[i] == '\0')
+	if (s[i] == '\0' || s[i] == '|')
 		return (1);
 	return (0);
 }
@@ -53,7 +53,7 @@ static int	pipe_error(char *s)
 		}
 		if (s[i] == '|' && s[i + 1] == '|')
 			return (1);
-		if (s[i] == '|' && is_last_pipe(s, i))
+		if (s[i] == '|' && pipe_content_error(s, i))
 			return (1);
 		i++;
 	}
