@@ -84,9 +84,17 @@ static char	*set_redirect_out(char *block, int *i, t_set_fd *set_fd)
 		return (NULL);
 	(*i)++;
 	if (block[*i] == '>' && set_fd->fd_out != -1)
+	{
 		set_fd->fd_out = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		set_fd->fd_out_name = file_name;
+	}
 	else if (set_fd->fd_out != -1)
+	{
 		set_fd->fd_out = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		set_fd->fd_out_name = file_name;
+	}
+	else
+		free(file_name);
 	/*if (*fd_out == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", file_name);
@@ -94,7 +102,6 @@ static char	*set_redirect_out(char *block, int *i, t_set_fd *set_fd)
 		*error = 0;
 		//return (NULL);
 	}*/
-	set_fd->fd_out_name = file_name;
 	block = rm_redirect(block, j, *i - 1, &set_fd->error);
 	*i = j - 1;
 	return (block);
@@ -111,6 +118,8 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 	while (block[i])
 	{
 		i = skip_quotes_while(block, i);
+		if (block[i] == 0)
+			break ;
 		if (block[i] == '>')
 			block = set_redirect_out(block, &i, set_fd);
 		else if (block[i] == '<' && block[i + 1] != '<')

@@ -67,7 +67,9 @@ int	skip_quotes(char *str, int i)
 int	skip_quotes_while(char *str, int i)
 {
 	while (str[i] && (str[i] == '"' || str[i] == '\''))
-		i = skip_quotes(str, i);
+	{
+		i = skip_quotes(str, i) + 1;
+	}
 	return (i);
 }
 
