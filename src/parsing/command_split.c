@@ -53,8 +53,8 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	block = ft_substr(shell->read, old_i, i - old_i);
 	if (!block)
 		set_fd.error = 1;
-	block = hendle_set(shell, block);
 	block = set_redirect(shell, block, &set_fd);
+	block = hendle_set(shell, block);
 	if (set_fd.error == 1)
 	{
 		ft_putstr_fd("minishell: memerror\n", 2);
