@@ -52,6 +52,21 @@ static void	skipe_to_name(char *block, int *i, int *j)
 	*j = *i;
 }
 
+static char	*quote_fil_name(char *file_name, int *i)
+{
+	char	*tmp;
+
+	if (file_name[0] == '\'' || file_name[0] == '"')
+	{
+		tmp = ft_substr(file_name, 1, ft_strlen(file_name) - 1);
+		free(file_name);
+		file_name = ft_strdup(tmp);
+		free(tmp);
+		(*i)++;
+	}
+	return (file_name);
+}
+
 char	*set_file_name(char *block, int *i)
 {
 	char	*file_name;
@@ -61,21 +76,18 @@ char	*set_file_name(char *block, int *i)
 	skipe_to_name(block, i, &j);
 	if (set_file_name_error(block, &file_name, i, 1))
 		return (file_name);
+	if (block[*i] == '\'' || block[*i] == '"')
+		*i = skip_quotes(block, *i);
 	while (block[*i] && !ft_iswhitespace(block[*i]) && block[*i] != '>'
-		&& block[*i] != '<')
-	{
-		if (block[*i] == '\'' || block[*i] == '"')
-			*i = skip_quotes_while(block, *i);
-		else
-			(*i)++;
-	}
+		&& block[*i] != '<' && block[*i] != '\'' && block[*i] != '"')
+		(*i)++;
 	save_i = *i;
 	file_name = ft_substr(block, j, save_i - j);
 	if (!file_name)
 		return (NULL);
 	if (set_file_name_error(block, &file_name, i, 2))
 		return (file_name);
-	file_name = str_remove_quotes(file_name);
+	file_name = quote_fil_name(file_name, i);
 	if (set_file_name_error(block, &file_name, i, 3))
 		return (file_name);
 	return (file_name);

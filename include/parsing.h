@@ -16,7 +16,9 @@
 typedef struct s_set_fd
 {
 	int		fd_out;
+	char	*fd_out_name;
 	int		fd_in;
+	char	*fd_in_name;
 	int		heredoc_index;
 	int		error;
 }				t_set_fd;
