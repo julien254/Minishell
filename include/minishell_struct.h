@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/10 07:16:47 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/10 13:05:04 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_minishell
 	int				here_doc_nbr;
 	char			*read;
 	int				exit_code;
+	int				interactive;
+	const char		*prompt;
 }				t_minishell;
 
 #endif
