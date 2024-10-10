@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/08 11:02:41 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/10 06:28:13 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ SRCS		=	src/minishell.c										\
 				src/parsing/set_redirect_name_file.c				\
 				src/parsing/heredoc/set_heredoc.c					\
 				src/parsing/heredoc/here_read.c						\
+				src/parsing/handel/replace_handle.c					\
+				src/parsing/handel/handle_set.c						\
 				src/builtins/ft_env.c								\
 				src/builtins/ft_export.c							\
 				src/builtins/ft_exit.c								\
@@ -56,7 +58,6 @@ SRCS		=	src/minishell.c										\
 				src/builtins/ft_echo.c								\
 				src/builtins/ft_cd.c								\
 				src/exec/exec.c										\
-				src/handel/replace_handle.c
 
 SRCS_BONUS	=	
 
