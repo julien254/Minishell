@@ -6,28 +6,28 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:04:47 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/10 13:05:17 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:15:21 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"
 
-static void	setup_readline(t_minishell *msh)
-{
-	msh->interactive = isatty(STDIN_FILENO);
-	rl_outstream = stderr;
-	msh->prompt = "minishell> ";
-	if (!msh->interactive)
-	{
-		rl_prep_term_function = 0;
-		msh->prompt = NULL;
-	}
-}
+/* static void	setup_readline(t_minishell *msh) */
+/* { */
+/* 	msh->interactive = isatty(STDIN_FILENO); */
+/* 	rl_outstream = stderr; */
+/* 	msh->prompt = "minishell> "; */
+/* 	if (!msh->interactive) */
+/* 	{ */
+/* 		rl_prep_term_function = 0; */
+/* 		msh->prompt = NULL; */
+/* 	} */
+/* } */
 
 int	main(int argc, char *argv[], char **envp)
 {
 	t_minishell	shell;
 
-	setup_readline(&shell);
+//	setup_readline(&shell);
 	(void)argc;
 	(void)argv;
 	shell.env = recover_env(envp);
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		ft_sig();
-		shell.read = readline(shell.prompt);
+		shell.read = readline("minishell : ");//shell.prompt
 		if (g_signal == 2)
 		{
 			shell.exit_code = 130;

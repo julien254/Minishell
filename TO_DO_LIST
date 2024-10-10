@@ -10,6 +10,8 @@ erreur detecter = - message derreur quand seulement un .(minishell: .: filename 
 		  - ls < dsadsadas , message derreur qui ne doivent pas s'afficher OKOKOKOKOK
 		  - gerer la chaine de commande vide. (command not found) OKOKOKOK
 		  - ls < dsada ne pas afficher erreur dup2 et ne pas tester la commande OKOKOKOKOK
+		  - echo hi | cat <"./test_files/infile" >>> ne fait pas le cat
+		  - cat < dsada | cat < gfdgf >>> naffiche pas le message derreur
 
 mise a jour du HOLDPATH dans l'env pour CD
 

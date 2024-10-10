@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/10 10:47:44 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/10 13:52:19 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -133,7 +133,7 @@ void	check_err_command(t_minishell *shell)
 			}
 			ft_putstr_fd("minishell: .: ", 2);
 			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(" cannot execute binary\n", 2);
+			ft_putstr_fd(": cannot execute binary file\n", 2);
 			shell->exit_code = 126;
 			exit(shell->exit_code);
 		}
@@ -212,8 +212,8 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 {
 	if (shell->command->fd_in == -1)
 	{
-		ft_putstr_fd("minishell: fd_in\n", 2);
-		//perror(shell->command->fd_in_name);
+		ft_putstr_fd("minishell: ", 2);
+		perror(shell->command->fd_in_name);
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
@@ -221,8 +221,8 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 	{
 		if (ft_strncmp(order, "last", 4) == 0)
 			close(shell->command->fd_pipe[1]);
-		ft_putstr_fd("minishell: fd_out\n", 2);
-		//perror(shell->command->fd_out_name);
+		ft_putstr_fd("minishell: ", 2);
+		perror(shell->command->fd_out_name);
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
@@ -241,15 +241,15 @@ void	ft_choose_dup2_with_no_pipe(t_minishell *shell)
 {
 	if (shell->command->fd_in == -1)
 	{
-		ft_putstr_fd("minishell: fd_in\n", 2);
-		//perror(shell->command->fd_in_name);
+		ft_putstr_fd("minishell: ", 2);
+		perror(shell->command->fd_in_name);
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
 	else if (shell->command->fd_out == -1)
 	{
-		ft_putstr_fd("minishell: fd_out\n", 2);
-		//perror(shell->command->fd_out_name);
+		ft_putstr_fd("minishell: ", 2);
+		perror(shell->command->fd_out_name);
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
