@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/10 09:59:37 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/10 10:47:44 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -294,7 +294,7 @@ void	exec_cmd(t_minishell *shell)
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
-	print_cmd(shell->command);
+	//print_cmd(shell->command);
 	if (!shell->command->next && if_is_builtins(shell))
 	{
 		exec_builtins(shell, 0);
