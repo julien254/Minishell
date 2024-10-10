@@ -67,6 +67,7 @@ static char	*set_redirect_in(char *block, int *i, int *fd_in, int *error)
 		//return (NULL);
 	}*/
 	free(file_name);
+	
 	block = rm_redirect(block, j, *i, error);
 	*i = j - 1;
 	return (block);

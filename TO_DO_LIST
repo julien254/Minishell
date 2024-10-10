@@ -2,14 +2,14 @@
 
 JULIEN:
 
-faire une seul execution si un seul element dans shell->command. A FAIRE EN PREMIER
+faire une seul execution si un seul element dans shell->command. FAIT, Mais il faut que gael trouve le moyen de m'enregistrer quel que pars le nom des fichier... j'ai tenter de le faire mais ca va me prendre trop de temp vu la facon dont il gere le parsing, impossible d.envoyer la structure minishell dans sa fonction. il y a deja 4 arguments. 
 
 faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY (gerer largument avec un atoi (doit prendre un + ou un moin -))
 
-erreur detecter = - message derreur quand seulement un .(minishell: .: filename argument required)
-		  - ls < dsadsadas , message derreur qui ne doivent pas s'afficher
-		  - gerer la chaine de commande vide. (command not found)
-		  - ls < dsada ne pas afficher erreur dup2 et ne pas tester la commande
+erreur detecter = - message derreur quand seulement un .(minishell: .: filename argument required) OKOKOKOK UN ENFER
+		  - ls < dsadsadas , message derreur qui ne doivent pas s'afficher OKOKOKOKOK
+		  - gerer la chaine de commande vide. (command not found) OKOKOKOK
+		  - ls < dsada ne pas afficher erreur dup2 et ne pas tester la commande OKOKOKOKOK
 
 mise a jour du HOLDPATH dans l'env pour CD
 

@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/05 10:05:34 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/10 07:16:47 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ typedef struct s_command_lst
 	int						*pid_list;
 	int						pid;
 	int						fd_in;
+	char					*fd_in_name;
 	int						fd_out;
+	char					*fd_out_name;
 	int						heredoc_index;
 	int						fd_pipe[2];
 	struct s_command_lst	*next;

@@ -6,12 +6,12 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:45:47 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/09 13:56:45 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/10 09:48:47 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-void change_directory_relative(char *path) 
+void change_directory_relative(char *path, int *exit_code) 
 {
 	char	*path_tmp;
 	char	*new_path;
@@ -36,17 +36,21 @@ void change_directory_relative(char *path)
 		return ;
 	}
 	if (chdir(new_path) == -1)
+	{
 		perror("minishell: cd");	
+		*exit_code = 1;
+	}
 	free(new_path);
 }
 
-void change_directory(int argc, char **args) 
+void change_directory(int argc, char **args, int *exit_code) 
 {
 	char	*path;
 
 	if (argc > 2)
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		*exit_code = 1;
 		return;
 	}
 	path = args[1];
@@ -55,17 +59,22 @@ void change_directory(int argc, char **args)
 	if (path[0] == '/')
 	{
 		if (chdir(path) == -1)
+		{
 			perror("minishell: cd");
+			*exit_code = 1;
+		}
 	}
 	else
-		change_directory_relative(path);
+		change_directory_relative(path, exit_code);
 }
 
-void ft_cd(char **args)
+int	ft_cd(char **args)
 {	
 	int	size_args;
+	int exit_code;
 	char	*home;
 
+	exit_code = 0;
 	size_args = ft_tab2dlen(args);
 	if (size_args == 1) 
 	{
@@ -79,6 +88,7 @@ void ft_cd(char **args)
 		}
     }
 	else
-        change_directory(size_args, args);
+        change_directory(size_args, args, &exit_code);
+	return (exit_code);
 }
 

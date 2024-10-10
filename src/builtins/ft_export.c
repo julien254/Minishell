@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/08 09:50:48 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/10 09:31:48 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -58,7 +58,7 @@ void	update_element(t_env *env, int *option_add, char **split)
 	
 }
 
-static void	*add_element_env(t_env *env, char *arg, int *option_add)
+static void	*add_element_env(t_minishell *shell, char *arg, int *option_add)
 {
 	char	**split_line_env;
 	t_env	*new;
@@ -72,20 +72,21 @@ static void	*add_element_env(t_env *env, char *arg, int *option_add)
 		ft_putstr_fd("minishell: export: `", 2);
 		ft_putstr_fd(arg, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
+		shell->exit_code = 1;
 		return (NULL);
 	}
-	new = return_element_env(env, split_line_env[0]);
+	new = return_element_env(shell->env, split_line_env[0]);
 	if (!new)
 	{
 		new = lstnew(split_line_env[0], split_line_env[1]);
-		lstadd_back(&env, new);
+		lstadd_back(&shell->env, new);
 	}
 	else
 		update_element(new, option_add, split_line_env);
 	return ((void *)1);
 }
 
-void    ft_export(t_env *env, char **argv)
+void    ft_export(t_minishell *shell, char **argv)
 {
 	t_env	*env_export;
 	int		option_add;
@@ -94,7 +95,7 @@ void    ft_export(t_env *env, char **argv)
 	option_add = 0;
 	if (ft_tab2dlen(argv) == 1)
 	{
-		env_export = lst_env_cpy(env);
+		env_export = lst_env_cpy(shell->env);
 		sort_list(env_export);
 		print_env(env_export, 1);
 		free_lst_env(env_export);
@@ -104,7 +105,7 @@ void    ft_export(t_env *env, char **argv)
 		i = 1;
 		while (argv[i])
 		{
-			add_element_env(env, argv[i++], & option_add);
+			add_element_env(shell, argv[i++], & option_add);
 		}
 	}
 }
