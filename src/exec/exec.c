@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/12 13:09:54 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/12 15:05:25 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -92,6 +92,21 @@ static int	if_backslash(char *str)
 	return (0);
 }
 
+int is_directory(t_minishell *shell) {
+    struct stat path_stat;
+
+    if (stat(shell->command->cmd, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
+	{
+		ft_putstr_fd("minishell : ", 2);
+		ft_putstr_fd(shell->command->cmd, 2);
+		ft_putstr_fd(": Is a directory\n", 2);
+		shell->command->wrong_cmd = 2;
+		shell->exit_code = 126;
+        return 1;
+    }
+    return 0;
+}
+
 static char	*ft_recovery_cmd(t_minishell *shell)
 {
 	size_t	i;
@@ -102,7 +117,7 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 	shell->tab_path = set_tab_path(shell);
 	if (if_backslash(shell->command->cmd))
 	{
-		if (access(shell->command->cmd, F_OK | X_OK) == 0)
+		if (access(shell->command->cmd, F_OK | X_OK) == 0 && !is_directory(shell))
 			return (shell->command->cmd);
 	}
 	else
@@ -119,11 +134,12 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 				return (NULL);
 			}
 			free(tmp);
-			if (access(cmd, F_OK | X_OK) == 0)
+			if (access(cmd, F_OK | X_OK) == 0 && !is_directory(shell))
 				return (cmd);
 			free(cmd);
 		}
-		shell->command->wrong_cmd = 1;
+		if (!shell->command->wrong_cmd)
+			shell->command->wrong_cmd = 1;
 	}
 	return (NULL);
 }
@@ -175,12 +191,13 @@ static void	putstr_err_command(t_minishell *shell)
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
-	else
+	else if (shell->command->wrong_cmd == 1)
 	{
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
-	shell->exit_code = 127;
+	if (shell->command->wrong_cmd != 2)
+		shell->exit_code = 127;
 }
 
 static void	ft_execve(t_minishell *shell)
@@ -325,14 +342,13 @@ void	exec_cmd(t_minishell *shell)
 	}
 	else if (!shell->command->next)
 	{
-		//print_cmd(shell->command);
+		print_cmd(shell->command);
 		exec_with_no_pipe(shell);
 	}
 	else
 	{
 		while (shell->command)
 		{
-		//	print_cmd(shell->command);
 			ft_pipe(shell);		
 			if (!shell->command->next)
 				ft_pipex(shell, "last");
