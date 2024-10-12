@@ -6,11 +6,32 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/10 13:52:19 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/12 13:09:54 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
+
+int	if_is_builtins_exec_in_parent(t_minishell *shell)
+{
+	if (shell->command->cmd == NULL)
+		return (0);
+	if (ft_strcmp(shell->command->cmd, "export") == 0)
+	{
+		if (ft_tab2dlen(shell->command->args) == 1)
+			return (1);
+	}
+	if (ft_strcmp(shell->command->cmd, "unset") == 0)
+		return (1);
+	if (ft_strcmp(shell->command->cmd, "exit") == 0)
+	{
+		if (shell->command->fd_in != -1 && shell->command->fd_out != -1)
+			return (1);
+	}
+	if (ft_strcmp(shell->command->cmd, "cd") == 0)
+		return (1);
+	return (0);
+}
 
 int	if_is_builtins(t_minishell *shell)
 {
@@ -282,6 +303,8 @@ void	exec_with_no_pipe(t_minishell *shell)
 	{
 		ft_choose_dup2_with_no_pipe(shell);
 		check_err_command(shell);
+		if (if_is_builtins(shell))
+			exec_builtins(shell, 1);
 		ft_execve(shell);
 		ft_free_malloc2d((void *)shell->tab_path);
 		exit(shell->exit_code);
@@ -294,18 +317,22 @@ void	exec_cmd(t_minishell *shell)
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
-	//print_cmd(shell->command);
-	if (!shell->command->next && if_is_builtins(shell))
+	if (!shell->command->next && if_is_builtins_exec_in_parent(shell))
 	{
+		//print_cmd(shell->command);
 		exec_builtins(shell, 0);
 		return;
 	}
 	else if (!shell->command->next)
+	{
+		//print_cmd(shell->command);
 		exec_with_no_pipe(shell);
+	}
 	else
 	{
 		while (shell->command)
 		{
+		//	print_cmd(shell->command);
 			ft_pipe(shell);		
 			if (!shell->command->next)
 				ft_pipex(shell, "last");
@@ -313,7 +340,7 @@ void	exec_cmd(t_minishell *shell)
 				ft_pipex(shell, "first");
 			if (shell->command->fd_in > 0)
 				close(shell->command->fd_in);
-			if (shell->command->next)
+			if (shell->command->next && shell->command->next->fd_in == 0)
 				shell->command->next->fd_in = shell->command->fd_pipe[0];
 			else
 				close(shell->command->fd_pipe[0]);
