@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/12 15:05:25 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/12 16:19:39 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -83,6 +83,8 @@ void	set_exit_code(t_minishell *shell,int status)
 
 static int	if_backslash(char *str)
 {
+	if (!str)
+		return (0);
 	while (*str)
 	{
 		if (*str == '/')
@@ -93,18 +95,18 @@ static int	if_backslash(char *str)
 }
 
 int is_directory(t_minishell *shell) {
-    struct stat path_stat;
+	struct stat path_stat;
 
-    if (stat(shell->command->cmd, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
+	if (stat(shell->command->cmd, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
 	{
 		ft_putstr_fd("minishell : ", 2);
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": Is a directory\n", 2);
 		shell->command->wrong_cmd = 2;
 		shell->exit_code = 126;
-        return 1;
-    }
-    return 0;
+		return 1;
+	}
+	return 0;
 }
 
 static char	*ft_recovery_cmd(t_minishell *shell)
@@ -120,7 +122,7 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 		if (access(shell->command->cmd, F_OK | X_OK) == 0 && !is_directory(shell))
 			return (shell->command->cmd);
 	}
-	else
+	else if (shell->command->cmd)
 	{
 		while (shell->tab_path && shell->tab_path[i])
 		{
@@ -147,57 +149,72 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 void	check_err_command(t_minishell *shell)
 {
 	char *cmd;
-	if (ft_strcmp(shell->command->args[0], "") == 0)
+
+	if (shell->command->cmd)
 	{
-		ft_putstr_fd(" : command not found\n", 2);
-		shell->exit_code = 127;
-		exit(shell->exit_code);
-	}
-	if (ft_strcmp(shell->command->args[0], ".") == 0)
-	{
-		if (shell->command->args[1])
+		if (ft_strcmp(shell->command->args[0], "") == 0)
 		{
-			free(shell->command->cmd);
-			shell->command->cmd = ft_strdup(shell->command->args[1]);
-			cmd = ft_recovery_cmd(shell);
-			if (!cmd)
-			{
-				ft_putstr_fd("minishell: ", 2);
-				ft_putstr_fd(shell->command->cmd, 2);
-				ft_putstr_fd(": no such file or directory\n", 2);
-				shell->exit_code = 1;
-				exit(shell->exit_code);
-			}
-			ft_putstr_fd("minishell: .: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": cannot execute binary file\n", 2);
-			shell->exit_code = 126;
+			ft_putstr_fd(" : command not found\n", 2);
+			shell->exit_code = 127;
 			exit(shell->exit_code);
 		}
-		else
+		if (ft_strcmp(shell->command->args[0], ".") == 0)
 		{
-			ft_putstr_fd("minishell: .: file name required as argument\n", 2);
-			shell->exit_code = 2;
-			exit(shell->exit_code);
+			if (shell->command->args[1])
+			{
+				free(shell->command->cmd);
+				shell->command->cmd = ft_strdup(shell->command->args[1]);
+				cmd = ft_recovery_cmd(shell);
+				if (!cmd)
+				{
+					ft_putstr_fd("minishell: ", 2);
+					ft_putstr_fd(shell->command->cmd, 2);
+					ft_putstr_fd(": no such file or directory\n", 2);
+					shell->exit_code = 1;
+					exit(shell->exit_code);
+				}
+				ft_putstr_fd("minishell: .: ", 2);
+				ft_putstr_fd(cmd, 2);
+				ft_putstr_fd(": cannot execute binary file\n", 2);
+				shell->exit_code = 126;
+				exit(shell->exit_code);
+			}
+			else
+			{
+				ft_putstr_fd("minishell: .: file name required as argument\n", 2);
+				shell->exit_code = 2;
+				exit(shell->exit_code);
+			}
 		}
 	}
 }
 
 static void	putstr_err_command(t_minishell *shell)
 {
-	if (!shell->command->wrong_cmd)
+	if (shell->command->cmd)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(shell->command->cmd, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		if (!shell->command->wrong_cmd)
+		{
+			if (errno == EACCES)
+			{
+				ft_putstr_fd("minishell: ", 2);
+				ft_putstr_fd(shell->command->cmd, 2);
+				ft_putstr_fd(": Permission denied\n", 2);
+				shell->exit_code = 126;
+				return ;
+			}
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(shell->command->cmd, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+		}
+		else if (shell->command->wrong_cmd == 1)
+		{
+			ft_putstr_fd(shell->command->cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
+		}
+		if (shell->command->wrong_cmd != 2)
+			shell->exit_code = 127;
 	}
-	else if (shell->command->wrong_cmd == 1)
-	{
-		ft_putstr_fd(shell->command->cmd, 2);
-		ft_putstr_fd(": command not found\n", 2);
-	}
-	if (shell->command->wrong_cmd != 2)
-		shell->exit_code = 127;
 }
 
 static void	ft_execve(t_minishell *shell)
@@ -342,7 +359,7 @@ void	exec_cmd(t_minishell *shell)
 	}
 	else if (!shell->command->next)
 	{
-		print_cmd(shell->command);
+		//print_cmd(shell->command);
 		exec_with_no_pipe(shell);
 	}
 	else
