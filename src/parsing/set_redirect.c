@@ -59,7 +59,7 @@ static char	*set_redirect_in(char *block, int *i, t_set_fd *set_fd)
 	file_name = set_file_name(block, i);
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
-	if (set_fd->fd_in != -1)
+	if (set_fd->fd_out != -1 || set_fd->fd_in != -1)
 		set_fd->fd_in = open(file_name, O_RDONLY);
 	/*if (*fd_in == -1)
 	{
@@ -83,12 +83,12 @@ static char	*set_redirect_out(char *block, int *i, t_set_fd *set_fd)
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
 	(*i)++;
-	if (block[*i] == '>' && set_fd->fd_out != -1)
+	if (block[*i] == '>' && (set_fd->fd_out != -1 || set_fd->fd_in != -1))
 	{
 		set_fd->fd_out = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		set_fd->fd_out_name = file_name;
 	}
-	else if (set_fd->fd_out != -1)
+	else if (set_fd->fd_out != -1 || set_fd->fd_in != -1)
 	{
 		set_fd->fd_out = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		set_fd->fd_out_name = file_name;
