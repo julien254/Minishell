@@ -5,10 +5,10 @@
             "name": "Debug MiniShell",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/gcannaud/Desktop/42/ssh_minishell/minishell", // Chemin vers l'exécutable de votre MiniShell
+            "program": "/home/gcannaud/Desktop/42/Minishell/minishell", // Chemin vers l'exécutable de votre MiniShell
             "args": [],
             "stopAtEntry": false,
-            "cwd": "/home/gcannaud/Desktop/42/ssh_minishell",
+            "cwd": "/home/gcannaud/Desktop/42/Minishell",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

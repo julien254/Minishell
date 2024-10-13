@@ -20,7 +20,7 @@ static int	add_cmd(t_minishell *shell, char **cmd_tab, t_set_fd set_fd)
 				&set_fd));
 	if (!shell->command)
 	{
-		printf("minishell: memerror\n");
+		ft_putstr_fd("minishell: memerror\n", 2);
 		return (1);
 	}
 	return (0);

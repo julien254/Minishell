@@ -19,21 +19,27 @@ static int	set_file_name_error(char *block, char **file_name, int *i,
 	if (error_id == 1 && (block[*i] == '\0' || block[*i] == '>'
 			|| block[*i] == '<'))
 	{
-		printf("minishell: syntax error near unexpected token `%c'\n",
-			block[*i]);
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
+			2);
+	//	printf("minishell: syntax error near unexpected token `%c'\n",
+	//		block[*i]);
 		*file_name = ft_strdup("");
 		return (1);
 	}
 	if (error_id == 2 && (*file_name[0] == ft_strcmp(*file_name, """")))
 	{
-		printf("minishell: %s: No such file or directory\n", *file_name);
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
+			2);
+		//printf("minishell: %s: No such file or directory\n", *file_name);
 		free(*file_name);
 		*file_name = ft_strdup("");
 		return (1);
 	}
 	if (error_id == 3 && (*file_name[0] == '\0'))
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
+			2);
+	//	printf("minishell: syntax error near unexpected token `newline'\n");
 		free(*file_name);
 		*file_name = ft_strdup("");
 		return (1);
@@ -70,7 +76,7 @@ static char	*quote_file_name(char *str)
 	return (str);
 }
 
-char	*set_file_name(char *block, int *i)
+char	*set_file_name(char *block, int *i, int *error)
 {
 	char	*file_name;
 	int		save_i;
@@ -78,9 +84,10 @@ char	*set_file_name(char *block, int *i)
 
 	skipe_to_name(block, i, &j);
 	if (set_file_name_error(block, &file_name, i, 1))
+	{
+		*error = 2;
 		return (file_name);
-	//if (block[*i] == '\'' || block[*i] == '"')
-	//	*i = skip_quotes(block, *i);
+	}
 	while (block[*i] && !ft_iswhitespace(block[*i]) && block[*i] != '>'
 		&& block[*i] != '<')
 	{
@@ -94,9 +101,15 @@ char	*set_file_name(char *block, int *i)
 	if (!file_name)
 		return (NULL);
 	if (set_file_name_error(block, &file_name, i, 2))
+	{
+		*error = 2;
 		return (file_name);
+	}
 	file_name = quote_file_name(file_name);
 	if (set_file_name_error(block, &file_name, i, 3))
+	{
+		*error = 2;
 		return (file_name);
+	}
 	return (file_name);
 }

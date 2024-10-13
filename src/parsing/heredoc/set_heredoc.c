@@ -72,7 +72,7 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	int		j;
 
 	j = *i;
-	file_name = set_file_name(block, i);
+	file_name = set_file_name(block, i, &shell->exit_code);
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
 	exit_code = handle_fork_and_write(shell, set_fd, file_name);

@@ -43,19 +43,36 @@ static char	*replace_env_var(t_minishell *shell, char *block, int i)
 
 char	*hendle_set(t_minishell *shell, char *block)
 {
+	int k;
 	int	i;
 
+	k = 0;
 	i = 0;
 	if (!block)
 		return (NULL);
 	while (block[i])
 	{
-		while (block[i] == '\'')
-			i = skip_quotes(block, i);
+		if (block[i] == '"' && k == 0)
+		{
+			k = 1;
+			i++;
+		}
+		if (block[i] == '"' && k == 1)
+			k = 0;
+		while (block[i] == '\'' && k == 0)
+			i = skip_quotes(block, i) + 1;
 		if (block[i] == '$' && (block[i + 1] && block[i + 1] != ' '
 				&& block[i + 1] != '$' && block[i + 1] != '\''
+				&& block[i + 1] != '='
 				&& block[i + 1] != '/' && block[i + 1] != '"'))
 			block = replace_env_var(shell, block, i);
+		else if (block[i] == '$' && k == 0 && ((block[i + 1] == '$'
+				|| block[i + 1] == '\'' || block[i + 1] == '='
+				|| block[i + 1] == '/' || block[i + 1] == '"')))
+		{
+			remove_char(&block, i);
+			i--;
+		}
 		if (!block)
 			return (NULL);
 		i++;

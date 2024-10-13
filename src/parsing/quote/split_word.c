@@ -35,7 +35,7 @@ static char	*ft_substr_split(char *s, unsigned int st, size_t l)
 	return (str);
 }
 
-static void	remove_char(char **s, size_t i)
+void	remove_char(char **s, size_t i)
 {
 	char	*tmp;
 	char	*tmp2;
