@@ -2,22 +2,11 @@
 
 JULIEN:
 
-faire une seul execution si un seul element dans shell->command. FAIT, Mais il faut que gael trouve le moyen de m'enregistrer quel que pars le nom des fichier... j'ai tenter de le faire mais ca va me prendre trop de temp vu la facon dont il gere le parsing, impossible d.envoyer la structure minishell dans sa fonction. il y a deja 4 arguments. 
-
-faire la fonction exit tout en fesant attention a ne pas depasser le long max en argument. A FAIRE MAIS EASY (gerer largument avec un atoi (doit prendre un + ou un moin -))
-
-erreur detecter = - message derreur quand seulement un .(minishell: .: filename argument required) OKOKOKOK UN ENFER
-		  - ls < dsadsadas , message derreur qui ne doivent pas s'afficher OKOKOKOKOK
-		  - gerer la chaine de commande vide. (command not found) OKOKOKOK
-		  - ls < dsada ne pas afficher erreur dup2 et ne pas tester la commande OKOKOKOKOK
-		  - echo hi | cat <"./test_files/infile" >>> ne fait pas le cat
-		  - cat < dsada | cat < gfdgf >>> naffiche pas le message derreur
-
 mise a jour du HOLDPATH dans l'env pour CD
 
-verfier les exit code de chaque builtins
+passer le plus de test possible au tester 
 
-passer le plus de test possible au tester
+gerer les 2 3 erreurs du tester
 
 normer
 
@@ -25,8 +14,7 @@ valgrind
 
 GAEL:
 
-normer
-valgrind
+regler les erreurs de parsing pointer par le test
 
 nous deux:
 
@@ -36,4 +24,4 @@ FAQ:
 
 
 A FAIRE EN DERNIER : REMETTRE EXIT SUR LA SORTI D'ERREUR
-					 ENELEVER LE -g DANS LES DEUX MAKEFILE
+		     ENELEVER LE -g DANS LES DEUX MAKEFILE
