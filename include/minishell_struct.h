@@ -24,6 +24,7 @@ typedef struct s_command_lst
 	char					*fd_in_name;
 	int						fd_out;
 	char					*fd_out_name;
+	char					*heredoc_name;
 	int						heredoc_index;
 	int						fd_pipe[2];
 	struct s_command_lst	*next;

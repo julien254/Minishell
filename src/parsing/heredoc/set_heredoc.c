@@ -32,7 +32,7 @@ static void	write_in_term_sav(t_minishell *shell, char *and_word,
 	content = here_read(content, and_word);
 	if (content == NULL)
 		exit(0);
-	tmp_name = ft_strjoin("/../../tmp/test", ft_itoa(heredoc_index));
+	tmp_name = ft_strjoin("/tmp/heredoc", ft_itoa(heredoc_index));
 	if (tmp_name == NULL)
 	{
 		free(content);
