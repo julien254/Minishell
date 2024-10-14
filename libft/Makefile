@@ -6,7 +6,7 @@
 #    By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/25 23:42:02 by jdetre            #+#    #+#              #
-#    Updated: 2024/08/22 08:14:35 by judetre          ###   ########.fr        #
+#    Updated: 2024/10/14 11:12:57 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS		=	ft_atoi.c							\
 				ft_isascii.c						\
 				ft_isdigit.c						\
 				ft_isprint.c						\
+				ft_is_white_space.c					\
 				ft_itoa.c							\
 				ft_memchr.c							\
 				ft_memcmp.c							\

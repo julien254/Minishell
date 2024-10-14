@@ -6,11 +6,12 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 07:29:32 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/08 08:04:30 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 10:32:18 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
-static int check_option(char *arg)
+
+static int	check_option(char *arg)
 {
 	int	i;
 
@@ -31,7 +32,7 @@ static int check_option(char *arg)
 	return (1);
 }
 
-void ft_echo(t_minishell *shell, char **args)
+void	ft_echo(t_minishell *shell, char **args)
 {
 	int	i;
 	int	option;

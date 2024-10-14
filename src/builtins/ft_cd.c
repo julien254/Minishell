@@ -6,12 +6,22 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:45:47 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/10 09:48:47 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 11:59:04 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-void change_directory_relative(char *path, int *exit_code) 
+static int	if_error(char *path)
+{
+	if (!path)
+	{
+		perror("minishell: cd: malloc");
+		return (0);
+	}
+	return (1);
+}
+
+static void	change_directory_relative(char *path, int *exit_code)
 {
 	char	*path_tmp;
 	char	*new_path;
@@ -20,30 +30,24 @@ void change_directory_relative(char *path, int *exit_code)
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("minishell: cd:");
-		return;
+		return ;
 	}
 	path_tmp = ft_strjoin(cwd, "/");
-	if (!path_tmp)
-	{
-		perror("minishell: cd: malloc");
+	if (if_error(path_tmp) == 0)
 		return ;
-	}
 	new_path = ft_strjoin(path_tmp, path);
 	free(path_tmp);
-	if (!new_path)
-	{
-		perror("minishell: cd: malloc");
+	if (if_error(new_path) == 0)
 		return ;
-	}
 	if (chdir(new_path) == -1)
 	{
-		perror("minishell: cd");	
+		perror("minishell: cd");
 		*exit_code = 1;
 	}
 	free(new_path);
 }
 
-void change_directory(int argc, char **args, int *exit_code) 
+static void	change_directory(int argc, char **args, int *exit_code)
 {
 	char	*path;
 
@@ -51,7 +55,7 @@ void change_directory(int argc, char **args, int *exit_code)
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		*exit_code = 1;
-		return;
+		return ;
 	}
 	path = args[1];
 	if (path[0] == 0)
@@ -69,26 +73,25 @@ void change_directory(int argc, char **args, int *exit_code)
 }
 
 int	ft_cd(char **args)
-{	
-	int	size_args;
-	int exit_code;
+{
+	int		size_args;
+	int		exit_code;
 	char	*home;
 
 	exit_code = 0;
 	size_args = ft_tab2dlen(args);
-	if (size_args == 1) 
+	if (size_args == 1)
 	{
-        home = getenv("HOME");
-        if (home == NULL)
-            perror("minishell: cd: HOME not set");
+		home = getenv("HOME");
+		if (home == NULL)
+			perror("minishell: cd: HOME not set");
 		else
 		{
-           if (chdir(home) == -1)
-			perror("minishell: cd");
+			if (chdir(home) == -1)
+				perror("minishell: cd");
 		}
-    }
+	}
 	else
-        change_directory(size_args, args, &exit_code);
+		change_directory(size_args, args, &exit_code);
 	return (exit_code);
 }
-

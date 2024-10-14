@@ -6,11 +6,10 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/12 16:19:39 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 11:46:05 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
-
 
 int	if_is_builtins_exec_in_parent(t_minishell *shell)
 {
@@ -75,7 +74,7 @@ static int	exec_builtins(t_minishell *shell, int exit_option)
 	return (shell->exit_code);
 }
 
-void	set_exit_code(t_minishell *shell,int status)
+void	set_exit_code(t_minishell *shell, int status)
 {
 	if (WIFEXITED(status))
 		shell->exit_code = WEXITSTATUS(status);
@@ -94,19 +93,21 @@ static int	if_backslash(char *str)
 	return (0);
 }
 
-int is_directory(t_minishell *shell) {
-	struct stat path_stat;
+int	is_directory(t_minishell *shell)
+{
+	struct stat	path_stat;
 
-	if (stat(shell->command->cmd, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
+	if (stat(shell->command->cmd, &path_stat) == 0 && \
+			S_ISDIR(path_stat.st_mode))
 	{
 		ft_putstr_fd("minishell : ", 2);
 		ft_putstr_fd(shell->command->cmd, 2);
 		ft_putstr_fd(": Is a directory\n", 2);
 		shell->command->wrong_cmd = 2;
 		shell->exit_code = 126;
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 static char	*ft_recovery_cmd(t_minishell *shell)
@@ -119,7 +120,8 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 	shell->tab_path = set_tab_path(shell);
 	if (if_backslash(shell->command->cmd))
 	{
-		if (access(shell->command->cmd, F_OK | X_OK) == 0 && !is_directory(shell))
+		if (access(shell->command->cmd, F_OK | X_OK) == 0 && \
+				!is_directory(shell))
 			return (shell->command->cmd);
 	}
 	else if (shell->command->cmd)
@@ -148,7 +150,7 @@ static char	*ft_recovery_cmd(t_minishell *shell)
 
 void	check_err_command(t_minishell *shell)
 {
-	char *cmd;
+	char	*cmd;
 
 	if (shell->command->cmd)
 	{
@@ -181,7 +183,8 @@ void	check_err_command(t_minishell *shell)
 			}
 			else
 			{
-				ft_putstr_fd("minishell: .: file name required as argument\n", 2);
+				ft_putstr_fd("minishell: .: filename argument required\n", 2);
+				ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
 				shell->exit_code = 2;
 				exit(shell->exit_code);
 			}
@@ -235,7 +238,7 @@ static void	ft_execve(t_minishell *shell)
 	}
 	env = make_tab_env(shell->env);
 	execve(cmd, shell->command->args, env);
-	ft_free_malloc2d((void*)env);
+	ft_free_malloc2d((void *)env);
 	perror("failed execve");
 }
 
@@ -313,7 +316,6 @@ void	ft_choose_dup2_with_no_pipe(t_minishell *shell)
 
 void	ft_pipex(t_minishell *shell, char *order)
 {
-
 	shell->command->pid = ft_fork();
 	if (shell->command->pid == 0)
 	{
@@ -353,20 +355,16 @@ void	exec_cmd(t_minishell *shell)
 	command_lst = shell->command;
 	if (!shell->command->next && if_is_builtins_exec_in_parent(shell))
 	{
-		//print_cmd(shell->command);
 		exec_builtins(shell, 0);
-		return;
+		return ;
 	}
 	else if (!shell->command->next)
-	{
-		//print_cmd(shell->command);
 		exec_with_no_pipe(shell);
-	}
 	else
 	{
 		while (shell->command)
 		{
-			ft_pipe(shell);		
+			ft_pipe(shell);
 			if (!shell->command->next)
 				ft_pipex(shell, "last");
 			else

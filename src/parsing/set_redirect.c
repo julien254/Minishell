@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:59:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/10 13:58:22 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/14 12:21:06 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -61,12 +61,6 @@ static char	*set_redirect_in(char *block, int *i, t_set_fd *set_fd, int *error)
 		return (NULL);
 	if (set_fd->fd_out != -1 && set_fd->fd_in != -1)
 		set_fd->fd_in = open(file_name, O_RDONLY);
-	/*if (*fd_in == -1)
-	{
-		printf("minishell: %s: No such file or directory\n", file_name);
-		//free(file_name);
-		//return (NULL);
-	}*/
 	set_fd->fd_in_name = file_name;
 	block = rm_redirect(block, j, *i, &set_fd->error);
 	*i = j - 1;

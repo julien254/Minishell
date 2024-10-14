@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:31:59 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/05 10:04:01 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 10:54:50 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LST_MANAGEMENT_H
@@ -42,6 +42,6 @@ void	remove_element_env(t_env **env, char *name);
 
 /**************************** FREE_LST_ENV ***************************/
 
-void    free_lst_env(t_env *env);
+void	free_lst_env(t_env *env);
 
 #endif

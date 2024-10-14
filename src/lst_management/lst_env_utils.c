@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:37:43 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/08 10:19:59 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 10:26:50 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -40,8 +40,8 @@ t_env	*lstnew(char *name, char *value)
 	t_env	*lst;
 
 	lst = (t_env *)malloc(sizeof(t_env));
-	//if (!lst)
-	//fonction pour quitter proprement
+	if (!lst)
+		return (NULL);
 	lst->name = name;
 	lst->value = value;
 	lst->next = NULL;

@@ -4,9 +4,9 @@ JULIEN:
 
 mise a jour du HOLDPATH dans l'env pour CD
 
-passer le plus de test possible au tester 
+gerer le probleme du ..
 
-gerer les 2 3 erreurs du tester
+passer le plus de test possible au tester 
 
 normer
 
@@ -14,7 +14,7 @@ valgrind
 
 GAEL:
 
-regler les erreurs de parsing pointer par le test
+remplacer les fonction nommer hendle par handle
 
 nous deux:
 

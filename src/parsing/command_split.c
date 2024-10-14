@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:53:59 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/26 10:00:31 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/14 12:16:32 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -89,7 +89,5 @@ int	command_split(t_minishell *shell)
 	}
 	if (split_block(shell, old_i, i))
 		return (1);
-	//if (shell->command)  //debuger
-		//print_cmd(shell->command);
 	return (0);
 }

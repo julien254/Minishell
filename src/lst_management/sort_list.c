@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 05:56:33 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/25 06:20:31 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/14 10:10:44 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -24,7 +24,6 @@ static void	swap_value(t_env **env, t_env **start, int *swap)
 	(*env)->next->value = value_swap;
 	*env = *start;
 	*swap = 1;
-
 }
 
 static void	*swap_list(t_env **env, t_env **start, int *i, int *swap)
@@ -59,7 +58,7 @@ t_env	*sort_list(t_env *env)
 	int		swap;
 	t_env	*start;
 	int		i;
-	void 	*status;
+	void	*status;
 
 	start = env;
 	swap = 0;

@@ -6,13 +6,14 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/10 09:31:48 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 10:42:34 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
 static int	is_valid_identifier(char *str, int *option_add)
 {
-	int i;
+	int	i;
 
 	if (!ft_isalpha(str[0]))
 	{
@@ -39,7 +40,7 @@ static int	is_valid_identifier(char *str, int *option_add)
 
 void	update_element(t_env *env, int *option_add, char **split)
 {
-	char *value_tmp;
+	char	*value_tmp;
 
 	if (*option_add)
 	{
@@ -55,14 +56,13 @@ void	update_element(t_env *env, int *option_add, char **split)
 		env->value = split[1];
 		free(split);
 	}
-	
 }
 
 static void	*add_element_env(t_minishell *shell, char *arg, int *option_add)
 {
 	char	**split_line_env;
 	t_env	*new;
-	
+
 	split_line_env = ft_split_at_first_pattern(arg, '=');
 	if (!split_line_env)
 		return (NULL);
@@ -86,12 +86,12 @@ static void	*add_element_env(t_minishell *shell, char *arg, int *option_add)
 	return ((void *)1);
 }
 
-void    ft_export(t_minishell *shell, char **argv)
+void	ft_export(t_minishell *shell, char **argv)
 {
 	t_env	*env_export;
 	int		option_add;
-   	int		i;
-	
+	int		i;
+
 	option_add = 0;
 	if (ft_tab2dlen(argv) == 1)
 	{

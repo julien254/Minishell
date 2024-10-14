@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:53:59 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/10 06:25:32 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 12:19:13 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
@@ -43,7 +43,7 @@ static char	*replace_env_var(t_minishell *shell, char *block, int i)
 
 char	*hendle_set(t_minishell *shell, char *block)
 {
-	int k;
+	int	k;
 	int	i;
 
 	k = 0;

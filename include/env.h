@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 06:54:45 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/05 11:17:35 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/14 10:54:25 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 /**************************** RECOVER_ENV *********************************/
 
 t_env	*recover_env(char **envp);
-void    *set_tab_path(t_minishell *shell);
+void	*set_tab_path(t_minishell *shell);
 
 /**************************** MAKE_TAB_ENV *********************************/
 
-char    **make_tab_env(t_env *env);
+char	**make_tab_env(t_env *env);
 
 #endif

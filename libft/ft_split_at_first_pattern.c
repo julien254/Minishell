@@ -6,10 +6,11 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 08:06:27 by judetre           #+#    #+#             */
-/*   Updated: 2024/08/25 08:43:47 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/14 10:05:11 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+
 int	if_no_pattern(char *str, char c)
 {
 	int	i;
@@ -20,7 +21,6 @@ int	if_no_pattern(char *str, char c)
 	if (!str[i])
 		return (1);
 	return (0);
-
 }
 
 static char	**ft_split_no_pattern(char *str)
