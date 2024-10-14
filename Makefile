@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/14 11:16:35 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/14 14:35:25 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,11 @@ SRCS		=	src/minishell.c										\
 				src/builtins/ft_echo.c								\
 				src/builtins/ft_cd.c								\
 				src/exec/exec.c										\
+				src/exec/exec_err.c									\
+				src/exec/exec_dup2_utils.c							\
+				src/exec/exec_path_utils.c							\
+				src/exec/exec_utils.c								\
+				src/exec/exec_builtins.c
 
 SRCS_BONUS	=	
 
