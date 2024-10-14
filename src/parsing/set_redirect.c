@@ -89,13 +89,6 @@ static char	*set_redirect_out(char *block, int *i, t_set_fd *set_fd, int *error)
 	}
 	else
 		free(file_name);
-	/*if (*fd_out == -1)
-	{
-		printf("minishell: %s: No such file or directory\n", file_name);
-		//free(file_name);
-		*error = 0;
-		//return (NULL);
-	}*/
 	block = rm_redirect(block, j, *i - 1, &set_fd->error);
 	*i = j - 1;
 	return (block);

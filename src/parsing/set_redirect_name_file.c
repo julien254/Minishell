@@ -12,35 +12,18 @@
 #include "../../include/minishell.h"
 
 static int	set_file_name_error(char *block, char **file_name, int *i,
-			int error_id)
+	int error_id)
 {
-	if (error_id != 1 && !*file_name)
-		return (1);
-	if (error_id == 1 && (block[*i] == '\0' || block[*i] == '>'
-			|| block[*i] == '<'))
+	if ((error_id != 1 && !*file_name)
+		|| (error_id == 1 && (block[*i] == '\0' || block[*i] == '>'
+				|| block[*i] == '<'))
+		|| (error_id == 2 && (*file_name[0] == ft_strcmp(*file_name, "")))
+		|| (error_id == 3 && (*file_name[0] == '\0')))
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
-			2);
-	//	printf("minishell: syntax error near unexpected token `%c'\n",
-	//		block[*i]);
-		*file_name = ft_strdup("");
-		return (1);
-	}
-	if (error_id == 2 && (*file_name[0] == ft_strcmp(*file_name, """")))
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
-			2);
-		//printf("minishell: %s: No such file or directory\n", *file_name);
-		free(*file_name);
-		*file_name = ft_strdup("");
-		return (1);
-	}
-	if (error_id == 3 && (*file_name[0] == '\0'))
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",
-			2);
-	//	printf("minishell: syntax error near unexpected token `newline'\n");
-		free(*file_name);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
+		if (*file_name)
+			free(*file_name);
 		*file_name = ft_strdup("");
 		return (1);
 	}
@@ -79,37 +62,27 @@ static char	*quote_file_name(char *str)
 char	*set_file_name(char *block, int *i, int *error)
 {
 	char	*file_name;
-	int		save_i;
 	int		j;
 
+	file_name = NULL;
 	skipe_to_name(block, i, &j);
-	if (set_file_name_error(block, &file_name, i, 1))
+	if (!set_file_name_error(block, &file_name, i, 1))
 	{
+		while (block[*i] && !ft_iswhitespace(block[*i]) && block[*i]
+			!= '>' && block[*i] != '<')
+		{
+			if (block[*i] == '\'' || block[*i] == '"')
+				*i = skip_quotes_while(block, *i);
+			else
+				(*i)++;
+		}
+		file_name = ft_substr(block, j, *i - j);
+		if (file_name && !set_file_name_error(block, &file_name, i, 2))
+			file_name = quote_file_name(file_name);
+		if (set_file_name_error(block, &file_name, i, 3))
+			*error = 2;
+	}
+	else
 		*error = 2;
-		return (file_name);
-	}
-	while (block[*i] && !ft_iswhitespace(block[*i]) && block[*i] != '>'
-		&& block[*i] != '<')
-	{
-		if (block[*i] == '\'' || block[*i] == '"')
-			*i = skip_quotes_while(block, *i);
-		else
-			(*i)++;
-	}
-	save_i = *i;
-	file_name = ft_substr(block, j, save_i - j);
-	if (!file_name)
-		return (NULL);
-	if (set_file_name_error(block, &file_name, i, 2))
-	{
-		*error = 2;
-		return (file_name);
-	}
-	file_name = quote_file_name(file_name);
-	if (set_file_name_error(block, &file_name, i, 3))
-	{
-		*error = 2;
-		return (file_name);
-	}
 	return (file_name);
 }

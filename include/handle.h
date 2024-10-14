@@ -13,8 +13,8 @@
 # define HANDLE_H
 
 char	*replace_handle(char *str, int index, int size, t_env *env);
-char	*hendles_error(char *str, int index, int exit_code);
-char	*hendle_set(t_minishell *shell, char *block);
+char	*handles_error(char *str, int index, int exit_code);
+char	*handle_set(t_minishell *shell, char *block);
 void	remove_char(char **s, size_t i);
 
 #endif

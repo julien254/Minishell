@@ -59,7 +59,7 @@ char	*replace_handle(char *str, int index, int size, t_env *env)
 	return (result_str);
 }
 
-char	*hendles_error(char *str, int index, int exit_code)
+char	*handles_error(char *str, int index, int exit_code)
 {
 	char	*str_tmp;
 	char	*value;

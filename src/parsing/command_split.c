@@ -54,7 +54,7 @@ static int	split_block(t_minishell *shell, int old_i, int i)
 	if (!block)
 		set_fd.error = 1;
 	block = set_redirect(shell, block, &set_fd);
-	block = hendle_set(shell, block);
+	block = handle_set(shell, block);
 	if (set_fd.error == 1)
 	{
 		ft_putstr_fd("minishell: memerror\n", 2);
