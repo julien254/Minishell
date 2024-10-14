@@ -58,6 +58,10 @@ static int	handle_fork_and_write(t_minishell *shell, t_set_fd *set_fd,
 	set_fd->heredoc_index = shell->here_doc_nbr;
 	if (pid == 0)
 		write_in_term_sav(shell, file_name, set_fd->heredoc_index);
+	set_fd->heredoc_name = ft_strjoin("/tmp/heredoc",
+			ft_itoa(shell->here_doc_nbr));
+	if (set_fd->heredoc_name == NULL)
+		return (1);
 	shell->here_doc_nbr += 1;
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -73,6 +77,7 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 
 	j = *i;
 	file_name = set_file_name(block, i, &shell->exit_code);
+	set_fd->heredoc_name = NULL;
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
 	exit_code = handle_fork_and_write(shell, set_fd, file_name);

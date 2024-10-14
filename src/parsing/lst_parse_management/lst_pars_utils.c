@@ -78,6 +78,7 @@ t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd)
 	cmd->fd_in_name = set_fd->fd_in_name;
 	cmd->fd_out_name = set_fd->fd_out_name;
 	cmd->heredoc_index = set_fd->heredoc_index;
+	cmd->heredoc_name = set_fd->heredoc_name;
 	cmd->wrong_cmd = 0;
 	cmd->next = NULL;
 	return (cmd);

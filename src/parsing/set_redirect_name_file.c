@@ -20,8 +20,7 @@ static int	set_file_name_error(char *block, char **file_name, int *i,
 		|| (error_id == 2 && (*file_name[0] == ft_strcmp(*file_name, "")))
 		|| (error_id == 3 && (*file_name[0] == '\0')))
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error", 2);
 		if (*file_name)
 			free(*file_name);
 		*file_name = ft_strdup("");
@@ -50,9 +49,7 @@ static char	*quote_file_name(char *str)
 	while (str[i])
 	{
 		if (str[i] == '"' || str[i] == '\'')
-		{
 			remove_quotes(&str, &i);
-		}
 		else
 			i++;
 	}
