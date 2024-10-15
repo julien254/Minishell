@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 14:38:59 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:10:44 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -26,6 +26,8 @@ static void	ft_execve(t_minishell *shell)
 	if (!cmd)
 	{
 		putstr_err_command(shell);
+		cmdclear(&shell->command);
+		free_lst_env(shell->env);
 		exit(shell->exit_code);
 	}
 	env = make_tab_env(shell->env);

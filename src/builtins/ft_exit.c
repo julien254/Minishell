@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 04:32:36 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/14 11:36:24 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:07:33 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -91,6 +91,8 @@ int	ft_exit(t_minishell *shell, int exec_option)
 	if (!exec_option)
 	{
 		free_lst_env(shell->env);
+		if (shell->command)
+			cmdclear(&shell->command);
 		if (shell->interactive)
 			ft_putstr_fd("exit\n", 2);
 	}
