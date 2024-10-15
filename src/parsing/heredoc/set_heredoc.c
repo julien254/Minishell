@@ -15,15 +15,18 @@
 static int	handle_parent_process(t_set_fd *set_fd, int pipe_fd[2], pid_t pid,
 		int *exit_code)
 {
-	int	status;
+	int		status;
+	char	*tmp;
 
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		*exit_code = WEXITSTATUS(status);
 	read(pipe_fd[0], &set_fd->heredoc_index, sizeof(int));
-	set_fd->heredoc_name = ft_strjoin("/tmp/heredoc",
-			ft_itoa(set_fd->heredoc_index));
+	tmp = ft_itoa(set_fd->heredoc_index);
+	set_fd->heredoc_name = ft_strjoin("/tmp/heredoc", tmp);
+	if (tmp)
+		free(tmp);
 	if (set_fd->heredoc_name == NULL)
 		return (1);
 	close(pipe_fd[0]);

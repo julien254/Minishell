@@ -27,6 +27,12 @@ static void	cmddelone(t_command_lst *cmd)
 				i++;
 			}
 		}
+		if (cmd->fd_in_name)
+			free(cmd->fd_in_name);
+		if (cmd->fd_out_name)
+			free(cmd->fd_out_name);
+		if (cmd->heredoc_name)
+			free(cmd->heredoc_name);
 		free(cmd);
 	}
 }

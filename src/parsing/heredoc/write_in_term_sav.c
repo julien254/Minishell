@@ -27,12 +27,15 @@ static int	ft_fillsave(char *content, char *name)
 static void	save_content(char *content, int *heredoc_index, int *pipe_fd)
 {
 	char	*tmp_name;
+	char	*tmp;
 	int		ret;
 
 	while (1)
 	{
-		tmp_name = ft_strjoin("/tmp/heredoc",
-				ft_itoa(*heredoc_index));
+		tmp = ft_itoa(*heredoc_index);
+		tmp_name = ft_strjoin("/tmp/heredoc", tmp);
+		if (tmp)
+			free(tmp);
 		if (tmp_name == NULL)
 		{
 			free(content);
@@ -56,7 +59,9 @@ void	write_in_term_sav(t_minishell *shell, char *and_word,
 {
 	char	*content;
 
-	(void)shell;
+	if (shell->command)
+		cmdclear(&shell->command);
+	free_lst_env(shell->env);
 	content = NULL;
 	ft_sig_handle();
 	content = here_read(content, and_word);
