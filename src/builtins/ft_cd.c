@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:45:47 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 12:58:55 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 13:00:33 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -66,6 +66,7 @@ static void	change_directory(t_minishell *shell, int argc, char **args, \
 {
 	char	*path;
 
+	(void)shell;
 	if (argc > 2)
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
@@ -93,6 +94,7 @@ int	ft_cd(t_minishell *shell, char **args)
 	int		exit_code;
 	char	*home;
 
+	(void)shell;
 	exit_code = 0;
 	size_args = ft_tab2dlen(args);
 	if (size_args == 1)
