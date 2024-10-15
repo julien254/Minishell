@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/10 13:05:04 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/15 13:47:17 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ typedef struct s_command_lst
 	char					*cmd;
 	int						wrong_cmd;
 	char					**args;
-	int						*pid_list;
 	int						pid;
 	int						fd_in;
 	char					*fd_in_name;
