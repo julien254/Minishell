@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 17:10:44 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:59:19 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -26,14 +26,14 @@ static void	ft_execve(t_minishell *shell)
 	if (!cmd)
 	{
 		putstr_err_command(shell);
-		cmdclear(&shell->command);
+		cmdclear(&shell->start_lst_command);
 		free_lst_env(shell->env);
 		exit(shell->exit_code);
 	}
 	env = make_tab_env(shell->env);
 	free_lst_env(shell->env);
 	args = ft_cpy_tab2d(shell->command->args);
-	cmdclear(&shell->command);
+	cmdclear(&shell->start_lst_command);
 	execve(cmd, args, env);
 	ft_free_malloc2d((void *)env);
 	perror("failed execve");
@@ -95,9 +95,10 @@ static void	launch_all_command(t_minishell *shell)
 void	exec_cmd(t_minishell *shell)
 {
 	int				status;
-	t_command_lst	*command_lst;
+	t_command_lst	*lst_command;
 
-	command_lst = shell->command;
+	shell->start_lst_command = shell->command;
+	lst_command = shell->command;
 	if (!shell->command->next && if_is_builtins_exec_in_parent(shell))
 	{
 		exec_builtins(shell, 0);
@@ -107,14 +108,15 @@ void	exec_cmd(t_minishell *shell)
 		exec_with_no_pipe(shell);
 	else
 		launch_all_command(shell);
-	while (command_lst)
+	while (lst_command)
 	{
-		waitpid(command_lst->pid, &status, 0);
+		waitpid(lst_command->pid, &status, 0);
 		set_exit_code(shell, status);
-		if (command_lst->fd_out && command_lst->fd_out > 1)
-			close(command_lst->fd_out);
-		if (command_lst->fd_in && command_lst->fd_in > 0)
-			close(command_lst->fd_in);
-		command_lst = command_lst->next;
+		if (lst_command->fd_out && \
+				lst_command->fd_out > 1)
+			close(lst_command->fd_out);
+		if (lst_command->fd_in && lst_command->fd_in > 0)
+			close(lst_command->fd_in);
+		lst_command = lst_command->next;
 	}
 }

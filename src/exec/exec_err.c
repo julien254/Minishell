@@ -6,10 +6,17 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 12:30:27 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:35:26 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
+static void exit_clean(t_minishell *shell)
+{
+	free_lst_env(shell->env);
+	cmdclear(&shell->command);
+	exit(shell->exit_code);
+}
 
 static void	print_good_err(t_minishell *shell)
 {
@@ -31,7 +38,7 @@ static void	print_good_err(t_minishell *shell)
 	ft_putstr_fd(": cannot execute binary file\n", 2);
 	shell->exit_code = 126;
 	free(cmd);
-	exit(shell->exit_code);
+	exit_clean(shell);
 }
 
 void	check_err_command(t_minishell *shell)
@@ -44,7 +51,7 @@ void	check_err_command(t_minishell *shell)
 			ft_putstr_fd(shell->command->args[0], 2);
 			ft_putstr_fd(" : command not found\n", 2);
 			shell->exit_code = 127;
-			exit(shell->exit_code);
+			exit_clean(shell);
 		}
 		if (ft_strcmp(shell->command->args[0], ".") == 0)
 		{
@@ -55,7 +62,7 @@ void	check_err_command(t_minishell *shell)
 				ft_putstr_fd("minishell: .: filename argument required\n", 2);
 				ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
 				shell->exit_code = 2;
-				exit(shell->exit_code);
+				exit_clean(shell);
 			}
 		}
 	}

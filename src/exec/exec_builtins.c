@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:43:59 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 17:05:04 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:55:33 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -72,7 +72,7 @@ int	exec_builtins(t_minishell *shell, int exit_option)
 	if (exit_option)
 	{
 		free_lst_env(shell->env);
-		cmdclear(&shell->command);
+		cmdclear(&shell->start_lst_command);
 		exit(shell->exit_code);
 	}
 	return (shell->exit_code);

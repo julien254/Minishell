@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/15 13:47:17 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 17:48:33 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_minishell
 {
 	t_env			*env;
 	t_command_lst	*command;
+	t_command_lst	*start_lst_command;
 	char			**tab_path;
 	int				here_doc_nbr;
 	char			*read;

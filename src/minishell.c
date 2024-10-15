@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:04:47 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 17:24:56 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 18:03:05 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[], char **envp)
 			if (parse_command(&shell) != 0)
 			{
 				exec_cmd(&shell);
-				cmdclear(&shell.command);
+				cmdclear(&shell.start_lst_command);
 			}
 		}
 		free(shell.read);
