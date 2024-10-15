@@ -10,62 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
+#include <unistd.h>
 
-static void	ft_fillsave(char *content, char *name)
+static int	handle_parent_process(t_set_fd *set_fd, int pipe_fd[2], pid_t pid,
+		int *exit_code)
 {
-	int	fd;
+	int	status;
 
-	fd = open(name, O_CREAT | O_RDWR | O_TRUNC, 0777);
-	ft_putstr_fd(content, fd);
-	close(fd);
-}
-
-static void	write_in_term_sav(t_minishell *shell, char *and_word,
-			int heredoc_index)
-{
-	char	*tmp_name;
-	char	*content;
-
-	(void)shell;
-	content = NULL;
-	ft_sig_handle();
-	content = here_read(content, and_word);
-	if (content == NULL)
-		exit(0);
-	tmp_name = ft_strjoin("/tmp/heredoc", ft_itoa(heredoc_index));
-	if (tmp_name == NULL)
-	{
-		free(content);
-		exit(1);
-	}
-	ft_fillsave(content, tmp_name);
-	free(tmp_name);
-	free(content);
-	exit(130);
+	close(pipe_fd[1]);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		*exit_code = WEXITSTATUS(status);
+	read(pipe_fd[0], &set_fd->heredoc_index, sizeof(int));
+	set_fd->heredoc_name = ft_strjoin("/tmp/heredoc",
+			ft_itoa(set_fd->heredoc_index));
+	if (set_fd->heredoc_name == NULL)
+		return (1);
+	close(pipe_fd[0]);
+	return (0);
 }
 
 static int	handle_fork_and_write(t_minishell *shell, t_set_fd *set_fd,
 	char *file_name)
 {
 	pid_t	pid;
-	int		status;
 	int		exit_code;
+	int		pipe_fd[2];
 
 	exit_code = 0;
+	if (pipe(pipe_fd) == -1)
+		return (-1);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	set_fd->heredoc_index = shell->here_doc_nbr;
 	if (pid == 0)
-		write_in_term_sav(shell, file_name, set_fd->heredoc_index);
-	set_fd->heredoc_name = ft_strjoin("/tmp/heredoc",
-			ft_itoa(shell->here_doc_nbr));
-	if (set_fd->heredoc_name == NULL)
+	{
+		close(pipe_fd[0]);
+		write_in_term_sav(shell, file_name, &set_fd->heredoc_index, pipe_fd);
+	}
+	if (handle_parent_process(set_fd, pipe_fd, pid, &exit_code) == 1)
 		return (1);
-	shell->here_doc_nbr += 1;
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		exit_code = WEXITSTATUS(status);
+	shell->here_doc_nbr = set_fd->heredoc_index + 1;
+	close(pipe_fd[0]);
 	return (exit_code);
 }
 
@@ -84,7 +71,11 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	if (exit_code == -1)
 		return (block);
 	if (exit_code == 0)
+	{
+		unlink(set_fd->heredoc_name);
+		free(set_fd->heredoc_name);
 		return (NULL);
+	}
 	if (exit_code == 1)
 		set_fd->error = 1;
 	block = rm_redirect(block, j, *i, &set_fd->error);
