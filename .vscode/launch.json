@@ -17,11 +17,11 @@
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": false
-                },
-                {
-                    "text": "set follow-fork-mode child",
-                    "ignoreFailures": true
-                }
+                }//,
+             //   {
+           //         "text": "set follow-fork-mode child",
+         //           "ignoreFailures": true
+       //         }
             ],
             "preLaunchTask": "make re", // Assurez-vous d'avoir une tâche de build configurée
             "miDebuggerPath": "/usr/bin/gdb", // Chemin vers gdb
