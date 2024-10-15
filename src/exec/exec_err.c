@@ -6,12 +6,12 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/14 13:57:54 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 12:30:27 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-void	print_good_err(t_minishell *shell)
+static void	print_good_err(t_minishell *shell)
 {
 	char	*cmd;
 
@@ -38,8 +38,10 @@ void	check_err_command(t_minishell *shell)
 {
 	if (shell->command->cmd)
 	{
-		if (ft_strcmp(shell->command->args[0], "") == 0)
+		if (ft_strcmp(shell->command->args[0], "") == 0 || \
+				ft_strcmp(shell->command->args[0], "..") == 0)
 		{
+			ft_putstr_fd(shell->command->args[0], 2);
 			ft_putstr_fd(" : command not found\n", 2);
 			shell->exit_code = 127;
 			exit(shell->exit_code);

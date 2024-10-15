@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:06:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/14 14:15:02 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 11:37:13 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -37,6 +37,7 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
+	if_heredoc(shell);
 	if (ft_strncmp(order, "last", 4) == 0)
 		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	else
@@ -64,5 +65,6 @@ void	ft_choose_dup2_with_no_pipe(t_minishell *shell)
 		shell->exit_code = 1;
 		exit(shell->exit_code);
 	}
+	if_heredoc(shell);
 	ft_dup2(shell->command->fd_in, shell->command->fd_out);
 }

@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 07:28:52 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/14 14:34:02 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 12:27:45 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXEC_H
@@ -26,7 +26,6 @@ int		exec_builtins(t_minishell *shell, int exit_option);
 
 /******************************** EXEC_ERR ****************************/
 
-void	print_good_err(t_minishell *shell);
 void	check_err_command(t_minishell *shell);
 void	putstr_err_command(t_minishell *shell);
 
@@ -47,5 +46,9 @@ int		is_directory(t_minishell *shell);
 /***************************** EXEC_PATH_UTILS ************************/
 
 char	*ft_recovery_cmd(t_minishell *shell);
+
+/***************************** EXEC_HEREDOC ************************/
+
+void	if_heredoc(t_minishell *shell);
 
 #endif

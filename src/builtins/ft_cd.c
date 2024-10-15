@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:45:47 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/14 11:59:04 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 12:55:22 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -19,6 +19,21 @@ static int	if_error(char *path)
 		return (0);
 	}
 	return (1);
+}
+
+static void	update_old_path(t_minishell *shell)
+{
+	t_env	*old_pwd;
+	char	cwd[PATH_MAX];
+
+	old_pwd = return_element_env(shell->env, "OLDPWD");
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		perror("minishell: cd:");
+		return ;
+	}
+
+
 }
 
 static void	change_directory_relative(char *path, int *exit_code)
@@ -47,7 +62,8 @@ static void	change_directory_relative(char *path, int *exit_code)
 	free(new_path);
 }
 
-static void	change_directory(int argc, char **args, int *exit_code)
+static void	change_directory(t_minishell *shell, int argc, char **args, \
+		int *exit_code)
 {
 	char	*path;
 
@@ -72,7 +88,7 @@ static void	change_directory(int argc, char **args, int *exit_code)
 		change_directory_relative(path, exit_code);
 }
 
-int	ft_cd(char **args)
+int	ft_cd(t_minishell *shell, char **args)
 {
 	int		size_args;
 	int		exit_code;
@@ -92,6 +108,6 @@ int	ft_cd(char **args)
 		}
 	}
 	else
-		change_directory(size_args, args, &exit_code);
+		change_directory(shell, size_args, args, &exit_code);
 	return (exit_code);
 }

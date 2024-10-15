@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:51:56 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/12 11:49:28 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 10:51:48 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
@@ -32,6 +32,8 @@ void	print_cmd(t_command_lst *cmd)
 		if (cmd->fd_out != 1)
 			printf("|fd_out_name :%s\n", cmd->fd_out_name);
 		printf("|heredoc_index :%d\n", cmd->heredoc_index);
+		if (cmd->heredoc_index)
+			printf("name heredoc :%s\n", cmd->heredoc_name);
 		printf("|pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0],
 			cmd->fd_pipe[1]);
 		printf("|--------------------\n");

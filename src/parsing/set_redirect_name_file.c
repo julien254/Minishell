@@ -20,7 +20,7 @@ static int	set_file_name_error(char *block, char **file_name, int *i,
 		|| (error_id == 2 && (*file_name[0] == ft_strcmp(*file_name, "")))
 		|| (error_id == 3 && (*file_name[0] == '\0')))
 	{
-		ft_putstr_fd("minishell: syntax error", 2);
+		ft_putstr_fd("minishell: syntax error\n", 2);
 		if (*file_name)
 			free(*file_name);
 		*file_name = ft_strdup("");
