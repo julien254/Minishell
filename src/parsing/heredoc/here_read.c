@@ -25,7 +25,11 @@ static char	*process_line(char *content, char *line, char *stop)
 	else
 		content = ft_calloc(1, 1);
 	if (ft_strncmp(line, stop, (ft_strlen(stop) + 1)) != 0)
-		content = ft_strjoin(content, line);
+	{
+		tmp = ft_strjoin(content, line);
+		free(content);
+		content = tmp;
+	}
 	return (content);
 }
 
