@@ -73,6 +73,7 @@ void	write_in_term_sav(t_minishell *shell, char *and_word,
 	content = NULL;
 	ft_sig_handle();
 	content = here_read(content, and_word);
+	free(and_word);
 	if (content == NULL)
 	{
 		close(pipe_fd[1]);
