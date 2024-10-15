@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 10:45:47 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 12:55:22 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 12:58:55 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -21,20 +21,19 @@ static int	if_error(char *path)
 	return (1);
 }
 
-static void	update_old_path(t_minishell *shell)
-{
-	t_env	*old_pwd;
-	char	cwd[PATH_MAX];
+/* static void	update_old_path(t_minishell *shell) */
+/* { */
+/* 	t_env	*old_pwd; */
+/* 	char	cwd[PATH_MAX]; */
+/* 	old_pwd = return_element_env(shell->env, "OLDPWD"); */
+/* 	if (getcwd(cwd, sizeof(cwd)) == NULL) */
+/* 	{ */
+/* 		perror("minishell: cd:"); */
+/* 		return ; */
+/* 	} */
 
-	old_pwd = return_element_env(shell->env, "OLDPWD");
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("minishell: cd:");
-		return ;
-	}
 
-
-}
+/* } */
 
 static void	change_directory_relative(char *path, int *exit_code)
 {
