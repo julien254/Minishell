@@ -19,13 +19,14 @@ static void	cmddelone(t_command_lst *cmd)
 	if (cmd)
 	{
 		free(cmd->cmd);
-		if (cmd->args[0])
+		if (cmd->args && cmd->args[0])
 		{
 			while (cmd->args[i])
 			{
 				free(cmd->args[i]);
 				i++;
 			}
+			free(cmd->args);
 		}
 		if (cmd->fd_in_name)
 			free(cmd->fd_in_name);

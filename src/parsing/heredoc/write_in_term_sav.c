@@ -68,7 +68,6 @@ void	write_in_term_sav(t_minishell *shell, char *and_word,
 	char	*content;
 
 	cmdclear(&shell->command);
-	free (shell->command);
 	free_lst_env(shell->env);
 	content = NULL;
 	ft_sig_handle();
