@@ -34,7 +34,7 @@ static int	handle_parent_process(t_set_fd *set_fd, int pipe_fd[2], pid_t pid,
 }
 
 static int	handle_fork_and_write(t_minishell *shell, t_set_fd *set_fd,
-	char *file_name)
+	char *file_name, char *block)
 {
 	pid_t	pid;
 	int		exit_code;
@@ -49,6 +49,7 @@ static int	handle_fork_and_write(t_minishell *shell, t_set_fd *set_fd,
 	set_fd->heredoc_index = shell->here_doc_nbr;
 	if (pid == 0)
 	{
+		free(block);
 		close(pipe_fd[0]);
 		write_in_term_sav(shell, file_name, &set_fd->heredoc_index, pipe_fd);
 	}
@@ -70,7 +71,7 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	set_fd->heredoc_name = NULL;
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
-	exit_code = handle_fork_and_write(shell, set_fd, file_name);
+	exit_code = handle_fork_and_write(shell, set_fd, file_name, block);
 	free(file_name);
 	if (exit_code == -1)
 		return (block);
