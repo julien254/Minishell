@@ -67,8 +67,7 @@ void	write_in_term_sav(t_minishell *shell, char *and_word,
 {
 	char	*content;
 
-	if (shell->command)
-		cmdclear(&shell->command);
+	cmdclear(&shell->command);
 	free_lst_env(shell->env);
 	content = NULL;
 	ft_sig_handle();
