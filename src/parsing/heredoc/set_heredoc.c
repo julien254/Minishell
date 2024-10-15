@@ -71,6 +71,7 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	if (file_name_error(file_name, &set_fd->error))
 		return (NULL);
 	exit_code = handle_fork_and_write(shell, set_fd, file_name);
+	free(file_name);
 	if (exit_code == -1)
 		return (block);
 	if (exit_code == 0)

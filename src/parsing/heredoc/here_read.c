@@ -19,6 +19,8 @@ static char	*process_line(char *content, char *line, char *stop)
 	if (content)
 	{
 		tmp = ft_strjoin(content, "\n");
+		if (!tmp)
+			return (NULL);
 		free(content);
 		content = tmp;
 	}
@@ -27,6 +29,8 @@ static char	*process_line(char *content, char *line, char *stop)
 	if (ft_strncmp(line, stop, (ft_strlen(stop) + 1)) != 0)
 	{
 		tmp = ft_strjoin(content, line);
+		if (!tmp)
+			return (NULL);
 		free(content);
 		content = tmp;
 	}
