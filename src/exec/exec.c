@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 17:59:19 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/15 18:15:55 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -99,6 +99,7 @@ void	exec_cmd(t_minishell *shell)
 
 	shell->start_lst_command = shell->command;
 	lst_command = shell->command;
+	status = 0;
 	if (!shell->command->next && if_is_builtins_exec_in_parent(shell))
 	{
 		exec_builtins(shell, 0);
@@ -112,8 +113,7 @@ void	exec_cmd(t_minishell *shell)
 	{
 		waitpid(lst_command->pid, &status, 0);
 		set_exit_code(shell, status);
-		if (lst_command->fd_out && \
-				lst_command->fd_out > 1)
+		if (lst_command->fd_out && lst_command->fd_out > 1)
 			close(lst_command->fd_out);
 		if (lst_command->fd_in && lst_command->fd_in > 0)
 			close(lst_command->fd_in);
