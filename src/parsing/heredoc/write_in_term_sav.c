@@ -24,18 +24,26 @@ static int	ft_fillsave(char *content, char *name)
 	return (0);
 }
 
+static char	*generate_tmp_name(int heredoc_index)
+{
+	char	*tmp;
+	char	*tmp_name ;
+
+	tmp = ft_itoa(heredoc_index);
+	tmp_name = ft_strjoin("/tmp/heredoc", tmp);
+	if (tmp)
+		free(tmp);
+	return (tmp_name);
+}
+
 static void	save_content(char *content, int *heredoc_index, int *pipe_fd)
 {
 	char	*tmp_name;
-	char	*tmp;
 	int		ret;
 
 	while (1)
 	{
-		tmp = ft_itoa(*heredoc_index);
-		tmp_name = ft_strjoin("/tmp/heredoc", tmp);
-		if (tmp)
-			free(tmp);
+		tmp_name = generate_tmp_name(*heredoc_index);
 		if (tmp_name == NULL)
 		{
 			free(content);
