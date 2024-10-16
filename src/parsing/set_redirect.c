@@ -118,8 +118,14 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 			block = set_heredoc(shell, set_fd, block, &i);
 		if (!block || block[0] == 0)
 		{
+			if (set_fd->fd_in != 0 && set_fd->fd_in != -1)
+				close(set_fd->fd_in);
+			if (set_fd->fd_out != 1 && set_fd->fd_out != -1)
+				close(set_fd->fd_out);
 			if (block)
+			{
 				free(block);
+			}
 			return (NULL);
 		}
 		i++;
