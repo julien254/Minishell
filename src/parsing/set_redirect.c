@@ -117,7 +117,11 @@ char	*set_redirect(t_minishell *shell, char *block, t_set_fd *set_fd)
 		else if (!ft_strncmp(&block[i], "<<", 1))
 			block = set_heredoc(shell, set_fd, block, &i);
 		if (!block || block[0] == 0)
+		{
+			if (block)
+				free(block);
 			return (NULL);
+		}
 		i++;
 	}
 	return (block);
