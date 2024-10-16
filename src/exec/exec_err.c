@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 18:49:38 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/16 13:18:01 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -22,11 +22,11 @@ static void close_fd(t_minishell *shell)
 static void exit_clean(t_minishell *shell)
 {
 	free_lst_env(shell->env);
-	cmdclear(&shell->command);
 	if (shell->command->fd_in > 0)
 		close(shell->command->fd_in);
 	if (shell->command->fd_out > 1)
 		close(shell->command->fd_out);
+	cmdclear(&shell->command);
 	exit(shell->exit_code);
 }
 
