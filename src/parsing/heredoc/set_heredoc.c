@@ -18,6 +18,7 @@ static int	handle_parent_process(t_set_fd *set_fd, int pipe_fd[2], pid_t pid,
 	int		status;
 	char	*tmp;
 
+	status = 0;
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -70,13 +71,19 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	file_name = set_file_name(block, i, &shell->exit_code);
 	set_fd->heredoc_name = NULL;
 	if (file_name_error(file_name, &set_fd->error))
+	{
+		if (block)
+			free(block);
 		return (NULL);
+	}
 	exit_code = handle_fork_and_write(shell, set_fd, file_name, block);
 	free(file_name);
 	if (exit_code == -1)
 		return (block);
 	if (exit_code == 0)
 	{
+		if (block)
+			free(block);
 		unlink(set_fd->heredoc_name);
 		free(set_fd->heredoc_name);
 		return (NULL);

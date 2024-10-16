@@ -33,7 +33,11 @@ static char	*replace_env_var(t_minishell *shell, char *block, int i)
 
 	y = 0;
 	if (block[i + 1] == '?')
-		block = handles_error(ft_strdup(block), i, shell->exit_code);
+	{
+		tmp = ft_strdup(block);
+		free(block);
+		block = handles_error(tmp, i, shell->exit_code);
+	}
 	else
 	{
 		y = 1 + set_handle_size(block, i);

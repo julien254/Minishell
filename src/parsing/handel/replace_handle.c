@@ -79,6 +79,7 @@ char	*handles_error(char *str, int index, int exit_code)
 		return (NULL);
 	}
 	result_str = join_with_handle(str, index, 2, value);
+	free(value);
 	free(str_tmp);
 	free(str);
 	return (result_str);
