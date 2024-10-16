@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/14 10:42:34 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:02:50 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -79,6 +79,7 @@ static void	*add_element_env(t_minishell *shell, char *arg, int *option_add)
 	if (!new)
 	{
 		new = lstnew(split_line_env[0], split_line_env[1]);
+		free(split_line_env);
 		lstadd_back(&shell->env, new);
 	}
 	else

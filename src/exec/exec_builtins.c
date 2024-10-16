@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:43:59 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/15 17:55:33 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/16 16:50:27 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -16,10 +16,7 @@ int	if_is_builtins_exec_in_parent(t_minishell *shell)
 	if (shell->command->cmd == NULL)
 		return (0);
 	if (ft_strcmp(shell->command->cmd, "export") == 0)
-	{
-		if (ft_tab2dlen(shell->command->args) == 1)
-			return (1);
-	}
+		return (1);
 	if (ft_strcmp(shell->command->cmd, "unset") == 0)
 		return (1);
 	if (ft_strcmp(shell->command->cmd, "exit") == 0)

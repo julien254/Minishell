@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 07:28:52 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 12:27:45 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/16 15:36:12 by judetre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXEC_H
@@ -31,7 +31,6 @@ void	putstr_err_command(t_minishell *shell);
 
 /***************************** EXEC_DUP2_UTILS ************************/
 
-void	ft_dup2(int fd_in, int fd_out);
 void	ft_choose_dup2(t_minishell *shell, char *order);
 void	ft_choose_dup2_with_no_pipe(t_minishell *shell);
 
