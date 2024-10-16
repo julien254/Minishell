@@ -15,11 +15,10 @@ static void	cmddelone(t_command_lst *cmd)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (cmd)
 	{
-		free(cmd->cmd);
-		if (cmd->args && cmd->args[0])
+		if (cmd->args)
 		{
 			while (cmd->args[i])
 			{
