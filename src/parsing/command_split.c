@@ -13,13 +13,13 @@
 
 static int	add_cmd(t_minishell *shell, char **cmd_tab, t_set_fd set_fd)
 {
-	if (cmd_tab && !cmd_tab[0])
-		free(cmd_tab);
 	if (!shell->command)
 		shell->command = cmdnew(cmd_tab[0], &cmd_tab[0], &set_fd);
 	else
 		cmdadd_back(&shell->command, cmdnew(cmd_tab[0], &cmd_tab[0],
 				&set_fd));
+	if (cmd_tab && !cmd_tab[0])
+		free(cmd_tab);
 	if (!shell->command)
 	{
 		ft_putstr_fd("minishell: memerror\n", 2);
