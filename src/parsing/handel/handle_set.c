@@ -28,7 +28,8 @@ static int	set_handle_size(char *block, int i)
 
 static char	*replace_env_var(t_minishell *shell, char *block, int i)
 {
-	int	y;
+	int		y;
+	char	*tmp;
 
 	y = 0;
 	if (block[i + 1] == '?')
@@ -36,7 +37,9 @@ static char	*replace_env_var(t_minishell *shell, char *block, int i)
 	else
 	{
 		y = 1 + set_handle_size(block, i);
-		block = replace_handle(ft_strdup(block), i, y, shell->env);
+		tmp = ft_strdup(block);
+		free(block);
+		block = replace_handle(tmp, i, y, shell->env);
 	}
 	return (block);
 }

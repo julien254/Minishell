@@ -15,8 +15,8 @@ char	*join_without_handle(char *str, int index, int size)
 {
 	char	*result_str;
 
-	result_str = (char *)malloc(sizeof(char *) * \
-			(ft_strlen(str) - size + 1));
+	result_str = (char *)calloc((ft_strlen(str) - size + 1),
+			sizeof(char *));
 	ft_strlcpy(result_str, str, index + 1);
 	str = str + index + size;
 	ft_strlcat(result_str, str, index + ft_strlen(str) + 1);
@@ -27,8 +27,8 @@ char	*join_with_handle(char *str, int index, int size, char *value)
 {
 	char	*result_str;
 
-	result_str = (char *)malloc(sizeof(char *) * \
-			(ft_strlen(str) - size + ft_strlen(value) + 1));
+	result_str = (char *)calloc((ft_strlen(str) - size + ft_strlen(value) + 1),
+			sizeof(char *));
 	ft_strlcpy(result_str, str, index + 1);
 	ft_strlcat(result_str, value, ft_strlen(value) + index + 1);
 	str = str + index + size;
