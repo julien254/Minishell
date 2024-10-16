@@ -28,6 +28,8 @@ static size_t	ft_count_words(char *s)
 			words++;
 		i++;
 	}
+	if (words == 0)
+		words = 1;
 	return (words);
 }
 
