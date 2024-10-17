@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:06:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/16 15:39:31 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:35:45 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -14,6 +14,12 @@
 static void	exit_clear(t_minishell *shell)
 {
 	free_lst_env(shell->env);
+	if (shell->command->fd_in > 0)
+		close(shell->command->fd_in);
+	if (shell->command->fd_out > 1)
+		close(shell->command->fd_out);
+	if (shell->command->fd_pipe[1])
+		close(shell->command->fd_pipe[1]);
 	cmdclear(&shell->command);
 	shell->exit_code = 1;
 	exit(shell->exit_code);
@@ -48,10 +54,9 @@ void	ft_choose_dup2(t_minishell *shell, char *order)
 		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	else
 	{
-		if (shell->command->fd_out > 1)
-			ft_dup2(shell->command->fd_in, shell->command->fd_out);
-		else
-			ft_dup2(shell->command->fd_in, shell->command->fd_pipe[1]);
+		if (shell->command->fd_out == 1)
+			shell->command->fd_out = shell->command->fd_pipe[1];
+		ft_dup2(shell->command->fd_in, shell->command->fd_out);
 	}
 }
 
