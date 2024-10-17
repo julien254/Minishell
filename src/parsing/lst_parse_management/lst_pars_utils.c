@@ -84,7 +84,7 @@ t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd)
 	cmd->wrong_cmd = 0;
 	cmd->fd_pipe[0] = 0;
 	cmd->fd_pipe[1] = 0;
-	cmd->builtins_end = 0;
+	cmd->fd_pipe_del = 0;
 	cmd->next = NULL;
 	return (cmd);
 }
