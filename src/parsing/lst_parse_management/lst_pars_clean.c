@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:51:56 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/08/22 12:13:49 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:57:08 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
@@ -33,6 +33,8 @@ static void	cmddelone(t_command_lst *cmd)
 			free(cmd->fd_out_name);
 		if (cmd->heredoc_name)
 			free(cmd->heredoc_name);
+		if (cmd->fd_pipe_del)
+			close(cmd->fd_pipe_del);
 		free(cmd);
 	}
 }
