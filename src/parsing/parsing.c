@@ -80,5 +80,7 @@ int	parse_command(t_minishell *shell)
 		return (0);
 	if (!command_split(shell))
 		return (1);
+	if (shell->command)
+		cmdclear(&shell->command);
 	return (0);
 }
