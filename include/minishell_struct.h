@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:44:39 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/17 17:17:59 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 17:39:57 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_command_lst
 	int						heredoc_index;
 	int						fd_pipe[2];
 	int						builtins;
-	int						builtins_end;
+	int						fd_pipe_del;
 	struct s_command_lst	*next;
 }				t_command_lst;
 

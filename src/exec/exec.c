@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/17 17:22:58 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 17:39:09 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -89,11 +89,7 @@ static void	launch_all_command(t_minishell *shell)
 		if (shell->command->next && shell->command->next->fd_in == 0)
 			shell->command->next->fd_in = shell->command->fd_pipe[0];
 		else if (shell->command->builtins)
-		{
-			while (shell->command->builtins_end != 1)
-				continue ;
-			close(shell->command->fd_pipe[0]);
-		}
+			shell->command->fd_pipe_del = shell->command->fd_pipe[0];
 		else
 			close(shell->command->fd_pipe[0]);
 		close(shell->command->fd_pipe[1]);
