@@ -35,7 +35,7 @@ static char	*set_redirect_in(char *block, int *i, t_set_fd *set_fd, int *error)
 
 static void	set_fd_out(t_set_fd *set_fd, char *file_name, int flags)
 {
-	if (set_fd->fd_out > 1 && set_fd->fd_out_name && set_fd->fd_out)
+	if (set_fd->fd_out > 1 && set_fd->fd_out_name)
 		close(set_fd->fd_out);
 	set_fd->fd_out = open(file_name, flags, 0644);
 	if (set_fd->fd_out_name)
