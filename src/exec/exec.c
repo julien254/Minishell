@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/17 17:39:09 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 17:45:13 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -118,6 +118,8 @@ void	exec_cmd(t_minishell *shell)
 	{
 		waitpid(lst_command->pid, &status, 0);
 		set_exit_code(shell, status);
+		if (lst_command->fd_pipe_del)
+			close(lst_command->fd_pipe_del);
 		if (lst_command->fd_out && lst_command->fd_out > 1)
 			close(lst_command->fd_out);
 		if (lst_command->fd_in && lst_command->fd_in > 0)

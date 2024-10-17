@@ -6,9 +6,11 @@ dasdas | dsada | dsada = fd encore ouvert OKOKOKOK ? a tester plus en profondeur
 normer
 valgrind:
 
-test 7
+test : fd open : 6, 19, 15, 17, 18, 26 , 50, 71, 72, 76, 97
 
-GAEL:
+GAEL:i
+
+test : leak : 456
 
 nous deux:
 
