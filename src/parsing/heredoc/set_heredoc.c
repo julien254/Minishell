@@ -61,23 +61,8 @@ static int	handle_fork_and_write(t_minishell *shell, t_set_fd *set_fd,
 	return (exit_code);
 }
 
-char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
+static char	*handle_exit_code(int exit_code, char *block, t_set_fd *set_fd)
 {
-	char	*file_name;
-	int		exit_code;
-	int		j;
-
-	j = *i;
-	file_name = set_file_name(block, i, &shell->exit_code);
-	set_fd->heredoc_name = NULL;
-	if (file_name_error(file_name, &set_fd->error))
-	{
-		if (block)
-			free(block);
-		return (NULL);
-	}
-	exit_code = handle_fork_and_write(shell, set_fd, file_name, block);
-	free(file_name);
 	if (exit_code == -1)
 		return (block);
 	if (exit_code == 0)
@@ -90,6 +75,26 @@ char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
 	}
 	if (exit_code == 1)
 		set_fd->error = 1;
+	return (block);
+}
+
+char	*set_heredoc(t_minishell *shell, t_set_fd *set_fd, char *block, int *i)
+{
+	char	*file_name;
+	int		exit_code;
+	int		j;
+
+	j = *i;
+	file_name = set_file_name(block, i, &shell->exit_code);
+	set_fd->heredoc_name = NULL;
+	file_name = handle_file_name_error(file_name, block, set_fd);
+	if (!file_name)
+		return (NULL);
+	exit_code = handle_fork_and_write(shell, set_fd, file_name, block);
+	free(file_name);
+	block = handle_exit_code(exit_code, block, set_fd);
+	if (!block)
+		return (NULL);
 	block = rm_redirect(block, j, *i, &set_fd->error);
 	*i = j - 1;
 	if (ft_strlen(block) == 0)

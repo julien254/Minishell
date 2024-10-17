@@ -43,4 +43,12 @@ int				file_name_error(char *file_name, int *error);
 char			*set_file_name(char *block, int *i, int *error);
 char			*rm_redirect(char *block, int j, int i, int *error);
 
+/************************** SET_REDIRECT_UTILS ******************************/
+
+
+char			*rm_redirect(char *block, int j, int i, int *error);
+int				file_name_error(char *file_name, int *error);
+char			*handle_file_name_error(char *file_name, char *block,
+					t_set_fd *set_fd);
+
 #endif

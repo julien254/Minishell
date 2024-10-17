@@ -46,6 +46,7 @@ SRCS		=	src/minishell.c										\
 				src/parsing/quote/quote_utils.c						\
 				src/parsing/quote/split_word.c						\
 				src/parsing/set_redirect.c							\
+				src/parsing/set_redirect_utils.c					\
 				src/parsing/set_redirect_name_file.c				\
 				src/parsing/heredoc/set_heredoc.c					\
 				src/parsing/heredoc/here_read.c						\
