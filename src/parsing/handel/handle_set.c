@@ -81,7 +81,7 @@ char	*handle_set(t_minishell *shell, char *block)
 					|| block[i + 1] == '/' || block[i + 1] == '"')))
 		{
 			remove_char(&block, i);
-			i--;
+			i = i - 2;
 		}
 		if (!block)
 			return (NULL);
