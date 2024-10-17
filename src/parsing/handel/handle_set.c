@@ -61,6 +61,25 @@ static void	quotes_skip(char *block, int *i, int *k)
 		*i = skip_quotes(block, *i) + 1;
 }
 
+static char	*process_dollar_sign(t_minishell *shell, char *block, int *i, int k)
+{
+	if (block[*i] == '$' && (block[*i + 1] && block[*i + 1] != ' '
+			&& block[*i + 1] != '$' && block[*i + 1] != '\''
+			&& block[*i + 1] != '='
+			&& block[*i + 1] != '/' && block[*i + 1] != '"'))
+		block = replace_env_var(shell, block, *i);
+	else if (block[*i] == '$' && k == 0 && ((block[*i + 1] == '$'
+				|| block[*i + 1] == '\'' || block[*i + 1] == '='
+				|| block[*i + 1] == '/' || block[*i + 1] == '"')))
+	{
+		remove_char(&block, i);
+		(*i)--;
+	}
+	else
+		(*i)++;
+	return (block);
+}
+
 char	*handle_set(t_minishell *shell, char *block)
 {
 	int	k;
@@ -71,20 +90,9 @@ char	*handle_set(t_minishell *shell, char *block)
 	while (block && block[i])
 	{
 		quotes_skip(block, &i, &k);
-		if (block[i] == '$' && (block[i + 1] && block[i + 1] != ' '
-				&& block[i + 1] != '$' && block[i + 1] != '\''
-				&& block[i + 1] != '='
-				&& block[i + 1] != '/' && block[i + 1] != '"'))
-			block = replace_env_var(shell, block, i);
-		else if (block[i] == '$' && k == 0 && ((block[i + 1] == '$'
-					|| block[i + 1] == '\'' || block[i + 1] == '='
-					|| block[i + 1] == '/' || block[i + 1] == '"')))
-		{
-			remove_char(&block, i);
-			i--;
-		}
-		else
-			i++;
+		if (block[i] == 0)
+			break ;
+		block = process_dollar_sign(shell, block, &i, k);
 		if (!block)
 			return (NULL);
 	}
