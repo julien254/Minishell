@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:57:27 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/10 13:58:26 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/17 13:38:44 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char			*set_file_name(char *block, int *i, int *error);
 char			*rm_redirect(char *block, int j, int i, int *error);
 
 /************************** SET_REDIRECT_UTILS ******************************/
-
 
 char			*rm_redirect(char *block, int j, int i, int *error);
 int				file_name_error(char *file_name, int *error);

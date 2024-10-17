@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:30:35 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 13:33:14 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 13:44:17 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -45,8 +45,7 @@ char	*ft_recovery_cmd(t_minishell *shell)
 	if (if_backslash(shell->command->cmd))
 	{
 		cmd = ft_strdup(shell->command->cmd);
-		if (access(cmd, F_OK | X_OK) == 0 && \
-				!is_directory(shell))
+		if (access(cmd, F_OK | X_OK) == 0 && !is_directory(shell))
 			return (cmd);
 	}
 	else if (shell->command->cmd)

@@ -6,14 +6,14 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 13:16:49 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 13:40:15 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
-static void close_fd(t_minishell *shell)
+static void	close_fd(t_minishell *shell)
 {
-	t_command_lst *command_lst;
+	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
 	if (shell->command->fd_in > 0)
@@ -30,7 +30,7 @@ static void close_fd(t_minishell *shell)
 		close(shell->command->fd_pipe[1]);
 }
 
-static void exit_clean(t_minishell *shell)
+static void	exit_clean(t_minishell *shell)
 {
 	free_lst_env(shell->env);
 	close_fd(shell);
