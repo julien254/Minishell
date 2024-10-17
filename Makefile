@@ -50,7 +50,7 @@ SRCS		=	src/minishell.c										\
 				src/parsing/set_redirect_name_file.c				\
 				src/parsing/heredoc/set_heredoc.c					\
 				src/parsing/heredoc/here_read.c						\
-				src/parsing/heredoc/write_in_term_sav.c				\
+				src/parsing/heredoc/write_in_term_save.c			\
 				src/parsing/handel/replace_handle.c					\
 				src/parsing/handel/handle_set.c						\
 				src/builtins/ft_env.c								\
