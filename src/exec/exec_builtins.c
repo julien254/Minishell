@@ -6,10 +6,30 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:43:59 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/16 16:50:27 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/17 14:11:05 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+static void	close_fd(t_minishell *shell)
+{
+	t_command_lst	*command_lst;
+
+	command_lst = shell->command;
+	if (shell->command->fd_in > 0)
+		close(shell->command->fd_in);
+	while (command_lst)
+	{
+		if (shell->command->fd_in > 0)
+			close(shell->command->fd_in);
+		if (command_lst->fd_out > 1)
+			close(command_lst->fd_out);
+		command_lst = command_lst->next;
+	}
+	if (shell->command->fd_pipe[0])
+		close(shell->command->fd_pipe[0]);
+	if (shell->command->fd_pipe[1])
+		close(shell->command->fd_pipe[1]); 
+}
 
 int	if_is_builtins_exec_in_parent(t_minishell *shell)
 {
@@ -69,8 +89,10 @@ int	exec_builtins(t_minishell *shell, int exit_option)
 	if (exit_option)
 	{
 		free_lst_env(shell->env);
+		close_fd(shell);
 		cmdclear(&shell->start_lst_command);
 		exit(shell->exit_code);
 	}
+	close_fd(shell);
 	return (shell->exit_code);
 }

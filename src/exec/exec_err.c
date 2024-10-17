@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 13:40:15 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 14:09:38 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -20,6 +20,8 @@ static void	close_fd(t_minishell *shell)
 		close(shell->command->fd_in);
 	while (command_lst)
 	{
+		if (shell->command->fd_in > 0)
+			close(shell->command->fd_in);
 		if (command_lst->fd_out > 1)
 			close(command_lst->fd_out);
 		command_lst = command_lst->next;
