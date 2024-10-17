@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:06:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 11:35:45 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:03:22 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -20,7 +20,7 @@ static void	exit_clear(t_minishell *shell)
 		close(shell->command->fd_out);
 	if (shell->command->fd_pipe[1])
 		close(shell->command->fd_pipe[1]);
-	cmdclear(&shell->command);
+	cmdclear(&shell->start_lst_command);
 	shell->exit_code = 1;
 	exit(shell->exit_code);
 }

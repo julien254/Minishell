@@ -6,24 +6,35 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 11:22:49 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 13:16:49 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
 
 static void close_fd(t_minishell *shell)
 {
+	t_command_lst *command_lst;
+
+	command_lst = shell->command;
 	if (shell->command->fd_in > 0)
 		close(shell->command->fd_in);
-	if (shell->command->fd_out > 1)
-		close(shell->command->fd_out);
+	while (command_lst)
+	{
+		if (command_lst->fd_out > 1)
+			close(command_lst->fd_out);
+		command_lst = command_lst->next;
+	}
+	if (shell->command->fd_pipe[0])
+		close(shell->command->fd_pipe[0]);
+	if (shell->command->fd_pipe[1])
+		close(shell->command->fd_pipe[1]);
 }
 
 static void exit_clean(t_minishell *shell)
 {
 	free_lst_env(shell->env);
 	close_fd(shell);
-	cmdclear(&shell->command);
+	cmdclear(&shell->start_lst_command);
 	exit(shell->exit_code);
 }
 
