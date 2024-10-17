@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 14:09:38 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:09:31 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -101,6 +101,7 @@ void	putstr_err_command(t_minishell *shell)
 				ft_putstr_fd("minishell: ", 2);
 				ft_putstr_fd(shell->command->cmd, 2);
 				ft_putstr_fd(": Permission denied\n", 2);
+				close_fd(shell);
 				shell->exit_code = 126;
 				return ;
 			}
