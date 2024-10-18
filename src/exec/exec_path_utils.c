@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:30:35 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 14:26:31 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:46:36 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -35,14 +35,12 @@ static void	set_wrong_cmd(t_minishell *shell)
 		shell->command->wrong_cmd = 1;
 }
 
-char	*ft_recovery_cmd(t_minishell *shell)
+char	*ft_recovery_cmd(t_minishell *shell, size_t i)
 {
-	size_t	i;
 	char	*cmd;
 
-	i = 0;
 	shell->tab_path = set_tab_path(shell);
-	if (if_backslash(shell->command->cmd))
+	if (if_backslash(shell->command->cmd) || !shell->tab_path)
 	{
 		cmd = ft_strdup(shell->command->cmd);
 		if (access(cmd, F_OK | X_OK) == 0 && !is_directory(shell))

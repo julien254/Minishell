@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:04:47 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 18:03:05 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 16:00:47 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/minishell.h"
@@ -20,6 +20,15 @@ static void	setup_readline(t_minishell *msh)
 	{
 		rl_prep_term_function = 0;
 		msh->prompt = NULL;
+	}
+}
+
+static void	exec_parsed_command(t_minishell *shell)
+{
+	if (parse_command(shell) != 0)
+	{
+		exec_cmd(shell);
+		cmdclear(&shell->start_lst_command);
 	}
 }
 
@@ -45,13 +54,7 @@ int	main(int argc, char *argv[], char **envp)
 		if (!shell.read)
 			ft_exit(&shell, 0);
 		if (shell.read[0] != 0)
-		{
-			if (parse_command(&shell) != 0)
-			{
-				exec_cmd(&shell);
-				cmdclear(&shell.start_lst_command);
-			}
-		}
+			exec_parsed_command(&shell);
 		free(shell.read);
 	}
 	return (0);

@@ -6,41 +6,10 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:51:56 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/15 10:51:48 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:49:27 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../../include/minishell.h"
-
-void	print_cmd(t_command_lst *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd)
-	{
-		printf("|--------------------\n");
-		printf("|cmd=%s\n", cmd->cmd);
-		while (cmd->args[i])
-		{
-			printf("|arg%i=%s\n", i, cmd->args[i]);
-			i++;
-		}
-		printf("|fd_in :%d\n", cmd->fd_in);
-		if (cmd->fd_in != 0)
-			printf("|fd_in_name :%s\n", cmd->fd_in_name);
-		printf("|fd_out :%d\n", cmd->fd_out);
-		if (cmd->fd_out != 1)
-			printf("|fd_out_name :%s\n", cmd->fd_out_name);
-		printf("|heredoc_index :%d\n", cmd->heredoc_index);
-		if (cmd->heredoc_index)
-			printf("name heredoc :%s\n", cmd->heredoc_name);
-		printf("|pipe[0] :%d , pipe[1] :%d\n", cmd->fd_pipe[0],
-			cmd->fd_pipe[1]);
-		printf("|--------------------\n");
-		i = 0;
-		cmd = cmd->next;
-	}
-}
 
 t_command_lst	*cmdlast(t_command_lst *cmd)
 {

@@ -6,12 +6,12 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 08:06:27 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/14 10:05:11 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:06:52 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	if_no_pattern(char *str, char c)
+static int	if_no_pattern(char *str, char c)
 {
 	int	i;
 
@@ -23,12 +23,28 @@ int	if_no_pattern(char *str, char c)
 	return (0);
 }
 
+static char	**make_empty_tab(void)
+{
+	char	**split;
+
+	split = (char **)malloc(sizeof(char *) * 2);
+	if (!split)
+		return (NULL);
+	split[0] = NULL;
+	split[1] = NULL;
+	return (split);
+}
+
 static char	**ft_split_no_pattern(char *str)
 {
 	char	**split;
 	int		i;
 
 	i = 0;
+	if (ft_strcmp(str, "=") == 0)
+	{
+		return (make_empty_tab());
+	}
 	while (str[i])
 		i++;
 	split = (char **)malloc(sizeof(char *) * 2);
@@ -51,7 +67,7 @@ char	**ft_split_at_first_pattern(char *str, char c)
 
 	size_last_str = 1;
 	i = 0;
-	if (if_no_pattern(str, c))
+	if (if_no_pattern(str, c) || ft_strcmp(str, "=") == 0)
 		return (ft_split_no_pattern(str));
 	while (str[i] != c)
 		i++;

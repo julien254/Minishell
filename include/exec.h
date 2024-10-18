@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 07:28:52 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/16 15:36:12 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/18 15:46:54 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EXEC_H
@@ -44,10 +44,19 @@ int		is_directory(t_minishell *shell);
 
 /***************************** EXEC_PATH_UTILS ************************/
 
-char	*ft_recovery_cmd(t_minishell *shell);
+char	*ft_recovery_cmd(t_minishell *shell, size_t i);
 
 /***************************** EXEC_HEREDOC ************************/
 
 void	if_heredoc(t_minishell *shell);
+
+/***************************** EXEC_HEREDOC ************************/
+
+void	close_all_fd(t_command_lst *lst_command);
+
+/***************************** EXEC_HEREDOC ************************/
+
+void	print_invalid_perm(t_minishell *shell);
+void	print_no_file(t_minishell *shell);
 
 #endif

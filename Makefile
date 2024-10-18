@@ -6,7 +6,7 @@
 #    By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/30 16:35:18 by jdetre            #+#    #+#              #
-#    Updated: 2024/10/15 11:36:44 by jdetre           ###   ########.fr        #
+#    Updated: 2024/10/18 15:35:05 by jdetre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,10 @@ SRCS		=	src/minishell.c										\
 				src/exec/exec_err.c									\
 				src/exec/exec_dup2_utils.c							\
 				src/exec/exec_path_utils.c							\
+				src/exec/exec_print_utils.c							\
 				src/exec/exec_utils.c								\
 				src/exec/exec_heredoc.c								\
+				src/exec/exec_close.c								\
 				src/exec/exec_builtins.c
 
 SRCS_BONUS	=	

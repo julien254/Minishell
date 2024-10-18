@@ -2,22 +2,17 @@
 
 JULIEN:
 
-dasdas | dsada | dsada = fd encore ouvert OKOKOKOK ? a tester plus en profondeur
-normer
-valgrind:
+valgrind: repasser les 457 test pour etre sur
 
-test : fd open : 6, 19, 15, 17, 18, 26 , 50, 71, 72, 76, 97
-
-GAEL:i
-
-test : leak : 456
+GAEL:
+plus qu'a KIFFER
 
 nous deux:
 
-trouver des erreurs potentiel , que ce soit les leaks les fd non fermer ou simplement des comportement anormale
 
 FAQ:
 
 
-A FAIRE EN DERNIER : REMETTRE EXIT SUR LA SORTI D'ERREUR
+A FAIRE EN DERNIER :
 		     ENELEVER LE -g DANS LES DEUX MAKEFILE
+			 CLEANING DU REPERTOIRE AVANT DE PUSH A 42

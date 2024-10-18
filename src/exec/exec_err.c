@@ -6,7 +6,7 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:17 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 15:09:31 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:48:15 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -16,8 +16,6 @@ static void	close_fd(t_minishell *shell)
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
-	if (shell->command->fd_in > 0)
-		close(shell->command->fd_in);
 	while (command_lst)
 	{
 		if (shell->command->fd_in > 0)
@@ -46,7 +44,7 @@ static void	print_good_err(t_minishell *shell)
 
 	free(shell->command->cmd);
 	shell->command->cmd = ft_strdup(shell->command->args[1]);
-	cmd = ft_recovery_cmd(shell);
+	cmd = ft_recovery_cmd(shell, 0);
 	if (!cmd)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -98,24 +96,20 @@ void	putstr_err_command(t_minishell *shell)
 		{
 			if (errno == EACCES)
 			{
-				ft_putstr_fd("minishell: ", 2);
-				ft_putstr_fd(shell->command->cmd, 2);
-				ft_putstr_fd(": Permission denied\n", 2);
+				print_invalid_perm(shell);
 				close_fd(shell);
 				shell->exit_code = 126;
 				return ;
 			}
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(shell->command->cmd, 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
+			print_no_file(shell);
 		}
 		else if (shell->command->wrong_cmd == 1)
 		{
 			ft_putstr_fd(shell->command->cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
-			close_fd(shell);
 		}
 		if (shell->command->wrong_cmd != 2)
 			shell->exit_code = 127;
 	}
+	close_fd(shell);
 }

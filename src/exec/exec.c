@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 06:11:08 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/17 17:45:13 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:47:07 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -17,7 +17,7 @@ static void	ft_execve(t_minishell *shell)
 	char	**env;
 	char	**args;
 
-	cmd = ft_recovery_cmd(shell);
+	cmd = ft_recovery_cmd(shell, 0);
 	if (shell->tab_path)
 	{
 		ft_free_malloc2d((void *)shell->tab_path);
@@ -120,10 +120,7 @@ void	exec_cmd(t_minishell *shell)
 		set_exit_code(shell, status);
 		if (lst_command->fd_pipe_del)
 			close(lst_command->fd_pipe_del);
-		if (lst_command->fd_out && lst_command->fd_out > 1)
-			close(lst_command->fd_out);
-		if (lst_command->fd_in && lst_command->fd_in > 0)
-			close(lst_command->fd_in);
+		close_all_fd(lst_command);
 		lst_command = lst_command->next;
 	}
 }

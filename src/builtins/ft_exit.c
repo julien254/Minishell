@@ -6,10 +6,32 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 04:32:36 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/15 17:07:33 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:08:11 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
+static void	free_command(t_minishell *shell)
+{
+	t_command_lst	*command_lst;
+
+	free_lst_env(shell->env);
+	if (shell->command)
+	{
+		command_lst = shell->command;
+		while (command_lst)
+		{
+			if (command_lst->fd_in > 0)
+				close(command_lst->fd_in);
+			if (command_lst->fd_out > 1)
+				close(command_lst->fd_out);
+			command_lst = command_lst->next;
+		}
+		if (shell->command->fd_pipe[1])
+			close(shell->command->fd_pipe[1]);
+		cmdclear(&shell->start_lst_command);
+	}
+}
 
 static void	if_is_neg(char c, int *i, int *is_neg)
 {
@@ -49,14 +71,16 @@ static int	is_num_arg(char *str)
 	return (0);
 }
 
-static void	check_first_arg(t_minishell *shell, int *arg_is_good)
+static void	check_first_arg(t_minishell *shell, int *arg_is_good, \
+		int exec_option)
 {
 	char	exit_code;
 
 	if (!is_num_arg(shell->command->args[1]))
 	{
 		*arg_is_good = 0;
-		ft_putstr_fd("exit\n", 2);
+		if (!exec_option && shell->interactive)
+			ft_putstr_fd("exit\n", 2);
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(shell->command->args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
@@ -79,10 +103,11 @@ int	ft_exit(t_minishell *shell, int exec_option)
 	{
 		size = ft_tab2dlen(shell->command->args);
 		if (size >= 2)
-			check_first_arg(shell, &first_arg_is_good);
+			check_first_arg(shell, &first_arg_is_good, exec_option);
 		if (size > 2 && first_arg_is_good)
 		{
-			ft_putstr_fd("exit\n", 2);
+			if (!exec_option && shell->interactive)
+				ft_putstr_fd("exit\n", 2);
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			shell->exit_code = 1;
 			return (1);
@@ -90,11 +115,9 @@ int	ft_exit(t_minishell *shell, int exec_option)
 	}
 	if (!exec_option)
 	{
-		free_lst_env(shell->env);
-		if (shell->command)
-			cmdclear(&shell->command);
 		if (shell->interactive)
 			ft_putstr_fd("exit\n", 2);
 	}
+	free_command(shell);
 	exit(shell->exit_code);
 }

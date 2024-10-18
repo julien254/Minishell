@@ -6,21 +6,20 @@
 /*   By: jdetre <julien.detre.dev@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:43:59 by jdetre            #+#    #+#             */
-/*   Updated: 2024/10/17 14:11:05 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:24:15 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
+
 static void	close_fd(t_minishell *shell)
 {
 	t_command_lst	*command_lst;
 
 	command_lst = shell->command;
-	if (shell->command->fd_in > 0)
-		close(shell->command->fd_in);
 	while (command_lst)
 	{
-		if (shell->command->fd_in > 0)
-			close(shell->command->fd_in);
+		if (command_lst->fd_in > 0)
+			close(command_lst->fd_in);
 		if (command_lst->fd_out > 1)
 			close(command_lst->fd_out);
 		command_lst = command_lst->next;
@@ -28,7 +27,7 @@ static void	close_fd(t_minishell *shell)
 	if (shell->command->fd_pipe[0])
 		close(shell->command->fd_pipe[0]);
 	if (shell->command->fd_pipe[1])
-		close(shell->command->fd_pipe[1]); 
+		close(shell->command->fd_pipe[1]);
 }
 
 int	if_is_builtins_exec_in_parent(t_minishell *shell)

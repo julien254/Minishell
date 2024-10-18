@@ -6,7 +6,7 @@
 /*   By: judetre <julien.detre.dev@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:25:51 by judetre           #+#    #+#             */
-/*   Updated: 2024/10/16 16:02:50 by judetre          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:26:17 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../include/minishell.h"
@@ -15,6 +15,8 @@ static int	is_valid_identifier(char *str, int *option_add)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	if (!ft_isalpha(str[0]))
 	{
 		if (str[0] != '_')
@@ -106,7 +108,7 @@ void	ft_export(t_minishell *shell, char **argv)
 		i = 1;
 		while (argv[i])
 		{
-			add_element_env(shell, argv[i++], & option_add);
+			add_element_env(shell, argv[i++], &option_add);
 		}
 	}
 }

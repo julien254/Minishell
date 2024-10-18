@@ -6,7 +6,7 @@
 /*   By: gcannaud <gcannaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:57:27 by gcannaud          #+#    #+#             */
-/*   Updated: 2024/10/17 13:38:44 by jdetre           ###   ########.fr       */
+/*   Updated: 2024/10/18 15:49:46 by jdetre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_set_fd
 
 /**************************** LST_UTILS_CMD *********************************/
 
-void			print_cmd(t_command_lst *cmd);
 t_command_lst	*cmdlast(t_command_lst *cmd);
 void			cmdadd_back(t_command_lst **cmd, t_command_lst *cmd_new);
 t_command_lst	*cmdnew(char *cmd_name, char **args, t_set_fd *set_fd);
