@@ -73,7 +73,8 @@ static char	*process_dollar_sign(t_minishell *shell, char *block, int *i, int k)
 				|| block[*i + 1] == '/' || block[*i + 1] == '"')))
 	{
 		remove_char(&block, *i);
-		(*i)--;
+		if (*i != 0)
+			(*i)--;
 	}
 	else
 		(*i)++;
