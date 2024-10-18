@@ -17,8 +17,8 @@ static int	set_handle_size(char *block, int i)
 
 	y = 0;
 	i++;
-	while (block[i] && block[i] != ' ' && block[i] != '$' && block[i] != '\''
-		&& block[i] != '/' && block[i] != '"')
+	while (block[i] && !ft_iswhitespace(block[i]) && block[i] != '$'
+		&& block[i] != '\'' && block[i] != '/' && block[i] != '"')
 	{
 		i++;
 		y++;
@@ -63,7 +63,7 @@ static void	quotes_skip(char *block, int *i, int *k)
 
 static char	*process_dollar_sign(t_minishell *shell, char *block, int *i, int k)
 {
-	if (block[*i] == '$' && (block[*i + 1] && block[*i + 1] != ' '
+	if (block[*i] == '$' && (block[*i + 1] && !ft_iswhitespace(block[*i + 1])
 			&& block[*i + 1] != '$' && block[*i + 1] != '\''
 			&& block[*i + 1] != '='
 			&& block[*i + 1] != '/' && block[*i + 1] != '"'))
